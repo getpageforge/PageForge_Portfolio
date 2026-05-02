@@ -158,6 +158,27 @@ a {
   box-shadow: 0 6px 20px rgba(110, 15, 26, 0.35);
 }
 
+/* ── VOLTAR ──────────────────────────────────────────────── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .88rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+  margin-bottom: 24px;
+  transition: var(--transition);
+}
+.back-link svg {
+  transition: transform 0.3s;
+}
+.back-link:hover {
+  color: var(--ouro-light);
+}
+.back-link:hover svg {
+  transform: translateX(-4px);
+}
+
 /* ===========================
    HEADER
    =========================== */

@@ -2,419 +2,912 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Capriccio Pizzaria – A Melhor Pizza de Itabaiana</title>
-  <meta name="description"
-    content="Capriccio Pizzaria em Itabaiana-SE. Pizzas artesanais bem recheadas, rodízio, calzone e entrega rápida. Peça já pelo WhatsApp!" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PageForge — Páginas Que Convertem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="/Capriccio.site/styles.css" />
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../Visual/style.css" />
 </head>
 
 <body>
 
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="#inicio" class="logo">
-        <!-- Logo para o header transparente (ex: branca) -->
-        <img src="imgs/capricciobranca.png" alt="Capriccio" class="logo-img logo-img-branca" />
-        <!-- Logo para o header com fundo branco (ex: colorida) -->
-        <img src="imgs/capricciovinho.png" alt="Capriccio" class="logo-img logo-img-colorida" />
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
 
-        <span class="logo-text">Capriccio</span>
-        <span class="logo-sub">Ristorante & Pizzeria</span>
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+
+      <a href="#" class="nav-logo">
+        <img src="../images/iconpf.png" alt="PageForge Logo" class="nav-logo-icon">
+        PageForge
       </a>
-      <nav class="nav" id="nav">
-        <a href="#inicio" class="nav-link">Início</a>
-        <a href="#cardapio" class="nav-link">Cardápio</a>
-        <a href="#avaliacoes" class="nav-link">Avaliações</a>
-        <a href="#localizacao" class="nav-link">Localização</a>
-      </nav>
-      <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank" rel="noopener"
-        class="btn btn-header">
-        <img src="imgs/whatsapp.png" alt="WhatsApp" class="wpp-icon" /> Pedir Agora
-      </a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+
+      <ul class="nav-links">
+        <li><a href="#services">Serviços</a></li>
+        <li><a href="#portfolio">Trabalhos</a></li>
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#plans">Planos</a></li>
+        <li><a href="#cta">Contato</a></li>
+      </ul>
+
+      <a href="#cta" class="nav-cta">Iniciar um Projeto</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#inicio" class="mobile-link">Início</a>
-      <a href="#cardapio" class="mobile-link">Cardápio</a>
-      <a href="#avaliacoes" class="mobile-link">Avaliações</a>
-      <a href="#localizacao" class="mobile-link">Localização</a>
-      <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank" rel="noopener"
-        class="btn btn-mobile-cta"><img src="imgs/whatsapp.png" alt="WhatsApp" class="wpp-icon" /> Pedir Agora</a>
-    </div>
-  </header>
+  </nav>
 
-  <section class="hero" id="inicio">
-    <div class="hero-bg">
-      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1600&q=80" alt="Pizza artesanal"
-        class="hero-img" />
-      <div class="hero-overlay"></div>
-      <div class="hero-glow"></div>
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#services" class="drawer-link">Serviços</a>
+    <a href="#portfolio" class="drawer-link">Trabalhos</a>
+    <a href="#about" class="drawer-link">Sobre</a>
+    <a href="#plans" class="drawer-link">Planos</a>
+    <a href="#cta" class="drawer-cta">Iniciar um Projeto →</a>
+  </div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+    <div class="blob hero-blob-1"></div>
+    <div class="blob hero-blob-2"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Aceitando novos projetos — vagas limitadas
+      </div>
+
+      <h1 class="hero-headline">
+        Transforme Visitantes em<br>
+        <span class="accent">Clientes Pagantes</span>
+      </h1>
+
+      <p class="hero-sub">
+        Crio páginas web focadas em conversão — landing pages, portfólios e sites de negócios
+        com design limpo, moderno e pensado para gerar resultados reais.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Quero Minha Página →</a>
+        <a href="#portfolio" class="btn-secondary">Ver Trabalhos</a>
+      </div>
     </div>
-    <div class="hero-content">
-      <div class="hero-badge animate-fade-up">⭐ 4.7 — Mais de 190 avaliações</div>
-      <h1 class="hero-title animate-fade-up delay-1">O Melhor Ristorante<br /><em>de Itabaiana</em> 🍽</h1>
-      <p class="hero-subtitle animate-fade-up delay-2">Muito recheio, sabor incomparável e entrega rápida</p>
-      <div class="hero-actions animate-fade-up delay-3">
-        <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank"
-          rel="noopener" class="btn btn-primary">
-          <img src="imgs/whatsapp.png" alt="WhatsApp" class="wpp-icon" /> Pedir no WhatsApp
+
+    <div class="hero-scroll">
+      <span>Role para baixo</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ MARQUEE ═══════════ -->
+  <section id="proof">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="marquee-dot"></span>Landing Pages</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Sites de Portfólio</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Sites para Negócios</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Design Focado em Conversão</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Responsivo & Moderno</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Entrega Rápida</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>HTML · CSS · JavaScript</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Páginas que Vendem</span>
+      <!-- duplicado para loop contínuo -->
+      <span class="marquee-item"><span class="marquee-dot"></span>Landing Pages</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Sites de Portfólio</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Sites para Negócios</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Design Focado em Conversão</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Responsivo & Moderno</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Entrega Rápida</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>HTML · CSS · JavaScript</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Páginas que Vendem</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-tag">O Que Eu Faço</div>
+        <h2 class="section-headline">Serviços Focados<br>em Resultados</h2>
+        <p class="section-sub">
+          Cada página entregue é pensada estrategicamente — não apenas bonita,
+          mas construída para guiar o visitante até a ação que você precisa.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- CARD 1 -->
+        <a href="/structure/landing-pages.html" class="service-card reveal">
+          <div class="service-icon">🚀</div>
+          <h3 class="service-title">Landing Pages</h3>
+          <p class="service-desc">
+            Páginas de captura focadas em conversão, com estrutura de copywriting persuasivo,
+            hierarquia visual clara e CTA que direcionam o visitante para uma única ação.
+          </p>
+          <span class="service-link">Saiba mais →</span>
         </a>
-        <a href="#cardapio" class="btn btn-secondary">🍕 Ver Cardápio</a>
+
+        <!-- CARD 2 -->
+        <a href="/structure/portfolio.html" class="service-card reveal reveal-d1">
+          <div class="service-icon">💼</div>
+          <h3 class="service-title">Sites de Portfólio</h3>
+          <p class="service-desc">
+            Portfólios que posicionam você como profissional de referência. Design premium,
+            navegação intuitiva e apresentação de projetos que gera confiança imediata.
+          </p>
+          <span class="service-link">Saiba mais →</span>
+        </a>
+
+        <!-- CARD 3 -->
+        <a href="/structure/business-sites.html" class="service-card reveal reveal-d2">
+          <div class="service-icon">🏢</div>
+          <h3 class="service-title">Sites para Negócios</h3>
+          <p class="service-desc">
+            Presença digital profissional para pequenas e médias empresas. Páginas que comunicam
+            credibilidade, detalham seus serviços e convertem visitantes em contatos.
+          </p>
+          <span class="service-link">Saiba mais →</span>
+        </a>
+
       </div>
-      <div class="hero-stats animate-fade-up delay-4">
-        <div class="stat"><strong>4.7★</strong><span>Avaliação</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><strong>190+</strong><span>Clientes felizes</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><strong>Rápido</strong><span>Entrega</span></div>
-      </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <span></span>
     </div>
   </section>
 
-  <section class="pedido-section">
+  <!-- ═══════════ PORTFOLIO ═══════════ -->
+  <section id="portfolio">
     <div class="container">
-      <div class="section-label">Como pedir</div>
-      <h2 class="section-title">Escolha como receber<br /><em>sua pizza</em></h2>
-      <div class="pedido-cards">
-        <div class="pedido-card reveal">
-          <div class="pedido-card-icon"><img src="imgs/whatsappvinho.png" alt="WhatsApp" class="wpp-icon-large" /></div>
-          <h3>Pedir pelo WhatsApp</h3>
-          <p>Fale direto com a pizzaria, personalize seu pedido e tire dúvidas rapidamente.</p>
-          <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank"
-            rel="noopener" class="btn btn-primary btn-full">
-            Chamar no WhatsApp
+      <div class="portfolio-header reveal">
+        <div class="section-tag">Trabalhos</div>
+        <h2 class="section-headline">Páginas Construídas<br>com Propósito</h2>
+        <p class="section-sub">
+          Projetos desenvolvidos para demonstrar o que é possível quando design e
+          estratégia de conversão trabalham juntos.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <!-- Projeto 1 — substitua os dados pelo seu projeto real -->
+        <a href="/Capriccio/index.html" class="project-card reveal" style="text-decoration: none; color: inherit;">
+          <div class="project-thumb">
+            <div class="project-thumb-inner thumb-saas">
+              <!--
+              SUBSTITUA: <img src="projeto1.jpg" alt="Nome do Projeto" style="width:100%;height:100%;object-fit:cover">
+            -->
+              <div class="thumb-ui">
+                <div class="thumb-bar accent"></div>
+                <div class="thumb-row">
+                  <div class="thumb-block"></div>
+                  <div class="thumb-block orange"></div>
+                </div>
+                <div class="thumb-bar medium"></div>
+                <div class="thumb-bar short"></div>
+                <div class="thumb-row">
+                  <div class="thumb-block"></div>
+                  <div class="thumb-block"></div>
+                  <div class="thumb-block"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-overlay">
+              <span class="overlay-btn">Ver Projeto →</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tag">Landing Page · Projeto Pessoal</div>
+            <div class="project-name">Nome do Projeto 1</div>
+            <div class="project-desc">
+              <!-- Descreva brevemente o projeto aqui. Ex: "Landing page para serviço de freelance,
+            com foco em geração de leads via formulário de contato." -->
+              Descreva brevemente o que foi construído e o objetivo da página.
+            </div>
+          </div>
+        </a>
+
+        <!-- Projeto 2 -->
+        <a href="#" class="project-card reveal reveal-d1" style="text-decoration: none; color: inherit;">
+          <div class="project-thumb">
+            <div class="project-thumb-inner thumb-agency">
+              <!--
+              SUBSTITUA: <img src="projeto2.jpg" alt="Nome do Projeto" style="width:100%;height:100%;object-fit:cover">
+            -->
+              <div class="thumb-ui">
+                <div class="thumb-bar" style="background:var(--orange);width:60%"></div>
+                <div class="thumb-bar short"></div>
+                <div
+                  style="height:44px;border-radius:7px;background:rgba(245,106,0,0.15);border:1px solid var(--border-hot)">
+                </div>
+                <div class="thumb-row">
+                  <div class="thumb-block orange"></div>
+                  <div class="thumb-block"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-overlay">
+              <span class="overlay-btn">Ver Projeto →</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tag">Portfólio · Projeto Pessoal</div>
+            <div class="project-name">Nome do Projeto 2</div>
+            <div class="project-desc">
+              Descreva brevemente o que foi construído e o objetivo da página.
+            </div>
+          </div>
+        </a>
+
+        <!-- Projeto 3 -->
+        <a href="#" class="project-card reveal reveal-d2" style="text-decoration: none; color: inherit;">
+          <div class="project-thumb">
+            <div class="project-thumb-inner thumb-product">
+              <!--
+              SUBSTITUA: <img src="projeto3.jpg" alt="Nome do Projeto" style="width:100%;height:100%;object-fit:cover">
+            -->
+              <div class="thumb-ui">
+                <div class="thumb-bar" style="background:#22c55e;width:45%"></div>
+                <div class="thumb-bar medium"></div>
+                <div class="thumb-row">
+                  <div class="thumb-block" style="background:rgba(34,197,94,0.14)"></div>
+                  <div class="thumb-block"></div>
+                  <div class="thumb-block" style="background:rgba(34,197,94,0.08)"></div>
+                </div>
+                <div class="thumb-bar short"></div>
+              </div>
+            </div>
+            <div class="project-overlay">
+              <span class="overlay-btn">Ver Projeto →</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tag">Site de Negócio · Projeto Pessoal</div>
+            <div class="project-name">Nome do Projeto 3</div>
+            <div class="project-desc">
+              Descreva brevemente o que foi construído e o objetivo da página.
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Visual side -->
+        <div class="about-visual reveal">
+          <div class="about-card">
+            <div class="about-card-blob"></div>
+            <!--
+            SUBSTITUA a div abaixo pela sua foto:
+            <img src="foto.jpg" alt="Seu nome" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:28px">
+          -->
+            <div class="about-avatar">PF</div>
+          </div>
+
+          <!-- Em mobile (≤ 480px) esses badges são renderizados via .about-badges-row no HTML -->
+          <div class="about-badge-float">
+            <div class="badge-num">PageForge </div>
+            <div class="badge-txt">Design &amp; Dev</div>
+          </div>
+          <div class="about-badge-float2">
+            <div class="badge-num" style="color:var(--orange)">3 serviços</div>
+            <div class="badge-txt"> Landing · Portfólio <br>· Negócios</div>
+          </div>
+        </div>
+
+        <!-- Text side -->
+        <div class="about-content reveal reveal-d2">
+          <div class="section-tag">Sobre</div>
+          <h2 class="section-headline">Páginas com<br>Intenção Real.</h2>
+
+          <p class="about-text">
+            Sou desenvolvedor front-end focado em criar páginas que <strong>comunicam valor e convertem</strong>.
+            Meu trabalho começa antes do código — entendendo quem vai acessar a página, o que precisa sentir
+            e qual ação precisa tomar.
+          </p>
+          <p class="about-text">
+            Trabalho com <strong>HTML, CSS e JavaScript</strong> para entregar páginas rápidas, responsivas
+            e visualmente marcantes. Cada detalhe — tipografia, espaçamento, hierarquia — existe por um motivo.
+          </p>
+          <p class="about-text">
+            Se você precisa de uma página que só "pareça bonita", existem outras opções. Se quer algo
+            pensado para <strong>gerar resultado</strong>, estou aqui para isso.
+          </p>
+
+          <div class="about-skills">
+            <span class="skill-chip">HTML</span>
+            <span class="skill-chip">CSS</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">Design Responsivo</span>
+            <span class="skill-chip">Landing Pages</span>
+            <span class="skill-chip">Foco em Conversão</span>
+            <span class="skill-chip">Entrega Rápida</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PLANOS MENSAIS ═══════════ -->
+  <style>
+    /* ── Plans section ─────────────────────────────────── */
+    #plans {
+      padding: 100px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .plans-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .plans-notice {
+      max-width: 640px;
+      margin: 0 auto 64px;
+      padding: 18px 22px;
+      border-radius: 14px;
+      background: rgba(245, 106, 0, 0.06);
+      border: 1px solid rgba(245, 106, 0, 0.18);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .plans-notice-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plans-notice strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .plan-card {
+      padding: 44px 36px;
+      border-radius: 22px;
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 106, 0, 0.3), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .plan-card:hover {
+      border-color: rgba(245, 106, 0, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(245, 106, 0, 0.07);
+    }
+
+    .plan-card:hover::before {
+      opacity: 1;
+    }
+
+    /* card premium destaque */
+    .plan-card.plan-premium {
+      background: rgba(10, 5, 2, 0.65);
+      border-color: rgba(245, 106, 0, 0.22);
+      box-shadow: 0 0 50px rgba(245, 106, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .plan-card.plan-premium::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245, 106, 0, 0.1) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .plan-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .plan-card.plan-premium .plan-badge {
+      color: var(--orange);
+    }
+
+    .plan-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .plan-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.55rem;
+      letter-spacing: -.03em;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .plan-tagline {
+      font-size: .85rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.55;
+      margin-bottom: 32px;
+    }
+
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 32px;
+    }
+
+    .plan-currency {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--orange);
+    }
+
+    .plan-amount {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.8rem;
+      letter-spacing: -.04em;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .plan-period {
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-left: 2px;
+    }
+
+    .plan-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+      margin-bottom: 28px;
+    }
+
+    .plan-card.plan-premium .plan-divider {
+      background: linear-gradient(90deg, rgba(245, 106, 0, 0.2), transparent);
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 36px;
+      flex: 1;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: .875rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .plan-check {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: rgba(245, 106, 0, 0.1);
+      border: 1px solid rgba(245, 106, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      font-size: .65rem;
+      margin-top: 1px;
+    }
+
+    .plan-card.plan-premium .plan-features li {
+      color: rgba(240, 237, 232, 0.7);
+    }
+
+    .plan-cta {
+      display: block;
+      text-align: center;
+      padding: 13px 20px;
+      border-radius: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .9rem;
+      transition: background .25s, box-shadow .25s, transform .15s, color .25s;
+      cursor: none;
+    }
+
+    .plan-cta-ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--muted);
+    }
+
+    .plan-cta-ghost:hover {
+      border-color: rgba(245, 106, 0, 0.35);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .plan-cta-solid {
+      background: var(--orange);
+      color: #fff;
+      border: 1px solid transparent;
+      position: relative;
+      z-index: 1;
+    }
+
+    .plan-cta-solid:hover {
+      background: var(--orange-hot);
+      box-shadow: 0 0 28px rgba(245, 106, 0, 0.45);
+      transform: translateY(-1px);
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #plans {
+        padding: 72px 0;
+      }
+
+      .plans-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+      }
+
+      .plan-card {
+        padding: 34px 26px;
+      }
+
+      .plans-notice {
+        margin-bottom: 48px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .plan-card {
+        padding: 28px 20px;
+      }
+
+      .plan-amount {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+
+  <section id="plans">
+    <div class="container">
+
+      <!-- cabeçalho -->
+      <div class="plans-header services-header reveal">
+        <div class="section-tag">Depois da Entrega</div>
+        <h2 class="section-headline">Seu Site Sempre<br>em Boas Mãos</h2>
+        <p class="section-sub">
+          Depois que o seu site ficar pronto, você pode contar com um plano mensal.
+          Eu cuido de tudo — manutenção, suporte e hospedagem — enquanto você foca no seu negócio.
+        </p>
+      </div>
+
+      <!-- aviso domínio e hospedagem -->
+      <div class="plans-notice reveal">
+        <span class="plans-notice-icon">💡</span>
+        <p>
+          <strong>E o domínio e hospedagem?</strong>&nbsp;
+          O domínio é o endereço do seu site (tipo <em>seusite.com.br</em>) — tem um custo anual simples,
+          geralmente entre R$40 e R$80 por ano. Já a hospedagem pode ser incluída no plano mensal,
+          sem que você precise se preocupar com nada disso.
+        </p>
+      </div>
+
+      <!-- grid dos planos -->
+      <div class="plans-grid">
+
+        <!-- PLANO BÁSICO -->
+        <div class="plan-card reveal">
+          <span class="plan-badge"><span class="plan-badge-dot"></span>Plano Básico</span>
+          <h3 class="plan-name">Tranquilidade</h3>
+          <p class="plan-tagline">Para quem quer o site funcionando direitinho, sem precisar se preocupar com nada.</p>
+
+          <div class="plan-price">
+            <span class="plan-currency">R$</span>
+            <span class="plan-amount">97</span>
+            <span class="plan-period">/mês</span>
+          </div>
+
+          <div class="plan-divider"></div>
+
+          <ul class="plan-features">
+            <li>
+              <span class="plan-check">✓</span>
+              Manutenção mensal do site
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Suporte por WhatsApp
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Pequenas correções quando necessário
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Hospedagem inclusa (sem custo extra)
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Monitoramento básico do site
+            </li>
+          </ul>
+
+          <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-ghost">
+            Quero esse plano →
           </a>
         </div>
-        <div class="pedido-card reveal delay-card">
-          <div class="pedido-card-icon">🛵</div>
-          <h3>Pedir pelo Delivery</h3>
-          <p>Mais praticidade para pedir em poucos cliques e acompanhar sua entrega.</p>
-          <a href="https://qro.go.link/4jWcY" target="_blank" rel="noopener" class="btn btn-outline btn-full">
-            Ir para o Delivery
+
+        <!-- PLANO PREMIUM -->
+        <div class="plan-card plan-premium reveal reveal-d1">
+          <span class="plan-badge"><span class="plan-badge-dot"></span>Plano Premium</span>
+          <h3 class="plan-name">Crescimento</h3>
+          <p class="plan-tagline">Para quem quer um site que evolui junto com o negócio, sem esperar semanas por uma
+            mudança.</p>
+
+          <div class="plan-price">
+            <span class="plan-currency">R$</span>
+            <span class="plan-amount">197</span>
+            <span class="plan-period">/mês</span>
+          </div>
+
+          <div class="plan-divider"></div>
+
+          <ul class="plan-features">
+            <li>
+              <span class="plan-check">✓</span>
+              Tudo do Plano Básico incluso
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Até 4 alterações no site por mês
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Atendimento prioritário — resposta mais rápida
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Otimizações e melhorias contínuas
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Hospedagem inclusa (sem custo extra)
+            </li>
+            <li>
+              <span class="plan-check">✓</span>
+              Relatório mensal simples sobre o site
+            </li>
+          </ul>
+
+          <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-solid">
+            Quero esse plano →
           </a>
         </div>
-        <div class="pedido-card reveal delay-card-2">
-          <div class="pedido-card-icon">🏠</div>
-          <h3>Retirar no Local</h3>
-          <p>Faça seu pedido com antecedência e retire rapidamente em nosso balcão.</p>
-          <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+retirar+um+pedido!" target="_blank"
-            rel="noopener" class="btn btn-outline btn-full">
-            Agendar Retirada
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FINAL CTA ═══════════ -->
+  <section id="cta">
+    <div class="blob cta-blob"></div>
+    <div class="container" style="position:relative;z-index:2">
+      <div class="cta-box reveal">
+        <div class="cta-box-border"></div>
+
+        <p class="cta-eyebrow">Vamos construir juntos?</p>
+        <h2 class="cta-headline">
+          Sua Página Pode Ser<br>
+          <span
+            style="background:linear-gradient(90deg,var(--orange),var(--orange-hot));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+            Seu Melhor Vendedor
+          </span>
+        </h2>
+        <p class="cta-sub">
+          Entre em contato pelo WhatsApp ou e-mail. Me fale sobre o seu projeto e
+          receba uma proposta sem compromisso.
+        </p>
+
+        <div class="cta-btns">
+          <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="btn-primary">
+            💬 Falar pelo WhatsApp
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=getpageforge@gmail.com" class="btn-secondary">
+            ✉️ getpageforge@email.com
           </a>
         </div>
+
+        <p class="cta-note">✦ Sem burocracia. Resposta rápida. Orçamento gratuito.</p>
       </div>
     </div>
   </section>
 
-  <section class="cardapio-section" id="cardapio">
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
     <div class="container">
-      <div class="section-label">Nosso Cardápio</div>
-      <h2 class="section-title">Destaques da<br /><em>casa</em></h2>
-      <p class="section-desc">Pizzas artesanais com muito recheio, sabor que você não esquece</p>
-      <div class="cardapio-grid">
+      <div class="footer-inner">
 
-        <div class="cardapio-card reveal">
-          <div class="cardapio-img-wrap">
-            <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&q=80" alt="Pizza de Camarão"
-              loading="lazy" />
-            <div class="cardapio-badge">⭐ Favorito</div>
-          </div>
-          <div class="cardapio-info">
-            <h3>Pizza de Camarão</h3>
-            <p>Uma verdadeira explosão de sabores do mar. Camarões frescos, molho especial e mussarela generosa.</p>
-            <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+quero+pedir+uma+Pizza+de+Camar%C3%A3o!"
-              target="_blank" rel="noopener" class="cardapio-btn">Pedir Agora →</a>
-          </div>
+        <div class="footer-logo">
+          <img src="../images/iconpf.png" alt="PageForge Logo" class="footer-logo-icon">
+          PageForge
         </div>
 
-        <div class="cardapio-card cardapio-card--featured reveal delay-card">
-          <div class="cardapio-img-wrap">
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="Rodízio de Pizzas"
-              loading="lazy" />
-            <div class="cardapio-badge cardapio-badge--gold">🔥 Especial</div>
-          </div>
-          <div class="cardapio-info">
-            <h3>Rodízio de Pizzas</h3>
-            <p>Rodízio por quantidade de fatias — experimente sabores variados, todos bem recheados e deliciosos.</p>
-            <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+quero+saber+sobre+o+Rod%C3%ADzio!" target="_blank"
-              rel="noopener" class="cardapio-btn">Saber Mais →</a>
-          </div>
+        <ul class="footer-links">
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#portfolio">Trabalhos</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#cta">Contato</a></li>
+        </ul>
+
+        <div class="footer-social">
+          <a href="#" class="social-btn" title="WhatsApp" target="_blank"> <img
+              src="../images/ne yani okul acılınca hergün kankim ile görüntülü konusamayacakmıyım(benden 1 yaş büyük🥲).jpg.jpeg"
+              alt="WhatsApp"></a>
+          <a href="https://www.instagram.com/getpageforge/" class="social-btn" title="Instagram" target="_blank"> <img
+              src="../images/baixados (14).jpg.jpeg" alt="Instagram"></a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=getpageforge@gmail.com" class="social-btn"
+            title="Gmail" target="_blank"> <img src="../images/Gmail.jpg.jpeg" alt="Gmail"></a>
         </div>
 
-        <div class="cardapio-card reveal delay-card-2">
-          <div class="cardapio-img-wrap">
-            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80" alt="Calzone"
-              loading="lazy" />
-            <div class="cardapio-badge cardapio-badge--red">🤩 Causa mesmo!</div>
-          </div>
-          <div class="cardapio-info">
-            <h3>Calzone</h3>
-            <p>Famoso pelos clientes — recheado até a borda, crocante por fora e irresistível por dentro. Causa mesmo!
-            </p>
-            <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+quero+pedir+um+Calzone!" target="_blank"
-              rel="noopener" class="cardapio-btn">Pedir Agora →</a>
-          </div>
-        </div>
-
+        <p class="footer-copy">© 2026 PageForge. Construído para converter.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="ambiente-section">
-    <div class="container">
-      <div class="section-label">Nossa Casa</div>
-      <h2 class="section-title">Ambiente aconchegante,<br /><em>perfeito para família</em></h2>
-      <p class="section-desc">Área kids, atendimento caloroso e espaço pensado para momentos especiais</p>
-      <div class="ambiente-grid">
-        <div class="ambiente-item reveal">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" alt="Ambiente da pizzaria"
-            loading="lazy" />
-          <div class="ambiente-overlay"><span>Salão Principal</span></div>
-        </div>
-        <div class="ambiente-item reveal delay-card">
-          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&q=80" alt="Área interna"
-            loading="lazy" />
-          <div class="ambiente-overlay"><span>Ambiente Familiar</span></div>
-        </div>
-        <div class="ambiente-item reveal delay-card-2">
-          <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=700&q=80" alt="Forno de pizza"
-            loading="lazy" />
-          <div class="ambiente-overlay"><span>Nosso Forno</span></div>
-        </div>
-        <div class="ambiente-item reveal">
-          <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=700&q=80" alt="Pizza saindo do forno"
-            loading="lazy" />
-          <div class="ambiente-overlay"><span>Feito com Amor</span></div>
-        </div>
-      </div>
-      <div class="servicos-row">
-        <div class="servico-item reveal">
-          <div class="servico-icon">🍽️</div>
-          <h4>Consumo no Local</h4>
-          <p>Ambiente aconchegante e familiar</p>
-        </div>
-        <div class="servico-item reveal delay-card">
-          <div class="servico-icon">👶</div>
-          <h4>Área Kids</h4>
-          <p>Diversão garantida para os pequenos</p>
-        </div>
-        <div class="servico-item reveal delay-card-2">
-          <div class="servico-icon">🛵</div>
-          <h4>Entrega Rápida</h4>
-          <p>Quentinha até sua porta</p>
-        </div>
-        <div class="servico-item reveal">
-          <div class="servico-icon">🥡</div>
-          <h4>Retirada</h4>
-          <p>Peça e retire no balcão</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="avaliacoes-section" id="avaliacoes">
-    <div class="container">
-      <div class="section-label">Avaliações</div>
-      <h2 class="section-title">O que dizem nossos<br /><em>clientes</em></h2>
-      <div class="rating-summary reveal">
-        <div class="rating-number">4.7</div>
-        <div class="rating-stars">★★★★★</div>
-        <div class="rating-count">Baseado em 190+ avaliações</div>
-      </div>
-      <div class="avaliacoes-grid">
-
-        <div class="avaliacao-card reveal">
-          <div class="avaliacao-stars">★★★★★</div>
-          <p>"Atendimento Top e a Pizza hummmmm deliciosa! E o que falar também do Calzone, aquilo causa mesmo kkkk"</p>
-          <div class="avaliacao-autor">
-            <div class="autor-avatar">J</div>
-            <div>
-              <strong>Juliane Carvalho</strong>
-              <span>Cliente verificada</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="avaliacao-card reveal delay-card">
-          <div class="avaliacao-stars">★★★★★</div>
-          <p>"Lugar bom, aconchegante, rodízio por quantidade de fatias comidas... fatias gostosas e bem recheadas."</p>
-          <div class="avaliacao-autor">
-            <div class="autor-avatar">L</div>
-            <div>
-              <strong>Lucas Andrade</strong>
-              <span>Cliente verificado</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="avaliacao-card reveal delay-card-2">
-          <div class="avaliacao-stars">★★★★★</div>
-          <p>"Top. Comida: 5, Serviço: 5. Simplesmente perfeito, recomendo demais para toda a família!"</p>
-          <div class="avaliacao-autor">
-            <div class="autor-avatar">M</div>
-            <div>
-              <strong>Matheus Menezes</strong>
-              <span>Cliente verificado</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="avaliacao-card reveal">
-          <div class="avaliacao-stars">★★★★★</div>
-          <p>"Pizza de camarão é INCRÍVEL! Recheio generoso, massa no ponto certo. Melhor pizzaria de Itabaiana sem
-            dúvida!"</p>
-          <div class="avaliacao-autor">
-            <div class="autor-avatar">A</div>
-            <div>
-              <strong>Ana Paula S.</strong>
-              <span>Cliente verificada</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="avaliacao-card reveal delay-card">
-          <div class="avaliacao-stars">★★★★★</div>
-          <p>"Entrega rápida e pizza quentinha. A área kids é ótima pra quem tem crianças. Voltaremos sempre!"</p>
-          <div class="avaliacao-autor">
-            <div class="autor-avatar">R</div>
-            <div>
-              <strong>Rafael Oliveira</strong>
-              <span>Cliente verificado</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="localizacao-section" id="localizacao">
-    <div class="container">
-      <div class="section-label">Onde estamos</div>
-      <h2 class="section-title">Venha nos<br /><em>visitar</em></h2>
-      <div class="localizacao-inner">
-        <div class="localizacao-info reveal">
-          <div class="info-item">
-            <div class="info-icon">📍</div>
-            <div>
-              <strong>Endereço</strong>
-              <span>Av. Rinaldo Mota Santos, 1063<br />Anízio Amâncio de Oliveira<br />Itabaiana – SE, 49503-315</span>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">📞</div>
-            <div>
-              <strong>Telefone / WhatsApp</strong>
-              <span>(79) 99944-4494</span>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">⏰</div>
-            <div>
-              <strong>Funcionamento</strong>
-              <span>Consulte horários pelo WhatsApp</span>
-            </div>
-          </div>
-          <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank"
-            rel="noopener" class="btn btn-primary">
-            <img src="imgs/whatsapp.png" alt="WhatsApp" class="wpp-icon" /> Chamar no WhatsApp
-          </a>
-        </div>
-        <div class="mapa-wrap reveal delay-card">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919!2d-37.4241!3d-10.6855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQxJzA3LjgiUyAzN8KwMjUnMjYuOCJX!5e0!3m2!1spt-BR!2sbr!4v1680000000000!5m2!1spt-BR!2sbr"
-            width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade" title="Localização da Capriccio Pizzaria"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-section">
-    <div class="cta-bg"></div>
-    <div class="container cta-inner">
-      <div class="cta-icon reveal">🍕</div>
-      <h2 class="cta-title reveal delay-1">Peça agora e<br /><em>receba em casa!</em></h2>
-      <p class="cta-subtitle reveal delay-2">Cada fatia feita com amor e muito recheio — só pra você</p>
-      <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank" rel="noopener"
-        class="btn btn-cta reveal delay-3">
-        <img src="imgs/whatsapp.png" alt="WhatsApp" class="wpp-icon" /> Chamar no WhatsApp
-      </a>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="imgs/capricciobranca.png" alt="Capriccio Pizzaria" class="footer-logo-icon" />
-        <span class="footer-name">Capriccio Pizzaria</span>
-        <p>Onde cada fatia é feita com amor e muito recheio!</p>
-      </div>
-      <div class="footer-info">
-        <p>📍 Av. Rinaldo Mota Santos, 1063<br />Anízio Amâncio de Oliveira — Itabaiana/SE</p>
-        <p>📞 (79) 99944-4494</p>
-      </div>
-      <div class="footer-links">
-        <a href="#inicio">Início</a>
-        <a href="#cardapio">Cardápio</a>
-        <a href="#avaliacoes">Avaliações</a>
-        <a href="#localizacao">Localização</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Capriccio Pizzaria. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <a href="https://wa.me/5579999444494?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido!" target="_blank" rel="noopener"
-    class="whatsapp-fab" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-    </svg>
-  </a>
-
-  <script src="scripts.js" defer></script>
+  <!-- ═══════════ JAVASCRIPT ═══════════ -->
   <script>
-    const header = document.getElementById('header');
+    /* ── Custom Cursor ─────────────────────────────────── */
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    let mx = -200, my = -200, rx = -200, ry = -200;
+
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    (function animCursor() {
+      rx += (mx - rx) * 0.14;
+      ry += (my - ry) * 0.14;
+      if (cursor) {
+        cursor.style.left = mx + 'px';
+        cursor.style.top = my + 'px';
+      }
+      if (cursorRing) {
+        cursorRing.style.left = rx + 'px';
+        cursorRing.style.top = ry + 'px';
+      }
+      requestAnimationFrame(animCursor);
+    })();
+
+    document.querySelectorAll('a, button, .service-card, .project-card, .skill-chip').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    /* ── Navbar Scroll ──────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 60);
-    });
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
+    /* ── Hamburger / Mobile Drawer ───────────────────────── */
     const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
+      const isOpen = mobileDrawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
     });
-    document.querySelectorAll('.mobile-link, .btn-mobile-cta').forEach(link => {
-      link.addEventListener('click', () => {
+
+    // Close drawer when a link inside it is clicked
+    mobileDrawer.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileDrawer.classList.remove('open');
         hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
       });
     });
 
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+    /* ── Scroll Reveal ──────────────────────────────────── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Smooth Anchor Scroll ───────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = 72; // nav height
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => observer.observe(el));
+    });
+
+    /* ── Parallax Hero Blobs ────────────────────────────── */
+    const blob1 = document.querySelector('.hero-blob-1');
+    const blob2 = document.querySelector('.hero-blob-2');
+
+    if (window.innerWidth > 768) {
+      document.addEventListener('mousemove', e => {
+        const xP = (e.clientX / window.innerWidth - 0.5) * 28;
+        const yP = (e.clientY / window.innerHeight - 0.5) * 28;
+        if (blob1) blob1.style.transform = `translate(${xP}px,${yP}px) scale(1.02)`;
+        if (blob2) blob2.style.transform = `translate(${-xP * .6}px,${-yP * .6}px) scale(1.01)`;
+      });
+    }
+
+    /* ── Card 3-D Tilt ──────────────────────────────────── */
+    if (window.innerWidth > 768) {
+      document.querySelectorAll('.service-card, .project-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(900px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-5px)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      });
+    }
   </script>
 </body>
 

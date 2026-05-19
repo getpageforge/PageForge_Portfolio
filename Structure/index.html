@@ -3,18 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <title>PageForge — Páginas Que Convertem</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../Visuals/style.css" />
+  <link rel="stylesheet" href="../Visual/style2.css" />
 </head>
 
 <body>
-
   <!-- CUSTOM CURSOR -->
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
@@ -22,23 +21,20 @@
   <!-- ═══════════ NAV ═══════════ -->
   <nav id="navbar">
     <div class="container nav-inner">
-
       <a href="#" class="nav-logo">
         <img src="../images/iconpf.png" alt="PageForge Logo" class="nav-logo-icon">
         PageForge
       </a>
-
       <ul class="nav-links">
         <li><a href="#services">Serviços</a></li>
         <li><a href="#portfolio">Trabalhos</a></li>
+        <li><a href="#how-it-works">Como Funciona</a></li>
         <li><a href="#about">Sobre</a></li>
         <li><a href="#plans">Planos</a></li>
         <li><a href="#cta">Contato</a></li>
       </ul>
-
       <a href="#cta" class="nav-cta">Iniciar um Projeto</a>
-
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -48,6 +44,7 @@
   <div class="mobile-drawer" id="mobileDrawer">
     <a href="#services" class="drawer-link">Serviços</a>
     <a href="#portfolio" class="drawer-link">Trabalhos</a>
+    <a href="#how-it-works" class="drawer-link">Como Funciona</a>
     <a href="#about" class="drawer-link">Sobre</a>
     <a href="#plans" class="drawer-link">Planos</a>
     <a href="#cta" class="drawer-cta">Iniciar um Projeto →</a>
@@ -57,29 +54,24 @@
   <section id="hero">
     <div class="blob hero-blob-1"></div>
     <div class="blob hero-blob-2"></div>
-
     <div class="container hero-inner">
       <div class="hero-badge">
         <span class="dot"></span>
         Aceitando novos projetos — vagas limitadas
       </div>
-
       <h1 class="hero-headline">
         Transforme Visitantes em<br>
         <span class="accent">Clientes Pagantes</span>
       </h1>
-
       <p class="hero-sub">
         Crio páginas web focadas em conversão — landing pages, portfólios e sites de negócios
         com design limpo, moderno e pensado para gerar resultados reais.
       </p>
-
       <div class="hero-ctas">
         <a href="#cta" class="btn-primary">Quero Minha Página →</a>
         <a href="#portfolio" class="btn-secondary">Ver Trabalhos</a>
       </div>
     </div>
-
     <div class="hero-scroll">
       <span>Role para baixo</span>
       <div class="scroll-line"></div>
@@ -97,7 +89,6 @@
       <span class="marquee-item"><span class="marquee-dot"></span>Entrega Rápida</span>
       <span class="marquee-item"><span class="marquee-dot"></span>HTML · CSS · JavaScript</span>
       <span class="marquee-item"><span class="marquee-dot"></span>Páginas que Vendem</span>
-      <!-- duplicado para loop contínuo -->
       <span class="marquee-item"><span class="marquee-dot"></span>Landing Pages</span>
       <span class="marquee-item"><span class="marquee-dot"></span>Sites de Portfólio</span>
       <span class="marquee-item"><span class="marquee-dot"></span>Sites para Negócios</span>
@@ -120,10 +111,7 @@
           mas construída para guiar o visitante até a ação que você precisa.
         </p>
       </div>
-
       <div class="services-grid">
-
-        <!-- CARD 1 -->
         <a href="/Structure/landing-pages.html" class="service-card reveal">
           <div class="service-icon">🚀</div>
           <h3 class="service-title">Landing Pages</h3>
@@ -133,8 +121,6 @@
           </p>
           <span class="service-link">Saiba mais →</span>
         </a>
-
-        <!-- CARD 2 -->
         <a href="/Structure/portfolio.html" class="service-card reveal reveal-d1">
           <div class="service-icon">💼</div>
           <h3 class="service-title">Sites de Portfólio</h3>
@@ -144,8 +130,6 @@
           </p>
           <span class="service-link">Saiba mais →</span>
         </a>
-
-        <!-- CARD 3 -->
         <a href="/Structure/business-sites.html" class="service-card reveal reveal-d2">
           <div class="service-icon">🏢</div>
           <h3 class="service-title">Sites para Negócios</h3>
@@ -155,7 +139,6 @@
           </p>
           <span class="service-link">Saiba mais →</span>
         </a>
-
       </div>
     </div>
   </section>
@@ -171,68 +154,123 @@
           estratégia de conversão trabalham juntos.
         </p>
       </div>
-
       <div class="portfolio-grid">
-
-        <!-- Projeto 1 — substitua os dados pelo seu projeto real -->
-        <a href="../Capriccio/index.html" class="project-card reveal" style="text-decoration: none; color: inherit;">
+        <!-- Projeto 1 -->
+        <a href="../Capriccio/index.html" class="project-card reveal">
           <div class="project-thumb">
             <div class="project-thumb-inner thumb-saas">
-              <img src="../images/capricciopreview.png" alt="Projeto 1" class="project-image">
+              <img src="../images/capricciopreview.png" alt="Capriccio Pizzaria" class="project-image">
             </div>
             <div class="project-overlay">
               <span class="overlay-btn">Ver Projeto →</span>
             </div>
           </div>
           <div class="project-info">
-            <div class="project-tag">Landing Page · Projeto Pessoal</div>
+            <div class="project-tag">Landing Page · Projeto De Negócios</div>
             <div class="project-name">Site demo de restaurante</div>
             <div class="project-desc">
-              <!-- Descreva brevemente o projeto aqui. Ex: "Landing page para serviço de freelance,
-            com foco em geração de leads via formulário de contato." -->
-              Foi desenvolvida uma landing page para a Capriccio Pizzaria e Restaurante, com foco em destacar o ambiente, os produtos e a experiência oferecida ao cliente.
+              Landing page para a Capriccio Pizzaria e Restaurante, com foco em destacar o ambiente, os produtos e a
+              experiência oferecida ao cliente.
             </div>
           </div>
         </a>
-
         <!-- Projeto 2 -->
-        <a href="#" class="project-card reveal reveal-d1" style="text-decoration: none; color: inherit;">
+        <div class="project-card project-wip reveal reveal-d1">
           <div class="project-thumb">
             <div class="project-thumb-inner thumb-agency">
-              <img src="" alt="Projeto 2" class="project-image">
+              <div class="wip-placeholder">
+                <div class="wip-icon">⚙️</div>
+                <span class="wip-label">Em breve</span>
+              </div>
             </div>
-            <div class="project-overlay">
-              <span class="overlay-btn">Ver Projeto →</span>
+            <div class="project-overlay project-overlay-wip">
+              <span class="overlay-btn overlay-btn-wip">Em andamento</span>
             </div>
           </div>
           <div class="project-info">
             <div class="project-tag">Portfólio · Projeto Pessoal</div>
             <div class="project-name">Projeto em andamento</div>
             <div class="project-desc">
-              null
+              Este projeto está em desenvolvimento. Em breve disponível para visualização.
             </div>
           </div>
-        </a>
-
+        </div>
         <!-- Projeto 3 -->
-        <a href="#" class="project-card reveal reveal-d2" style="text-decoration: none; color: inherit;">
+        <div class="project-card project-wip reveal reveal-d2">
           <div class="project-thumb">
             <div class="project-thumb-inner thumb-product">
-              <img src="" alt="Projeto 3" class="project-image">
+              <div class="wip-placeholder">
+                <div class="wip-icon">🛠️</div>
+                <span class="wip-label">Em breve</span>
+              </div>
             </div>
-            <div class="project-overlay">
-              <span class="overlay-btn">Ver Projeto →</span>
+            <div class="project-overlay project-overlay-wip">
+              <span class="overlay-btn overlay-btn-wip">Em andamento</span>
             </div>
           </div>
           <div class="project-info">
             <div class="project-tag">Site de Negócio · Projeto Pessoal</div>
             <div class="project-name">Projeto em andamento</div>
             <div class="project-desc">
-              null
+              Este projeto está em desenvolvimento. Em breve disponível para visualização.
             </div>
           </div>
-        </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ═══════════ HOW IT WORKS ═══════════ -->
+  <section id="how-it-works">
+    <div class="blob hiw-blob"></div>
+    <div class="container">
+      <div class="hiw-header reveal">
+        <div class="section-tag">O Processo</div>
+        <h2 class="section-headline">Como Funciona</h2>
+        <p class="section-sub">
+          Do briefing à entrega — cada etapa é pensada para garantir uma página
+          que comunica, converte e representa sua marca com excelência.
+        </p>
+      </div>
+      <div class="hiw-steps">
+        <div class="hiw-step reveal">
+          <div class="hiw-step-number">01</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon">📋</div>
+            <h3 class="hiw-step-title">Briefing Estratégico</h3>
+            <p class="hiw-step-desc">Entendimento profundo do negócio, objetivos, posicionamento e público-alvo da
+              marca.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d1">
+          <div class="hiw-step-number">02</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon">🎨</div>
+            <h3 class="hiw-step-title">Estrutura & Design</h3>
+            <p class="hiw-step-desc">Planejamento visual e estratégico da experiência da página — hierarquia, fluxo e
+              intenção.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d2">
+          <div class="hiw-step-number">03</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon">⚡</div>
+            <h3 class="hiw-step-title">Desenvolvimento</h3>
+            <p class="hiw-step-desc">Construção responsiva, otimizada e focada em performance — código limpo e
+              eficiente.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d3">
+          <div class="hiw-step-number">04</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon">🚀</div>
+            <h3 class="hiw-step-title">Entrega & Evolução</h3>
+            <p class="hiw-step-desc">Publicação, refinamentos finais e suporte contínuo para evolução da sua página.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -241,34 +279,23 @@
   <section id="about">
     <div class="container">
       <div class="about-grid">
-
-        <!-- Visual side -->
         <div class="about-visual reveal">
           <div class="about-card">
             <div class="about-card-blob"></div>
-            <!--
-            SUBSTITUA a div abaixo pela sua foto:
-            <img src="foto.jpg" alt="Seu nome" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:28px">
-          -->
             <div class="about-avatar">PF</div>
           </div>
-
-          <!-- Em mobile (≤ 480px) esses badges são renderizados via .about-badges-row no HTML -->
           <div class="about-badge-float">
-            <div class="badge-num">PageForge </div>
+            <div class="badge-num">PageForge</div>
             <div class="badge-txt">Design &amp; Dev</div>
           </div>
           <div class="about-badge-float2">
             <div class="badge-num" style="color:var(--orange)">3 serviços</div>
-            <div class="badge-txt"> Landing · Portfólio <br>· Negócios</div>
+            <div class="badge-txt">Landing · Portfólio<br>· Negócios</div>
           </div>
         </div>
-
-        <!-- Text side -->
         <div class="about-content reveal reveal-d2">
           <div class="section-tag">Sobre</div>
           <h2 class="section-headline">Páginas com<br>Intenção Real.</h2>
-
           <p class="about-text">
             Sou desenvolvedor front-end focado em criar páginas que <strong>comunicam valor e convertem</strong>.
             Meu trabalho começa antes do código — entendendo quem vai acessar a página, o que precisa sentir
@@ -282,7 +309,6 @@
             Se você precisa de uma página que só "pareça bonita", existem outras opções. Se quer algo
             pensado para <strong>gerar resultado</strong>, estou aqui para isso.
           </p>
-
           <div class="about-skills">
             <span class="skill-chip">HTML</span>
             <span class="skill-chip">CSS</span>
@@ -293,313 +319,90 @@
             <span class="skill-chip">Entrega Rápida</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ═══════════ ESTRATÉGIA ANTES DO DESIGN ═══════════ -->
+  <section id="strategy">
+    <div class="blob strategy-blob-1"></div>
+    <div class="blob strategy-blob-2"></div>
+    <div class="container">
+      <div class="strategy-inner reveal">
+        <div class="strategy-eyebrow">
+          <div class="section-tag">Metodologia</div>
+        </div>
+        <div class="strategy-grid">
+          <div class="strategy-text-col">
+            <h2 class="section-headline strategy-headline">Estratégia<br><span class="strategy-accent">Antes do
+                Design</span></h2>
+            <p class="strategy-lead">
+              Cada projeto começa com um briefing estratégico.
+            </p>
+            <p class="strategy-body">
+              Antes de criar qualquer página, analiso seu negócio, objetivos, posicionamento e público para construir
+              algo que realmente faça sentido para sua marca.
+            </p>
+            <p class="strategy-body">
+              Isso garante uma página mais <strong>estratégica, profissional</strong> e focada em resultado — não só
+              esteticamente bonita, mas construída para converter.
+            </p>
+            <a href="https://thoughtful-bolt-ac9.notion.site/ebd/f26ae59d991d4fe3b75136f1888de4a1" target="_blank"
+              rel="noopener" class="strategy-cta">
+              <span class="strategy-cta-text">Preencher Briefing</span>
+              <span class="strategy-cta-arrow">→</span>
+              <span class="strategy-cta-glow"></span>
+            </a>
+          </div>
+          <div class="strategy-visual-col">
+            <div class="strategy-pillars">
+              <div class="strategy-pillar reveal-d1">
+                <div class="pillar-icon">🎯</div>
+                <div class="pillar-content">
+                  <h4 class="pillar-title">Análise do Negócio</h4>
+                  <p class="pillar-desc">Entendimento do contexto, mercado e diferenciais competitivos.</p>
+                </div>
+              </div>
+              <div class="strategy-pillar reveal-d2">
+                <div class="pillar-icon">👥</div>
+                <div class="pillar-content">
+                  <h4 class="pillar-title">Público-Alvo</h4>
+                  <p class="pillar-desc">Quem visita, o que sente e qual ação precisa realizar.</p>
+                </div>
+              </div>
+              <div class="strategy-pillar reveal-d3">
+                <div class="pillar-icon">📐</div>
+                <div class="pillar-content">
+                  <h4 class="pillar-title">Posicionamento</h4>
+                  <p class="pillar-desc">Identidade visual, tom de voz e presença de marca.</p>
+                </div>
+              </div>
+              <div class="strategy-pillar reveal-d4">
+                <div class="pillar-icon">📈</div>
+                <div class="pillar-content">
+                  <h4 class="pillar-title">Foco em Resultado</h4>
+                  <p class="pillar-desc">Cada elemento da página com propósito de conversão.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════ PLANOS MENSAIS ═══════════ -->
-  <style>
-    /* ── Plans section ─────────────────────────────────── */
-    #plans {
-      padding: 100px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .plans-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .plans-notice {
-      max-width: 640px;
-      margin: 0 auto 64px;
-      padding: 18px 22px;
-      border-radius: 14px;
-      background: rgba(245, 106, 0, 0.06);
-      border: 1px solid rgba(245, 106, 0, 0.18);
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      font-size: .88rem;
-      color: var(--muted);
-      line-height: 1.65;
-      font-weight: 300;
-    }
-
-    .plans-notice-icon {
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .plans-notice strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .plan-card {
-      padding: 44px 36px;
-      border-radius: 22px;
-      background: var(--glass-bg);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(28px) saturate(1.5);
-      -webkit-backdrop-filter: blur(28px) saturate(1.5);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      transition: border-color .3s, box-shadow .3s, transform .3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .plan-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(245, 106, 0, 0.3), transparent);
-      opacity: 0;
-      transition: opacity .3s;
-    }
-
-    .plan-card:hover {
-      border-color: rgba(245, 106, 0, 0.2);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(245, 106, 0, 0.07);
-    }
-
-    .plan-card:hover::before {
-      opacity: 1;
-    }
-
-    /* card premium destaque */
-    .plan-card.plan-premium {
-      background: rgba(10, 5, 2, 0.65);
-      border-color: rgba(245, 106, 0, 0.22);
-      box-shadow: 0 0 50px rgba(245, 106, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-
-    .plan-card.plan-premium::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(245, 106, 0, 0.1) 0%, transparent 55%);
-      pointer-events: none;
-    }
-
-    .plan-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .plan-card.plan-premium .plan-badge {
-      color: var(--orange);
-    }
-
-    .plan-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .plan-name {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.55rem;
-      letter-spacing: -.03em;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .plan-tagline {
-      font-size: .85rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.55;
-      margin-bottom: 32px;
-    }
-
-    .plan-price {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-      margin-bottom: 32px;
-    }
-
-    .plan-currency {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--orange);
-    }
-
-    .plan-amount {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 2.8rem;
-      letter-spacing: -.04em;
-      line-height: 1;
-      color: var(--text);
-    }
-
-    .plan-period {
-      font-size: .82rem;
-      color: var(--muted);
-      font-weight: 300;
-      margin-left: 2px;
-    }
-
-    .plan-divider {
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-      margin-bottom: 28px;
-    }
-
-    .plan-card.plan-premium .plan-divider {
-      background: linear-gradient(90deg, rgba(245, 106, 0, 0.2), transparent);
-    }
-
-    .plan-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      margin-bottom: 36px;
-      flex: 1;
-    }
-
-    .plan-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      font-size: .875rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.5;
-    }
-
-    .plan-check {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-      border-radius: 5px;
-      background: rgba(245, 106, 0, 0.1);
-      border: 1px solid rgba(245, 106, 0, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--orange);
-      font-size: .65rem;
-      margin-top: 1px;
-    }
-
-    .plan-card.plan-premium .plan-features li {
-      color: rgba(240, 237, 232, 0.7);
-    }
-
-    .plan-cta {
-      display: block;
-      text-align: center;
-      padding: 13px 20px;
-      border-radius: 10px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: .9rem;
-      transition: background .25s, box-shadow .25s, transform .15s, color .25s;
-      cursor: none;
-    }
-
-    .plan-cta-ghost {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--muted);
-    }
-
-    .plan-cta-ghost:hover {
-      border-color: rgba(245, 106, 0, 0.35);
-      color: var(--text);
-      transform: translateY(-1px);
-    }
-
-    .plan-cta-solid {
-      background: var(--orange);
-      color: #fff;
-      border: 1px solid transparent;
-      position: relative;
-      z-index: 1;
-    }
-
-    .plan-cta-solid:hover {
-      background: var(--orange-hot);
-      box-shadow: 0 0 28px rgba(245, 106, 0, 0.45);
-      transform: translateY(-1px);
-    }
-
-    /* ── Responsive ─────────────────────────────────────── */
-    @media (max-width: 768px) {
-      #plans {
-        padding: 72px 0;
-      }
-
-      .plans-grid {
-        grid-template-columns: 1fr;
-        max-width: 440px;
-      }
-
-      .plan-card {
-        padding: 34px 26px;
-      }
-
-      .plans-notice {
-        margin-bottom: 48px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .plan-card {
-        padding: 28px 20px;
-      }
-
-      .plan-amount {
-        font-size: 2.4rem;
-      }
-    }
-  </style>
-
   <section id="plans">
     <div class="container">
-
-      <!-- cabeçalho -->
       <div class="plans-header services-header reveal">
         <div class="section-tag">Depois da Entrega</div>
         <h2 class="section-headline">Seu Site Sempre<br>em Boas Mãos</h2>
         <p class="section-sub">
           Depois que o seu site ficar pronto, você pode contar com um plano mensal.
-          Eu cuido de tudo — manutenção, suporte e hospedagem — enquanto você foca no seu negócio.
+          Cuido de tudo — manutenção, suporte e hospedagem — enquanto você foca no seu negócio.
         </p>
       </div>
 
-      <!-- aviso domínio e hospedagem -->
       <div class="plans-notice reveal">
         <span class="plans-notice-icon">💡</span>
         <p>
@@ -610,98 +413,88 @@
         </p>
       </div>
 
-      <!-- grid dos planos -->
       <div class="plans-grid">
-
-        <!-- PLANO BÁSICO -->
+        <!-- PLANO ESSENTIAL -->
         <div class="plan-card reveal">
-          <span class="plan-badge"><span class="plan-badge-dot"></span>Plano Básico</span>
-          <h3 class="plan-name">Tranquilidade</h3>
-          <p class="plan-tagline">Para quem quer o site funcionando direitinho, sem precisar se preocupar com nada.</p>
-
-          <div class="plan-price">
-            <span class="plan-currency">R$</span>
-            <span class="plan-amount">97</span>
-            <span class="plan-period">/mês</span>
+          <div class="plan-card-inner">
+            <span class="plan-badge"><span class="plan-badge-dot"></span>Essential</span>
+            <h3 class="plan-name">Essencial</h3>
+            <p class="plan-tagline">Para quem quer o site funcionando direitinho, sem precisar se preocupar com nada.
+            </p>
+            <div class="plan-price">
+              <span class="plan-currency">R$</span>
+              <span class="plan-amount">97</span>
+              <span class="plan-period">/mês</span>
+            </div>
+            <div class="plan-divider"></div>
+            <ul class="plan-features">
+              <li><span class="plan-check">✓</span>Manutenção mensal do site</li>
+              <li><span class="plan-check">✓</span>Suporte por WhatsApp</li>
+              <li><span class="plan-check">✓</span>Pequenas correções quando necessário</li>
+              <li><span class="plan-check">✓</span>Hospedagem contratada separadamente</li>
+              <li><span class="plan-check">✓</span>Monitoramento básico do site</li>
+            </ul>
+            <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-ghost">
+              Quero esse plano →
+            </a>
           </div>
-
-          <div class="plan-divider"></div>
-
-          <ul class="plan-features">
-            <li>
-              <span class="plan-check">✓</span>
-              Manutenção mensal do site
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Suporte por WhatsApp
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Pequenas correções quando necessário
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Hospedagem inclusa (sem custo extra)
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Monitoramento básico do site
-            </li>
-          </ul>
-
-          <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-ghost">
-            Quero esse plano →
-          </a>
         </div>
 
-        <!-- PLANO PREMIUM -->
-        <div class="plan-card plan-premium reveal reveal-d1">
-          <span class="plan-badge"><span class="plan-badge-dot"></span>Plano Premium</span>
-          <h3 class="plan-name">Crescimento</h3>
-          <p class="plan-tagline">Para quem quer um site que evolui junto com o negócio, sem esperar semanas por uma
-            mudança.</p>
-
-          <div class="plan-price">
-            <span class="plan-currency">R$</span>
-            <span class="plan-amount">197</span>
-            <span class="plan-period">/mês</span>
+        <!-- PLANO GROWTH (destaque) -->
+        <div class="plan-card plan-featured reveal reveal-d1">
+          <div class="plan-card-inner">
+            <div class="plan-popular-badge">Mais Popular</div>
+            <span class="plan-badge"><span class="plan-badge-dot"></span>Growth</span>
+            <h3 class="plan-name">Crescimento</h3>
+            <p class="plan-tagline">Para quem quer um site que evolui junto com o negócio, sem esperar semanas por uma
+              mudança.</p>
+            <div class="plan-price">
+              <span class="plan-currency">R$</span>
+              <span class="plan-amount">197</span>
+              <span class="plan-period">/mês</span>
+            </div>
+            <div class="plan-divider"></div>
+            <ul class="plan-features">
+              <li><span class="plan-check">✓</span>Tudo do plano Essential incluso</li>
+              <li><span class="plan-check">✓</span>Até 4 alterações no site por mês</li>
+              <li><span class="plan-check">✓</span>Atendimento prioritário — resposta mais rápida</li>
+              <li><span class="plan-check">✓</span>Otimizações e melhorias contínuas</li>
+              <li><span class="plan-check">✓</span>Hospedagem inclusa (sem custo extra)</li>
+              <li><span class="plan-check">✓</span>Relatório mensal simples sobre o site</li>
+            </ul>
+            <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-solid">
+              Quero esse plano →
+            </a>
           </div>
-
-          <div class="plan-divider"></div>
-
-          <ul class="plan-features">
-            <li>
-              <span class="plan-check">✓</span>
-              Tudo do Plano Básico incluso
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Até 4 alterações no site por mês
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Atendimento prioritário — resposta mais rápida
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Otimizações e melhorias contínuas
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Hospedagem inclusa (sem custo extra)
-            </li>
-            <li>
-              <span class="plan-check">✓</span>
-              Relatório mensal simples sobre o site
-            </li>
-          </ul>
-
-          <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-solid">
-            Quero esse plano →
-          </a>
         </div>
 
+        <!-- PLANO AUTHORITY -->
+        <div class="plan-card plan-authority reveal reveal-d2">
+          <div class="plan-card-inner">
+            <span class="plan-badge plan-badge-gold"><span class="plan-badge-dot"></span>Authority</span>
+            <h3 class="plan-name">Autoridade</h3>
+            <p class="plan-tagline">Para marcas que desejam evolução contínua, otimizações estratégicas e presença
+              digital mais forte.</p>
+            <div class="plan-price">
+              <span class="plan-currency plan-currency-gold">R$</span>
+              <span class="plan-amount">297</span>
+              <span class="plan-period">/mês</span>
+            </div>
+            <div class="plan-divider plan-divider-gold"></div>
+            <ul class="plan-features">
+              <li><span class="plan-check plan-check-gold">✓</span>Tudo do plano Growth incluso</li>
+              <li><span class="plan-check plan-check-gold">✓</span>Melhorias contínuas de conversão</li>
+              <li><span class="plan-check plan-check-gold">✓</span>Ajustes estratégicos visuais</li>
+              <li><span class="plan-check plan-check-gold">✓</span>Prioridade máxima no suporte</li>
+              <li><span class="plan-check plan-check-gold">✓</span>Otimizações UX/UI mensais</li>
+              <li><span class="plan-check plan-check-gold">✓</span>Pequenas melhorias mensais no site</li>
+              <li><span class="plan-check plan-check-gold">✓</span>Consultoria rápida mensal</li>
+            </ul>
+            <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="plan-cta plan-cta-authority">
+              Quero esse plano →
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -712,7 +505,6 @@
     <div class="container" style="position:relative;z-index:2">
       <div class="cta-box reveal">
         <div class="cta-box-border"></div>
-
         <p class="cta-eyebrow">Vamos construir juntos?</p>
         <h2 class="cta-headline">
           Sua Página Pode Ser<br>
@@ -725,16 +517,14 @@
           Entre em contato pelo WhatsApp ou e-mail. Me fale sobre o seu projeto e
           receba uma proposta sem compromisso.
         </p>
-
         <div class="cta-btns">
           <a href="https://wa.me/557999832772" target="_blank" rel="noopener" class="btn-primary">
-            💬 Falar pelo WhatsApp
+            <img src="../images/whatsapp.png" alt="WhatsApp" class="btn-icon"> Falar pelo WhatsApp
           </a>
           <a href="https://mail.google.com/mail/?view=cm&fs=1&to=getpageforge@gmail.com" class="btn-secondary">
-            ✉️ getpageforge@email.com
+            <img src="../images/Mail-Photoroom.png" alt="Email" class="btn-icon email-icon"> getpageforge@email.com
           </a>
         </div>
-
         <p class="cta-note">✦ Sem burocracia. Resposta rápida. Orçamento gratuito.</p>
       </div>
     </div>
@@ -744,29 +534,31 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-
         <div class="footer-logo">
           <img src="../images/iconpf.png" alt="PageForge Logo" class="footer-logo-icon">
           PageForge
         </div>
-
         <ul class="footer-links">
           <li><a href="#services">Serviços</a></li>
           <li><a href="#portfolio">Trabalhos</a></li>
+          <li><a href="#how-it-works">Como Funciona</a></li>
           <li><a href="#about">Sobre</a></li>
           <li><a href="#cta">Contato</a></li>
         </ul>
-
         <div class="footer-social">
-          <a href="https://wa.me/557999832772" class="social-btn" title="WhatsApp" target="_blank"> <img
+          <a href="https://wa.me/557999832772" class="social-btn" title="WhatsApp" target="_blank">
+            <img
               src="../images/ne yani okul acılınca hergün kankim ile görüntülü konusamayacakmıyım(benden 1 yaş büyük🥲).jpg.jpeg"
-              alt="WhatsApp"></a>
-          <a href="https://www.instagram.com/getpageforge/" class="social-btn" title="Instagram" target="_blank"> <img
-              src="../images/baixados (14).jpg.jpeg" alt="Instagram"></a>
+              alt="WhatsApp">
+          </a>
+          <a href="https://www.instagram.com/getpageforge/" class="social-btn" title="Instagram" target="_blank">
+            <img src="../images/baixados (14).jpg.jpeg" alt="Instagram">
+          </a>
           <a href="https://mail.google.com/mail/?view=cm&fs=1&to=getpageforge@gmail.com" class="social-btn"
-            title="Gmail" target="_blank"> <img src="../images/Gmail.jpg.jpeg" alt="Gmail"></a>
+            title="Gmail" target="_blank">
+            <img src="../images/Gmail.jpg.jpeg" alt="Gmail">
+          </a>
         </div>
-
         <p class="footer-copy">© 2026 PageForge. Construído para converter.</p>
       </div>
     </div>
@@ -778,24 +570,15 @@
     const cursor = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursor-ring');
     let mx = -200, my = -200, rx = -200, ry = -200;
-
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
     (function animCursor() {
       rx += (mx - rx) * 0.14;
       ry += (my - ry) * 0.14;
-      if (cursor) {
-        cursor.style.left = mx + 'px';
-        cursor.style.top = my + 'px';
-      }
-      if (cursorRing) {
-        cursorRing.style.left = rx + 'px';
-        cursorRing.style.top = ry + 'px';
-      }
+      if (cursor) { cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; }
+      if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
       requestAnimationFrame(animCursor);
     })();
-
-    document.querySelectorAll('a, button, .service-card, .project-card, .skill-chip').forEach(el => {
+    document.querySelectorAll('a, button, .service-card, .project-card, .skill-chip, .strategy-pillar').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
@@ -809,18 +592,16 @@
     /* ── Hamburger / Mobile Drawer ───────────────────────── */
     const hamburger = document.getElementById('hamburger');
     const mobileDrawer = document.getElementById('mobileDrawer');
-
     hamburger.addEventListener('click', () => {
       const isOpen = mobileDrawer.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
     });
-
-    // Close drawer when a link inside it is clicked
     mobileDrawer.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         mobileDrawer.classList.remove('open');
         hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
       });
     });
 
@@ -836,7 +617,7 @@
         const target = document.querySelector(a.getAttribute('href'));
         if (!target) return;
         e.preventDefault();
-        const offset = 72; // nav height
+        const offset = 72;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       });
@@ -845,7 +626,6 @@
     /* ── Parallax Hero Blobs ────────────────────────────── */
     const blob1 = document.querySelector('.hero-blob-1');
     const blob2 = document.querySelector('.hero-blob-2');
-
     if (window.innerWidth > 768) {
       document.addEventListener('mousemove', e => {
         const xP = (e.clientX / window.innerWidth - 0.5) * 28;
@@ -857,7 +637,7 @@
 
     /* ── Card 3-D Tilt ──────────────────────────────────── */
     if (window.innerWidth > 768) {
-      document.querySelectorAll('.service-card, .project-card').forEach(card => {
+      document.querySelectorAll('.service-card, .project-card:not(.project-wip)').forEach(card => {
         card.addEventListener('mousemove', e => {
           const r = card.getBoundingClientRect();
           const x = (e.clientX - r.left) / r.width - 0.5;

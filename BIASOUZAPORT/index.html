@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bia Souza — Fotografia</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ======= NAV ======= -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav__logo">Bia Souza</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#portfolio">Portfólio</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato" class="nav__cta">Agendar</a></li>
+    </ul>
+  </nav>
+
+  <!-- ======= HERO ======= -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <img
+        src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=85&auto=format&fit=crop"
+        alt="hero"
+        class="hero__img"
+        id="parallaxImg"
+      />
+      <div class="hero__overlay"></div>
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow reveal">Fotografia de alma</p>
+      <h1 class="hero__headline reveal reveal--delay1">
+        Fotografia para quem
+        <em>sente, vive</em> e quer
+        lembrar para sempre.
+      </h1>
+      <p class="hero__sub reveal reveal--delay2">
+        Transformando momentos reais em memórias eternas
+        através de experiências únicas e emocionais.
+      </p>
+      <div class="hero__btns reveal reveal--delay3">
+        <a href="#contato" class="btn btn--light">Agendar experiência</a>
+        <a href="#portfolio" class="btn btn--ghost">Ver portfólio</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll">
+      <span class="hero__scroll-line"></span>
+      <span class="hero__scroll-text">scroll</span>
+    </div>
+  </section>
+
+  <!-- ======= INTRO STRIP ======= -->
+  <section class="strip">
+    <p class="strip__text">Casais &nbsp;·&nbsp; Gestantes &nbsp;·&nbsp; Família &nbsp;·&nbsp; Feminino &nbsp;·&nbsp; Ensaios Emocionais</p>
+  </section>
+
+  <!-- ======= PORTFOLIO ======= -->
+  <section class="portfolio" id="portfolio">
+    <div class="section-header reveal">
+      <span class="section-label">02 — Portfólio</span>
+      <h2 class="section-title">Imagens que <em>falam por si</em></h2>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="portfolio__tabs reveal">
+      <button class="tab active" data-cat="all">Todos</button>
+      <button class="tab" data-cat="casais">Casais</button>
+      <button class="tab" data-cat="gestantes">Gestantes</button>
+      <button class="tab" data-cat="familia">Família</button>
+      <button class="tab" data-cat="feminino">Feminino</button>
+    </div>
+
+    <div class="portfolio__grid" id="portfolioGrid">
+
+      <!-- row 1 -->
+      <div class="grid-item grid-item--tall" data-cat="casais">
+        <img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=800&q=80&auto=format&fit=crop" alt="Casais" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Casais</span></div>
+      </div>
+      <div class="grid-item" data-cat="gestantes">
+        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=700&q=80&auto=format&fit=crop" alt="Gestante" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Gestantes</span></div>
+      </div>
+      <div class="grid-item" data-cat="feminino">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80&auto=format&fit=crop" alt="Feminino" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Feminino</span></div>
+      </div>
+
+      <!-- row 2 -->
+      <div class="grid-item grid-item--wide" data-cat="familia">
+        <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?w=900&q=80&auto=format&fit=crop" alt="Família" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Família</span></div>
+      </div>
+      <div class="grid-item grid-item--tall" data-cat="feminino">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=80&auto=format&fit=crop" alt="Feminino" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Feminino</span></div>
+      </div>
+
+      <!-- row 3 -->
+      <div class="grid-item" data-cat="casais">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&q=80&auto=format&fit=crop" alt="Casais" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Casais</span></div>
+      </div>
+      <div class="grid-item" data-cat="gestantes">
+        <img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=700&q=80&auto=format&fit=crop" alt="Gestante" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Gestantes</span></div>
+      </div>
+      <div class="grid-item grid-item--wide" data-cat="familia">
+        <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=900&q=80&auto=format&fit=crop" alt="Família" loading="lazy"/>
+        <div class="grid-item__overlay"><span>Família</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======= NUMBERS ======= -->
+  <section class="numbers">
+    <div class="numbers__inner">
+      <div class="numbers__item reveal">
+        <strong>+500</strong>
+        <span>ensaios realizados</span>
+      </div>
+      <div class="numbers__divider"></div>
+      <div class="numbers__item reveal reveal--delay1">
+        <strong>5 anos</strong>
+        <span>de experiência</span>
+      </div>
+      <div class="numbers__divider"></div>
+      <div class="numbers__item reveal reveal--delay2">
+        <strong>100%</strong>
+        <span>clientes satisfeitos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= EXPERIÊNCIA ======= -->
+  <section class="experiencia" id="experiencia">
+    <div class="experiencia__left reveal">
+      <span class="section-label">03 — Experiência</span>
+      <h2 class="section-title">Mais do que <em>fotografias</em></h2>
+      <p class="experiencia__desc">
+        Cada ensaio é uma experiência criada para eternizar
+        sentimentos reais. Do primeiro contato até a entrega,
+        você é guiada com cuidado, sensibilidade e presença.
+      </p>
+    </div>
+
+    <div class="experiencia__cards">
+      <div class="exp-card reveal">
+        <div class="exp-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5v-5l-3-3"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Direção Completa</h3>
+        <p>Conduzo cada momento para que você se sinta naturalmente linda, sem precisar de experiência.</p>
+      </div>
+      <div class="exp-card reveal reveal--delay1">
+        <div class="exp-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Atendimento Personalizado</h3>
+        <p>Cada cliente é única. Planejamos juntas cada detalhe para que a experiência seja sua.</p>
+      </div>
+      <div class="exp-card reveal reveal--delay2">
+        <div class="exp-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3.055 11H5a2 2 0 0 1 2 2v1a2 2 0 0 0 2 2 2 2 0 0 1 2 2v2.945"/><path d="M8 3.935V5a2 2 0 0 0 2 2h2a2 2 0 0 1 2 2v1a2 2 0 0 0 2 2h2.064"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <h3>Experiência Confortável</h3>
+        <p>Ambiente acolhedor, ritmo suave. Você chega como cliente e sai como protagonista da sua história.</p>
+      </div>
+      <div class="exp-card reveal reveal--delay3">
+        <div class="exp-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Memórias Autênticas</h3>
+        <p>Fotos que capturam quem você realmente é — sentimentos, olhares, pequenos gestos eternizados.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= SOBRE ======= -->
+  <section class="sobre" id="sobre">
+    <div class="sobre__inner">
+      <div class="sobre__img-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=700&q=85&auto=format&fit=crop"
+          alt="Bia Souza"
+          class="sobre__img"
+        />
+        <div class="sobre__img-accent"></div>
+      </div>
+
+      <div class="sobre__content reveal reveal--delay1">
+        <span class="section-label">04 — Sobre</span>
+        <h2 class="section-title">Olá, eu sou <em>Bia Souza</em></h2>
+        <p class="sobre__text">
+          Sou fotógrafa especializada em conexões humanas reais. 
+          Acredito que toda pessoa carrega uma beleza singular que merece 
+          ser eternizada com cuidado, sensibilidade e arte.
+        </p>
+        <p class="sobre__text">
+          Há mais de 5 anos crio experiências fotográficas que vão muito além 
+          de clicar em um botão — são momentos de autoconhecimento, leveza 
+          e celebração da sua história.
+        </p>
+        <a href="https://www.instagram.com/biasouzafotografiaa/" target="_blank" class="btn btn--dark sobre__btn">
+          Ver Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= DEPOIMENTOS ======= -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="section-header reveal">
+      <span class="section-label">05 — Depoimentos</span>
+      <h2 class="section-title">O que dizem <em>sobre a experiência</em></h2>
+    </div>
+
+    <div class="depo__track" id="depoTrack">
+      <div class="depo-card reveal">
+        <div class="depo-card__quote">"</div>
+        <p>Foi a experiência mais especial que já vivi. Cada foto parece um quadro. Me senti completamente à vontade e o resultado me emocionou demais.</p>
+        <div class="depo-card__author">
+          <strong>Mariana Costa</strong>
+          <span>Ensaio Feminino</span>
+        </div>
+      </div>
+
+      <div class="depo-card reveal reveal--delay1">
+        <div class="depo-card__quote">"</div>
+        <p>A Bia capturou coisas que eu nem sabia que tinha. Olhar as fotos do meu ensaio de gestante foi a primeira vez que me vi linda de verdade.</p>
+        <div class="depo-card__author">
+          <strong>Fernanda Alves</strong>
+          <span>Ensaio Gestante</span>
+        </div>
+      </div>
+
+      <div class="depo-card reveal reveal--delay2">
+        <div class="depo-card__quote">"</div>
+        <p>Fizemos o ensaio de casal e as fotos estão todas penduradas em casa. Cada vez que passo, me lembro daquele dia perfeito. Obrigada, Bia!</p>
+        <div class="depo-card__author">
+          <strong>Juliana & Pedro</strong>
+          <span>Ensaio de Casal</span>
+        </div>
+      </div>
+
+      <div class="depo-card reveal reveal--delay2">
+        <div class="depo-card__quote">"</div>
+        <p>Nunca imaginei me sentir tão eu mesma na frente de uma câmera. A Bia tem um dom para deixar tudo leve e natural. As fotos são simplesmente perfeitas.</p>
+        <div class="depo-card__author">
+          <strong>Camila Rocha</strong>
+          <span>Ensaio Feminino</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CTA FINAL ======= -->
+  <section class="cta-final" id="contato">
+    <div class="cta-final__bg">
+      <img src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?w=1600&q=85&auto=format&fit=crop" alt="cta" class="cta-final__img" />
+      <div class="cta-final__overlay"></div>
+    </div>
+    <div class="cta-final__content reveal">
+      <span class="section-label section-label--light">Pronta para eternizar?</span>
+      <h2 class="cta-final__title">Algumas memórias merecem ser eternizadas da forma certa.</h2>
+      <a href="https://wa.me/5579999999999" target="_blank" class="btn btn--light btn--lg">
+        Agendar meu ensaio
+      </a>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__logo">Bia Souza</span>
+        <p>Fotografia de alma<br />Sergipe, Brasil</p>
+      </div>
+      <div class="footer__links">
+        <a href="https://www.instagram.com/biasouzafotografiaa/" target="_blank" class="footer__social">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/5579999999999" target="_blank" class="footer__social">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          WhatsApp
+        </a>
+        <a href="#" class="footer__social">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Sergipe, SE
+        </a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Bia Souza Fotografia — Todos os direitos reservados</span>
+    </div>
+  </footer>
+
+  <script>
+    // ─── NAV scroll ───────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+    });
+
+    // ─── Mobile menu ──────────────────────────────────────────
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      toggle.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.classList.remove('open');
+    }));
+
+    // ─── Reveal on scroll ─────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // ─── Parallax hero ────────────────────────────────────────
+    const pImg = document.getElementById('parallaxImg');
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth > 768) {
+        pImg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+      }
+    }, { passive: true });
+
+    // ─── Portfolio filter ─────────────────────────────────────
+    const tabs  = document.querySelectorAll('.tab');
+    const items = document.querySelectorAll('.grid-item');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const cat = tab.dataset.cat;
+        items.forEach(item => {
+          if (cat === 'all' || item.dataset.cat === cat) {
+            item.style.display = '';
+            setTimeout(() => item.style.opacity = 1, 10);
+          } else {
+            item.style.opacity = 0;
+            setTimeout(() => item.style.display = 'none', 300);
+          }
+        });
+      });
+    });
+
+    // ─── Smooth scroll ────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

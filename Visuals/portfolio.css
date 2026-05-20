@@ -510,7 +510,7 @@ body {
 }
 
 .price-value sup {
-  font-size: .38em;
+  font-size: .23em;
   vertical-align: top;
   margin-top: .42em;
   color: var(--orange);

@@ -156,7 +156,8 @@
       </div>
       <div class="portfolio-grid">
         <!-- Projeto 1 -->
-        <a href="../Capriccio.site/index.html" class="project-card reveal" style="text-decoration: none; color: inherit;">
+        <a href="../Capriccio.site/index.html" class="project-card reveal"
+          style="text-decoration: none; color: inherit;">
           <div class="project-thumb">
             <div class="project-thumb-inner thumb-saas">
               <img src="../images/capricciopreview.png" alt="Capriccio Pizzaria" class="project-image">
@@ -169,15 +170,17 @@
             <div class="project-tag">Site para Negócios · Projeto Pessoal</div>
             <div class="project-name">Capriccio Pizzaria</div>
             <div class="project-desc">
-              Página única (landing page) focada em conversão para pizzaria, destacando cardápio, avaliações e facilitando pedidos diretos pelo WhatsApp.
+              Página única (landing page) focada em conversão para pizzaria, destacando cardápio, avaliações e
+              facilitando pedidos diretos pelo WhatsApp.
             </div>
           </div>
         </a>
         <!-- Projeto 2 -->
-        <a href="../BIASOUZAPORT/index.html" class="project-card reveal reveal-d1" style="text-decoration: none; color: inherit;">
+        <a href="../BIASOUZAPORT/index.html" class="project-card reveal reveal-d1"
+          style="text-decoration: none; color: inherit;">
           <div class="project-thumb">
             <div class="project-thumb-inner thumb-agency">
-              <img src="" alt="Bia Souza Portfólio" class="project-image">
+              <img src="../images/BIASOUZAPORT.png" alt="Bia Souza Portfólio" class="project-image">
             </div>
             <div class="project-overlay">
               <span class="overlay-btn">Ver Projeto →</span>
@@ -187,7 +190,7 @@
             <div class="project-tag">Portfólio · Projeto Pessoal</div>
             <div class="project-name">Bia Souza</div>
             <div class="project-desc">
-              Projeto em andamento. Este projeto está em desenvolvimento. Em breve disponível para visualização.
+              Landing page de portfólio focada em conversão para fotógrafa, destacando galerias de ensaios, depoimentos e agendamento direto pelo WhatsApp.
             </div>
           </div>
         </a>
@@ -646,8 +649,8 @@
 
     /* ── Mobile Touch Feedback ─────────────────────────── */
     // Enable :active states on iOS
-    document.addEventListener("touchstart", () => {}, { passive: true });
-    
+    document.addEventListener("touchstart", () => { }, { passive: true });
+
     // Add temporary active class on touch/press to play shine animation
     document.querySelectorAll('.btn-primary, .btn-secondary, .nav-cta, .drawer-cta, .strategy-cta, .plan-cta, .overlay-btn, .social-btn').forEach(btn => {
       btn.addEventListener('pointerdown', () => {

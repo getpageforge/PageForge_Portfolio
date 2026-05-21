@@ -278,6 +278,26 @@ a { text-decoration: none; color: inherit; }
   max-width: 900px;
   margin: 0 auto;
 }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-sec);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  transition: color 0.3s;
+}
+.back-link:hover {
+  color: var(--champagne);
+}
+.back-link svg {
+  transition: transform 0.3s;
+}
+.back-link:hover svg {
+  transform: translateX(-4px);
+}
 .hero__eyebrow {
   font-family: var(--font-body);
   font-size: 0.85rem;

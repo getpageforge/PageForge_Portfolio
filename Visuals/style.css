@@ -2901,3 +2901,525 @@ footer {
     gap: 14px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PÁGINA EXPRESS — Porta de Entrada Premium
+   ═══════════════════════════════════════════════════════════ */
+#express-offer {
+  padding: 100px 0;
+  position: relative;
+  background: rgba(255, 255, 255, 0.008);
+}
+
+.express-blob-1 {
+  position: absolute;
+  top: -15%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(245, 106, 0, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.express-header {
+  text-align: center;
+  margin-bottom: 72px;
+  position: relative;
+  z-index: 1;
+}
+
+.express-header .section-sub {
+  max-width: 580px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.express-content {
+  position: relative;
+  z-index: 1;
+}
+
+.express-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.express-feature {
+  padding: 32px 28px;
+  border-radius: 18px;
+  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  transition: border-color .35s, background .35s, transform .35s, box-shadow .35s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.express-feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 106, 0, 0.28), transparent);
+  opacity: 0;
+  transition: opacity .35s;
+}
+
+@media (hover: hover) {
+  .express-feature:hover {
+    border-color: rgba(245, 106, 0, 0.3);
+    background: rgba(18, 8, 2, 0.68);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45), 0 0 40px rgba(245, 106, 0, 0.08);
+  }
+
+  .express-feature:hover::before {
+    opacity: 1;
+  }
+}
+
+.express-feature-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: inline-block;
+  transition: transform .3s, filter .3s;
+}
+
+@media (hover: hover) {
+  .express-feature:hover .express-feature-icon {
+    transform: scale(1.1) translateY(-2px);
+    filter: drop-shadow(0 0 12px rgba(245, 106, 0, 0.5));
+  }
+}
+
+.express-feature-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.express-feature-desc {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Main Offer Card */
+.express-offer-card {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 48px 40px;
+  border-radius: 24px;
+  background: var(--glass-bg);
+  border: 1.5px solid rgba(245, 106, 0, 0.25);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(245, 106, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.express-offer-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 106, 0, 0.35), transparent);
+  opacity: 0;
+  transition: opacity .35s;
+}
+
+.express-offer-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% -15%, rgba(245, 106, 0, 0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .express-offer-card:hover {
+    border-color: rgba(245, 106, 0, 0.4);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(245, 106, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .express-offer-card:hover::before {
+    opacity: 1;
+  }
+}
+
+.express-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.express-service-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+
+.express-new-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: .65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #fff;
+  background: var(--orange);
+  padding: 4px 12px;
+  border-radius: 100px;
+  box-shadow: 0 0 16px rgba(245, 106, 0, 0.45);
+}
+
+.express-service-tagline {
+  font-size: .95rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.express-features-list {
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.express-features-ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.express-features-ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: .95rem;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.express-check {
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: -2px;
+}
+
+.express-price-section {
+  text-align: center;
+  margin-bottom: 28px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
+}
+
+.express-price-label {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+
+.express-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.express-currency {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--orange);
+}
+
+.express-amount {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 3.2rem;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--text);
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.85));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.express-price-note {
+  font-size: .8rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.express-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 28px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-hot));
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s, opacity .3s;
+  box-shadow: 0 12px 36px rgba(245, 106, 0, 0.35);
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+  letter-spacing: -.01em;
+}
+
+@media (hover: hover) {
+  .express-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 48px rgba(245, 106, 0, 0.45);
+  }
+}
+
+.express-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.express-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 106, 0, 0.35), transparent);
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.express-footer-note {
+  font-size: .82rem;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 300;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+.express-footer-note strong {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Service Card Price Tag (novo elemento)
+   ───────────────────────────────────────────────────────── */
+.service-price-tag {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.price-highlight {
+  color: var(--orange);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — Express & Price Tags
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .express-features {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .express-offer-card {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  #express-offer {
+    padding: 80px 0;
+  }
+
+  .express-header {
+    margin-bottom: 56px;
+  }
+
+  .express-header .section-headline {
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+  }
+
+  .express-features {
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .express-feature {
+    padding: 28px 20px;
+  }
+
+  .express-feature-icon {
+    font-size: 1.6rem;
+  }
+
+  .express-offer-card {
+    padding: 36px 28px;
+    max-width: 100%;
+  }
+
+  .express-service-name {
+    font-size: 1.4rem;
+  }
+
+  .express-service-tagline {
+    font-size: .9rem;
+    margin-bottom: 24px;
+  }
+
+  .express-features-ul li {
+    font-size: .9rem;
+    gap: 10px;
+  }
+
+  .express-amount {
+    font-size: 2.8rem;
+  }
+
+  .express-cta {
+    font-size: .9rem;
+    padding: 14px 24px;
+    margin-bottom: 20px;
+  }
+
+  .express-footer-note {
+    font-size: .78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .express-blob-1 {
+    width: 400px;
+    height: 400px;
+    top: -20%;
+  }
+
+  .express-header {
+    margin-bottom: 48px;
+  }
+
+  .express-features {
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .express-feature {
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
+
+  .express-feature-icon {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .express-feature-title {
+    font-size: .95rem;
+  }
+
+  .express-feature-desc {
+    font-size: .82rem;
+  }
+
+  .express-offer-card {
+    padding: 28px 20px;
+    border-radius: 18px;
+  }
+
+  .express-card-header {
+    gap: 8px;
+  }
+
+  .express-service-name {
+    font-size: 1.2rem;
+  }
+
+  .express-new-badge {
+    font-size: .6rem;
+    padding: 3px 10px;
+  }
+
+  .express-service-tagline {
+    font-size: .85rem;
+    margin-bottom: 20px;
+  }
+
+  .express-price-section {
+    padding: 20px 0;
+  }
+
+  .express-price-label {
+    font-size: .78rem;
+  }
+
+  .express-amount {
+    font-size: 2.4rem;
+  }
+
+  .express-features-ul li {
+    font-size: .85rem;
+    gap: 8px;
+  }
+
+  .express-check {
+    font-size: 1rem;
+  }
+
+  .express-cta {
+    font-size: .85rem;
+    padding: 12px 20px;
+  }
+}

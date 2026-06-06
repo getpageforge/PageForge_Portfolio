@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PageForge — Painel Administrativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Ambient background -->
+  <div class="ambient-blob blob-1"></div>
+  <div class="ambient-blob blob-2"></div>
+
+  <!-- ── HEADER ── -->
+  <header class="admin-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="2" width="7" height="7" rx="2" fill="#F56A00"/>
+            <rect x="11" y="2" width="7" height="7" rx="2" fill="#F56A00" opacity=".5"/>
+            <rect x="2" y="11" width="7" height="7" rx="2" fill="#F56A00" opacity=".5"/>
+            <rect x="11" y="11" width="7" height="7" rx="2" fill="#F56A00" opacity=".3"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">PageForge</span>
+          <span class="brand-sep">·</span>
+          <span class="brand-sub">Admin</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <h1 class="header-title">Painel Administrativo</h1>
+        <p class="header-subtitle">Gerenciamento de Briefings</p>
+      </div>
+
+      <div class="header-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Sistema ativo</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="admin-main">
+
+    <!-- METRICS -->
+    <section class="metrics-section">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Total de Briefings</span>
+            <span class="metric-value" id="metric-total">—</span>
+          </div>
+          <div class="metric-trend" id="trend-total"></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Recebidos Hoje</span>
+            <span class="metric-value" id="metric-today">—</span>
+          </div>
+          <div class="metric-trend" id="trend-today"></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Esta Semana</span>
+            <span class="metric-value" id="metric-week">—</span>
+          </div>
+          <div class="metric-trend" id="trend-week"></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Este Mês</span>
+            <span class="metric-value" id="metric-month">—</span>
+          </div>
+          <div class="metric-trend" id="trend-month"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEARCH & CONTROLS -->
+    <section class="controls-section">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Pesquisar briefing por nome, empresa ou e-mail..."
+          autocomplete="off"
+        />
+        <button class="search-clear" id="search-clear" aria-label="Limpar busca">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="controls-right">
+        <span class="results-count" id="results-count"></span>
+        <button class="refresh-btn" id="refresh-btn" title="Atualizar dados">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"/>
+            <polyline points="1 20 1 14 7 14"/>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+          Atualizar
+        </button>
+      </div>
+    </section>
+
+    <!-- LIST VIEW -->
+    <section class="list-view" id="list-view">
+      <div class="briefings-list" id="briefings-list">
+        <!-- cards injetados via JS -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state" style="display:none">
+        <div class="empty-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <h3 class="empty-title">Nenhum briefing recebido até o momento.</h3>
+        <p class="empty-sub">Quando novos briefings chegarem pelo portfólio, eles aparecerão aqui automaticamente.</p>
+      </div>
+
+      <!-- No search results -->
+      <div class="no-results" id="no-results" style="display:none">
+        <div class="empty-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+        <h3 class="empty-title">Nenhum resultado encontrado.</h3>
+        <p class="empty-sub">Tente buscar por outro nome, empresa ou e-mail.</p>
+      </div>
+    </section>
+
+    <!-- DETAIL VIEW -->
+    <section class="detail-view" id="detail-view" style="display:none">
+      <div class="detail-header">
+        <button class="back-btn" id="back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Voltar para os Briefings
+        </button>
+      </div>
+
+      <div class="detail-card" id="detail-card">
+        <!-- injetado via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

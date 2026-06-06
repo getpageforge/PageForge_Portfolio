@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Briefing — PageForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="briefing.css">
+</head>
+<body>
+
+  <div class="bg-noise"></div>
+  <div class="bg-grid"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+            <rect width="10" height="10" rx="2.5" fill="#F56A00"/>
+            <rect x="12" width="10" height="10" rx="2.5" fill="#FF4500" opacity="0.7"/>
+            <rect y="12" width="10" height="10" rx="2.5" fill="#FF4500" opacity="0.7"/>
+            <rect x="12" y="12" width="10" height="10" rx="2.5" fill="#F56A00" opacity="0.4"/>
+          </svg>
+        </div>
+        <span>PageForge</span>
+      </a>
+      <div class="top-bar-tag">Diagnóstico de Projeto</div>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+
+    <!-- HERO -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-badge"><span class="hero-dot"></span>Briefing Exclusivo</div>
+      <h1 class="hero-title">Vamos entender<br><span class="hero-accent">seu projeto</span></h1>
+      <p class="hero-sub">Preencha este briefing para que possamos analisar sua necessidade e desenvolver a melhor solução para o seu negócio.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="stat-num">7</span><span class="stat-label">Etapas</span></div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat"><span class="stat-num">~8</span><span class="stat-label">Minutos</span></div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat"><span class="stat-num">100%</span><span class="stat-label">Confidencial</span></div>
+      </div>
+      <button class="hero-cta" id="startBtn">
+        <span>Iniciar Diagnóstico</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <!-- FORM -->
+    <section class="form-section hidden" id="formSection">
+
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span class="progress-label" id="progressLabel">Etapa 1 de 7</span>
+          <span class="progress-pct" id="progressPct">14%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width:14%"></div>
+        </div>
+        <div class="progress-steps" id="progressSteps"></div>
+      </div>
+
+      <div class="steps-container" id="stepsContainer">
+
+        <!-- ETAPA 1 -->
+        <div class="step-panel" data-step="1">
+          <div class="step-header">
+            <div class="step-tag">Etapa 01</div>
+            <h2 class="step-title">Informações Básicas</h2>
+            <p class="step-sub">Precisamos conhecer você antes de começar.</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label" for="f_nome">Nome completo <span class="req">*</span></label>
+              <input class="field-input" type="text" id="f_nome" name="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_empresa">Empresa ou projeto <span class="req">*</span></label>
+              <input class="field-input" type="text" id="f_empresa" name="empresa" placeholder="Nome da empresa" required>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_segmento">Segmento de atuação <span class="req">*</span></label>
+              <input class="field-input" type="text" id="f_segmento" name="segmento" placeholder="Ex: Saúde, Moda, Tecnologia…" required>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_email">E-mail profissional <span class="req">*</span></label>
+              <input class="field-input" type="email" id="f_email" name="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_whatsapp">WhatsApp <span class="req">*</span></label>
+              <input class="field-input" type="tel" id="f_whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_instagram">Instagram da marca</label>
+              <input class="field-input" type="text" id="f_instagram" name="instagram" placeholder="@suamarca">
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_site">Site atual</label>
+              <input class="field-input" type="text" id="f_site" name="site" placeholder="https://seusite.com.br ou X se não houver">
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label">Como conheceu a PageForge? <span class="req">*</span></label>
+              <div class="chips-group" data-name="origem" data-required="true">
+                <button type="button" class="chip" data-value="Google">Google</button>
+                <button type="button" class="chip" data-value="Instagram">Instagram</button>
+                <button type="button" class="chip" data-value="LinkedIn">LinkedIn</button>
+                <button type="button" class="chip" data-value="Indicação">Indicação</button>
+                <button type="button" class="chip" data-value="Outro">Outro</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div class="step-panel hidden" data-step="2">
+          <div class="step-header">
+            <div class="step-tag">Etapa 02</div>
+            <h2 class="step-title">Sobre o Negócio</h2>
+            <p class="step-sub">Queremos entender profundamente sua empresa e mercado.</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label" for="f_tempo">Tempo de mercado <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select class="field-input field-select" id="f_tempo" name="tempo" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Menos de 1 ano</option>
+                  <option>1 a 3 anos</option>
+                  <option>3 a 5 anos</option>
+                  <option>5 a 10 anos</option>
+                  <option>Mais de 10 anos</option>
+                </select>
+                <span class="select-arrow">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_descricao">Descrição resumida da empresa <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_descricao" name="descricao" placeholder="O que sua empresa faz, como faz e para quem…" rows="4" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_cliente_ideal">Quem é o cliente ideal da sua empresa? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_cliente_ideal" name="cliente_ideal" placeholder="Perfil do seu cliente, características, comportamentos…" rows="3" required></textarea>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_faixa_etaria">Faixa etária média do público <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select class="field-input field-select" id="f_faixa_etaria" name="faixa_etaria" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>18 a 24 anos</option>
+                  <option>25 a 34 anos</option>
+                  <option>35 a 44 anos</option>
+                  <option>45 a 54 anos</option>
+                  <option>55+ anos</option>
+                  <option>Variado</option>
+                </select>
+                <span class="select-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_comportamento">Como o público se comporta antes de comprar?</label>
+              <textarea class="field-input field-textarea" id="f_comportamento" name="comportamento" placeholder="Pesquisa no Google, compara preços, busca indicações…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_dores_publico">Dores, desejos ou objeções do seu público</label>
+              <textarea class="field-input field-textarea" id="f_dores_publico" name="dores_publico" placeholder="O que preocupa, o que desejam, o que os impede de comprar…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_diferencial">O que torna sua empresa diferente da concorrência? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_diferencial" name="diferencial" placeholder="Seu maior diferencial competitivo…" rows="3" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_percepcao">Como você acredita que sua marca é percebida hoje?</label>
+              <textarea class="field-input field-textarea" id="f_percepcao" name="percepcao" placeholder="Descreva a percepção atual do mercado sobre sua marca…" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 3 -->
+        <div class="step-panel hidden" data-step="3">
+          <div class="step-header">
+            <div class="step-tag">Etapa 03</div>
+            <h2 class="step-title">Sobre o Projeto</h2>
+            <p class="step-sub">Detalhe o que você precisa e como imagina a solução.</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label">Qual serviço você deseja? <span class="req">*</span></label>
+              <div class="chips-group" data-name="servico" data-required="true" data-multi="true">
+                <button type="button" class="chip" data-value="Landing Page">Landing Page</button>
+                <button type="button" class="chip" data-value="Site Institucional">Site Institucional</button>
+                <button type="button" class="chip" data-value="Redesign">Redesign</button>
+                <button type="button" class="chip" data-value="Blog">Blog</button>
+                <button type="button" class="chip" data-value="Sistema Web">Sistema Web</button>
+                <button type="button" class="chip" data-value="Outro">Outro</button>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label">Quais páginas você imagina para o site? <span class="req">*</span></label>
+              <div class="chips-group" data-name="paginas" data-required="true" data-multi="true">
+                <button type="button" class="chip" data-value="Home">Home</button>
+                <button type="button" class="chip" data-value="Sobre">Sobre</button>
+                <button type="button" class="chip" data-value="Serviços">Serviços</button>
+                <button type="button" class="chip" data-value="Portfólio">Portfólio</button>
+                <button type="button" class="chip" data-value="Blog">Blog</button>
+                <button type="button" class="chip" data-value="Contato">Contato</button>
+                <button type="button" class="chip" data-value="FAQ">FAQ</button>
+                <button type="button" class="chip" data-value="Área de Membros">Área de Membros</button>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label">Quais funcionalidades são importantes?</label>
+              <div class="chips-group" data-name="funcionalidades" data-multi="true">
+                <button type="button" class="chip" data-value="Formulário de contato">Formulário de contato</button>
+                <button type="button" class="chip" data-value="Chat/WhatsApp">Chat/WhatsApp</button>
+                <button type="button" class="chip" data-value="Analytics">Analytics</button>
+                <button type="button" class="chip" data-value="SEO avançado">SEO avançado</button>
+                <button type="button" class="chip" data-value="Multi-idioma">Multi-idioma</button>
+                <button type="button" class="chip" data-value="Integração com APIs">Integração com APIs</button>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_problemas">Quais problemas você percebe no seu site ou comunicação atual? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_problemas" name="problemas" placeholder="Descreva os principais problemas que você identifica…" rows="4" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_oportunidades">Onde você sente que perde oportunidades de venda ou contato?</label>
+              <textarea class="field-input field-textarea" id="f_oportunidades" name="oportunidades" placeholder="Pontos de fuga, canais com baixo resultado…" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 4 -->
+        <div class="step-panel hidden" data-step="4">
+          <div class="step-header">
+            <div class="step-tag">Etapa 04</div>
+            <h2 class="step-title">Objetivos e Metas</h2>
+            <p class="step-sub">O que você quer conquistar com este projeto?</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label" for="f_objetivo">Qual é o principal objetivo deste projeto? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_objetivo" name="objetivo" placeholder="Aumentar vendas, gerar leads, fortalecer marca…" rows="3" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_metas">Quais metas a empresa deseja alcançar nos próximos meses?</label>
+              <textarea class="field-input field-textarea" id="f_metas" name="metas" placeholder="Metas numéricas, objetivos de crescimento…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_expectativas">Quais são suas expectativas com a PageForge? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_expectativas" name="expectativas" placeholder="O que você espera que mudará após este projeto…" rows="3" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_meta_financeira">Existe alguma meta financeira ligada a este projeto?</label>
+              <textarea class="field-input field-textarea" id="f_meta_financeira" name="meta_financeira" placeholder="Aumento de faturamento esperado, ROI desejado…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_crescimento">Como você imagina o crescimento da empresa nos próximos 6 a 12 meses?</label>
+              <textarea class="field-input field-textarea" id="f_crescimento" name="crescimento" placeholder="Expansão de equipe, novos mercados, novos produtos…" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 5 -->
+        <div class="step-panel hidden" data-step="5">
+          <div class="step-header">
+            <div class="step-tag">Etapa 05</div>
+            <h2 class="step-title">Identidade e Posicionamento</h2>
+            <p class="step-sub">Vamos entender como você quer ser percebido.</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label" for="f_percepcao_desejada">Como você quer que sua marca seja percebida no mercado? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_percepcao_desejada" name="percepcao_desejada" placeholder="Premium, acessível, tecnológica, humanizada…" rows="3" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_autoridade">Que tipo de autoridade ou confiança a marca precisa transmitir?</label>
+              <textarea class="field-input field-textarea" id="f_autoridade" name="autoridade" placeholder="Expertise técnica, resultados comprovados, depoimentos…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_visao">Qual é a visão de futuro da sua marca?</label>
+              <textarea class="field-input field-textarea" id="f_visao" name="visao" placeholder="Onde sua marca estará em 5 anos…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label">Qual estilo visual combina com a imagem que você quer transmitir? <span class="req">*</span></label>
+              <div class="chips-group" data-name="estilo_visual" data-required="true" data-multi="true">
+                <button type="button" class="chip" data-value="Minimalista">Minimalista</button>
+                <button type="button" class="chip" data-value="Moderno e Tecnológico">Moderno e Tecnológico</button>
+                <button type="button" class="chip" data-value="Elegante e Premium">Elegante e Premium</button>
+                <button type="button" class="chip" data-value="Colorido e Criativo">Colorido e Criativo</button>
+                <button type="button" class="chip" data-value="Corporativo e Sólido">Corporativo e Sólido</button>
+                <button type="button" class="chip" data-value="Jovem e Descontraído">Jovem e Descontraído</button>
+                <button type="button" class="chip" data-value="Natural e Orgânico">Natural e Orgânico</button>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_cores">Existe alguma cor ou paleta desejada?</label>
+              <input class="field-input" type="text" id="f_cores" name="cores" placeholder="Ex: Azul e branco, preto e dourado…">
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f_estilo_evitar">Algum estilo visual que você não quer seguir?</label>
+              <input class="field-input" type="text" id="f_estilo_evitar" name="estilo_evitar" placeholder="Ex: Nada muito colorido, nada muito sóbrio…">
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_concorrentes">Quais concorrentes ou marcas do seu mercado você observa?</label>
+              <textarea class="field-input field-textarea" id="f_concorrentes" name="concorrentes" placeholder="Cite marcas do mesmo segmento que você acompanha…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_inspiracoes">Quais sites você considera inspiradores?</label>
+              <textarea class="field-input field-textarea" id="f_inspiracoes" name="inspiracoes" placeholder="Links ou nomes de sites que te inspiram…" rows="3"></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_marcas_admira">Quais marcas você admira visualmente ou estrategicamente?</label>
+              <textarea class="field-input field-textarea" id="f_marcas_admira" name="marcas_admira" placeholder="Marcas de qualquer segmento que te inspiram…" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 6 -->
+        <div class="step-panel hidden" data-step="6">
+          <div class="step-header">
+            <div class="step-tag">Etapa 06</div>
+            <h2 class="step-title">Investimento e Prazo</h2>
+            <p class="step-sub">Nos ajude a entender sua disponibilidade e urgência.</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label">Nível de urgência do projeto <span class="req">*</span></label>
+              <div class="chips-group" data-name="urgencia" data-required="true">
+                <button type="button" class="chip" data-value="Urgente — preciso o quanto antes">🔥 Urgente</button>
+                <button type="button" class="chip" data-value="Alta — tenho data específica">Alta prioridade</button>
+                <button type="button" class="chip" data-value="Média — dentro de 30 dias">Média prioridade</button>
+                <button type="button" class="chip" data-value="Baixa — sem pressa">Sem pressa</button>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label">Prazo desejado <span class="req">*</span></label>
+              <div class="chips-group" data-name="prazo" data-required="true">
+                <button type="button" class="chip" data-value="Urgente (menos de 15 dias)">Urgente (−15 dias)</button>
+                <button type="button" class="chip" data-value="15 dias">15 dias</button>
+                <button type="button" class="chip" data-value="30 dias">30 dias</button>
+                <button type="button" class="chip" data-value="Sem prazo definido">Sem prazo</button>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_data">Existe alguma data importante ou evento?</label>
+              <input class="field-input" type="text" id="f_data" name="data_importante" placeholder="Lançamento de produto, evento, temporada…">
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label">Faixa de investimento prevista <span class="req">*</span></label>
+              <div class="chips-group" data-name="orcamento" data-required="true">
+                <button type="button" class="chip" data-value="Até R$ 1.500">Até R$ 1.500</button>
+                <button type="button" class="chip" data-value="R$ 1.500 – R$ 2.000">R$ 1.500 – 2.000</button>
+                <button type="button" class="chip" data-value="R$ 2.500 – R$ 3.000">R$ 2.500 – 3.000</button>
+                <button type="button" class="chip" data-value="R$ 3.000 – R$ 5.000">R$ 3.000 – 5.000</button>
+                <button type="button" class="chip" data-value="Acima de R$ 5.000">Acima de R$ 5.000</button>
+                <button type="button" class="chip" data-value="A definir / Em aberto">A definir</button>
+              </div>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_dificuldades">Quais dificuldades sua empresa enfrenta hoje na presença digital? <span class="req">*</span></label>
+              <textarea class="field-input field-textarea" id="f_dificuldades" name="dificuldades" placeholder="Baixa visibilidade, poucos leads, site desatualizado…" rows="4" required></textarea>
+            </div>
+            <div class="field-wrap full">
+              <label class="field-label" for="f_melhorar">O que você mais deseja melhorar com este projeto?</label>
+              <textarea class="field-input field-textarea" id="f_melhorar" name="melhorar" placeholder="Priorize o que mais te incomoda ou o que mais quer alcançar…" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 7 -->
+        <div class="step-panel hidden" data-step="7">
+          <div class="step-header">
+            <div class="step-tag">Etapa 07</div>
+            <h2 class="step-title">Observações Finais</h2>
+            <p class="step-sub">Qualquer detalhe adicional que possamos precisar saber.</p>
+          </div>
+          <div class="fields-grid">
+            <div class="field-wrap full">
+              <label class="field-label" for="f_observacoes">Há algo mais que a PageForge precisa saber?</label>
+              <textarea class="field-input field-textarea" id="f_observacoes" name="observacoes" placeholder="Informações adicionais, restrições, contextos importantes…" rows="5"></textarea>
+            </div>
+            <div class="field-wrap full consent-wrap">
+              <label class="checkbox-label">
+                <input type="checkbox" id="f_consent" class="checkbox-input" required>
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text">Concordo que meus dados serão utilizados exclusivamente para análise e contato pela PageForge, de forma sigilosa e profissional.</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-nav btn-back hidden" id="btnBack">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Voltar</span>
+        </button>
+        <button class="btn-nav btn-next" id="btnNext">
+          <span>Continuar</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- REVIEW -->
+    <section class="review-section hidden" id="reviewSection">
+      <div class="review-header">
+        <div class="step-tag">Revisão Final</div>
+        <h2 class="step-title">Revise suas respostas</h2>
+        <p class="step-sub">Verifique todas as informações antes de enviar o briefing.</p>
+      </div>
+      <div class="review-grid" id="reviewGrid"></div>
+      <div class="form-nav review-nav">
+        <button class="btn-nav btn-back" id="btnReviewBack">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Editar</span>
+        </button>
+        <button class="btn-nav btn-submit" id="btnSubmit">
+          <span>Enviar Briefing</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SUCCESS -->
+    <section class="success-section hidden" id="successSection">
+      <div class="success-icon-wrap">
+        <div class="success-ring"></div>
+        <div class="success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+      </div>
+      <h2 class="success-title">Briefing enviado com sucesso</h2>
+      <p class="success-sub">Recebemos suas informações e iniciaremos a análise do seu projeto. Em breve entraremos em contato pelo WhatsApp ou e-mail informado.</p>
+
+      <div class="analysis-card" id="analysisCard">
+        <div class="analysis-header">
+          <div class="analysis-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Análise Inicial
+          </div>
+          <span class="analysis-label">Diagnóstico automático gerado</span>
+        </div>
+        <ul class="analysis-list" id="analysisList"></ul>
+      </div>
+
+      <a href="#" class="btn-return" id="btnReturn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar para o Portfólio
+      </a>
+    </section>
+
+  </main>
+
+  <script src="briefing.js"></script>
+</body>
+</html>

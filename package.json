@@ -1,0 +1,30 @@
+{
+  "name": "pageforge.ofc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx vercel dev",
+    "vercel-dev-cmd": "echo 'Starting Vercel Dev Environment'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getpageforge/PageForge_Portfolio-main.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getpageforge/PageForge_Portfolio-main/issues"
+  },
+  "homepage": "https://github.com/getpageforge/PageForge_Portfolio-main#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.107.0",
+    "vercel": "^54.9.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.0.0"
+  }
+}

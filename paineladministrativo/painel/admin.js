@@ -164,16 +164,60 @@
 
       card.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-          <div style="flex: 1;">
+          <div style="flex: 1; min-width: 0; cursor: pointer;" class="card-info-area">
             <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">${escapeHtml(briefing.nome)}</div>
             <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 8px;">${escapeHtml(briefing.empresa)}</div>
             <div style="font-size: 12px; color: rgba(255,255,255,0.4);">${escapeHtml(briefing.email)}</div>
           </div>
-          <div style="text-align: right;">
-            <div style="font-size: 12px; color: rgba(255,255,255,0.5);">${briefing.created_at}</div>
+          <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+            <div style="font-size: 12px; color: rgba(255,255,255,0.5); text-align: right;">${briefing.created_at}</div>
+            <button class="delete-btn" data-id="${briefing.id}" title="Deletar briefing" style="
+              background: none;
+              border: 1px solid rgba(255, 70, 70, 0.3);
+              color: rgba(255, 100, 100, 0.7);
+              width: 34px;
+              height: 34px;
+              border-radius: 8px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+              transition: all 0.2s ease;
+            ">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                <path d="M10 11v6"/>
+                <path d="M14 11v6"/>
+                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+              </svg>
+            </button>
           </div>
         </div>
       `;
+
+      // Click na area de info abre o detalhe
+      card.querySelector('.card-info-area').addEventListener('click', () => {
+        viewBriefingDetail(briefing.id);
+      });
+
+      // Botão deletar
+      const deleteBtn = card.querySelector('.delete-btn');
+      deleteBtn.addEventListener('mouseenter', () => {
+        deleteBtn.style.background = 'rgba(255, 70, 70, 0.15)';
+        deleteBtn.style.borderColor = 'rgba(255, 70, 70, 0.6)';
+        deleteBtn.style.color = '#ff6464';
+      });
+      deleteBtn.addEventListener('mouseleave', () => {
+        deleteBtn.style.background = 'none';
+        deleteBtn.style.borderColor = 'rgba(255, 70, 70, 0.3)';
+        deleteBtn.style.color = 'rgba(255, 100, 100, 0.7)';
+      });
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteBriefing(briefing.id, briefing.nome, card);
+      });
 
       briefingsList.appendChild(card);
     });
@@ -184,6 +228,47 @@
       resultsCount.textContent = `${total} briefing${total !== 1 ? 's' : ''}`;
     } else {
       resultsCount.textContent = `${found} de ${total} resultado${found !== 1 ? 's' : ''}`;
+    }
+  }
+
+  /* ──────────────────────────────────────────────── */
+  /* DELETAR BRIEFING */
+  /* ──────────────────────────────────────────────── */
+
+  async function deleteBriefing(id, nome, cardElement) {
+    const confirmed = window.confirm(`Deletar o briefing de "${nome}"?\n\nEssa ação não pode ser desfeita.`);
+    if (!confirmed) return;
+
+    try {
+      const token = localStorage.getItem('authToken');
+      const response = await fetch(`/api/delete-briefing?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (response.status === 401) { redirectToLogin(); return; }
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        showError('Erro ao deletar briefing');
+        return;
+      }
+
+      // Animação de saída suave
+      cardElement.style.transition = 'all 0.3s ease';
+      cardElement.style.opacity = '0';
+      cardElement.style.transform = 'translateX(20px)';
+      setTimeout(() => {
+        cardElement.remove();
+        // Atualizar contagem
+        const remaining = briefingsList.querySelectorAll('.briefing-card').length;
+        if (remaining === 0) emptyState.style.display = 'flex';
+        if (metricsTotal) metricsTotal.textContent = remaining;
+      }, 300);
+
+    } catch (err) {
+      showError('Erro ao conectar com a API');
     }
   }
 

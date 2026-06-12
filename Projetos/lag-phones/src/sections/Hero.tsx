@@ -66,7 +66,7 @@ export default function Hero() {
           className="flex justify-center mb-6"
         >
           <a 
-            href="../../Structure/index.html#portfolio" 
+            href="/Structure/index.html#portfolio" 
             className="flex items-center gap-2 text-sm text-[#A3A3A3] hover:text-white transition-colors"
           >
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none">

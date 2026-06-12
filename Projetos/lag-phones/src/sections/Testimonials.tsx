@@ -82,7 +82,7 @@ export default function Testimonials() {
     <section className="section-padding bg-[#000000] relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1A1A1A] to-transparent" />
 
-      <div className="container-site">
+      <div className="container-site" ref={ref}>
         <SectionHeader
           eyebrow="Avaliações"
           title="O que nossos clientes dizem."
@@ -91,7 +91,7 @@ export default function Testimonials() {
         />
 
         {/* Mobile: single column */}
-        <div ref={ref} className="md:hidden flex flex-col gap-3">
+        <div className="md:hidden flex flex-col gap-3">
           {TESTIMONIALS.map((t, i) => renderCard(t, i))}
         </div>
 

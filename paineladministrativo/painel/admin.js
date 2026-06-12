@@ -22,6 +22,40 @@
   const metricsMonth = document.getElementById('metric-month');
 
   /* ──────────────────────────────────────────────── */
+  /* CUSTOM CURSOR */
+  /* ──────────────────────────────────────────────── */
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mx = -200, my = -200, rx = -200, ry = -200;
+  
+  document.addEventListener('mousemove', e => { 
+    mx = e.clientX; 
+    my = e.clientY; 
+  });
+  
+  (function animCursor() {
+    rx += (mx - rx) * 0.14;
+    ry += (my - ry) * 0.14;
+    if (cursor) { cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; }
+    if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
+    requestAnimationFrame(animCursor);
+  })();
+
+  document.addEventListener('mouseover', e => {
+    const isInteractive = e.target.closest('a, button, input, .briefing-card, .btn-logout, .search-clear, svg, .card-info-area');
+    if (isInteractive) {
+      document.body.classList.add('cursor-hover');
+    }
+  });
+
+  document.addEventListener('mouseout', e => {
+    const isInteractive = e.target.closest('a, button, input, .briefing-card, .btn-logout, .search-clear, svg, .card-info-area');
+    if (isInteractive) {
+      document.body.classList.remove('cursor-hover');
+    }
+  });
+
+  /* ──────────────────────────────────────────────── */
   /* AUTENTICAÇÃO & PROTEÇÃO */
   /* ──────────────────────────────────────────────– */
 

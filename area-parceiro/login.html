@@ -2,72 +2,278 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Área do Parceiro | PageForge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="../Visuals/style.css" />
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js" defer></script>
   <style>
-    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--bg); }
-    .login-container { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 100%; max-width: 420px; backdrop-filter: blur(20px); text-align: center; }
-    .login-logo { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; }
-    .login-logo img { width: 30px; height: 30px; border-radius: 7px; }
-    .login-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; font-family: var(--font-display); }
-    .login-sub { color: var(--muted); margin-bottom: 30px; font-size: 0.9rem; }
-    
-    .form-group { margin-bottom: 20px; text-align: left; }
-    .form-group label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
-    .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px; color: #fff; font-family: var(--font-body); font-size: 1rem; transition: border-color 0.3s; }
-    .form-input:focus { outline: none; border-color: var(--orange); background: rgba(255,255,255,0.08); }
-    
-    .btn-submit { width: 100%; padding: 14px; border-radius: 10px; background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hot) 100%); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1rem; border: 1px solid rgba(255, 200, 120, 0.2); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 10px; }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(245, 106, 0, 0.3); }
-    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
-    
-    #errorMsg { color: var(--red); margin-top: 15px; font-size: 0.9rem; }
+    /* ─── FIX: Cursor visível nesta página ─── */
+    /* O style.css principal usa cursor: none para o cursor customizado do site.
+       Nesta página não existe cursor customizado, então restauramos o padrão. */
+    *, *::before, *::after { cursor: auto !important; }
+    a, button, [role="button"], input, select, label { cursor: pointer !important; }
+    input[type="text"], input[type="email"], input[type="password"] { cursor: text !important; }
+
+    /* ─── Layout ─── */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    /* ─── Background decorativo ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 20%, rgba(245, 106, 0, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 20% 80%, rgba(192, 57, 43, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .login-container {
+      background: rgba(14,14,14,0.85);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px 40px 36px;
+      width: 100%;
+      max-width: 420px;
+      backdrop-filter: blur(40px) saturate(1.8);
+      -webkit-backdrop-filter: blur(40px) saturate(1.8);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.72), 0 0 60px rgba(245,106,0,0.07), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* Top border glow */
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,106,0,0.65), transparent);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .login-logo {
+      margin-bottom: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text, #F0EDE8);
+      text-decoration: none;
+    }
+    .login-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .login-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-family: var(--font-display);
+      letter-spacing: -0.03em;
+      color: var(--text, #F0EDE8);
+    }
+    .login-sub {
+      color: var(--muted, rgba(240,237,232,0.5));
+      margin-bottom: 32px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .form-group { margin-bottom: 18px; text-align: left; }
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted, rgba(240,237,232,0.5));
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border, rgba(255,255,255,0.08));
+      padding: 13px 16px;
+      border-radius: 11px;
+      color: var(--text, #F0EDE8);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: rgba(245,106,0,0.5);
+      background: rgba(245,106,0,0.04);
+      box-shadow: 0 0 0 3px rgba(245,106,0,0.1);
+    }
+    .form-input::placeholder { color: rgba(240,237,232,0.25); }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--orange, #F56A00) 0%, var(--orange-hot, #FF4500) 100%);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,200,120,0.2);
+      cursor: pointer !important;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 10px;
+      box-shadow: 0 0 40px rgba(245,106,0,0.3), 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(245,106,0,0.45), 0 8px 28px rgba(0,0,0,0.5);
+    }
+    .btn-submit:active { transform: translateY(0) scale(0.98); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed !important; transform: none; }
+
+    .divider {
+      margin: 28px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted, rgba(240,237,232,0.4));
+      font-size: 0.8rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border, rgba(255,255,255,0.08));
+    }
+
+    #errorMsg {
+      color: #ff6b6b;
+      margin-top: 14px;
+      font-size: 0.88rem;
+      min-height: 20px;
+      text-align: center;
+    }
+    #successMsg {
+      color: #4ade80;
+      margin-top: 14px;
+      font-size: 0.88rem;
+      min-height: 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .signup-link {
+      margin-top: 8px;
+      color: var(--muted, rgba(240,237,232,0.5));
+      font-size: 0.88rem;
+      text-align: center;
+    }
+    .signup-link a {
+      color: var(--orange, #F56A00);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .signup-link a:hover { opacity: 0.8; text-decoration: underline; }
+
+    .footer-note {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: rgba(240,237,232,0.22);
+    }
+    .footer-note::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(245,106,0,0.45);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 16px; }
+      .login-container { padding: 32px 24px 28px; border-radius: 20px; }
+      .login-title { font-size: 1.35rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="login-container reveal">
+
+  <div class="login-container">
     <a href="/index.html" class="login-logo">
-      <img src="../images/iconpf.png" alt="Logo">
+      <img src="../images/iconpf.png" alt="Logo PageForge">
       PageForge
     </a>
-    <h2 class="login-title">Área do Parceiro</h2>
+    <h1 class="login-title">Área do Parceiro</h1>
     <p class="login-sub">Acesse seu painel de indicações e comissões</p>
-    
-    <form id="loginForm" onsubmit="handleLogin(event)">
+
+    <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
       <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" id="email" class="form-input" required placeholder="seu@email.com">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" class="form-input" required placeholder="seu@email.com" autocomplete="email">
       </div>
       <div class="form-group">
-        <label>Senha</label>
-        <input type="password" id="password" class="form-input" required placeholder="••••••••">
+        <label for="password">Senha</label>
+        <input type="password" id="password" class="form-input" required placeholder="••••••••" autocomplete="current-password">
       </div>
       <button type="submit" class="btn-submit" id="submitBtn">Entrar</button>
     </form>
-    
+
     <p id="errorMsg"></p>
-    
-    <p style="margin-top: 25px; color: var(--muted); font-size: 0.9rem;">
-      Não tem conta? <a href="/parceiros.html" style="color: var(--orange); text-decoration: underline;">Cadastre-se</a>
+    <p id="successMsg"></p>
+
+    <div class="divider">ou</div>
+
+    <p class="signup-link">
+      Ainda não é parceiro? <a href="/area-parceiro/cadastro.html">Cadastre-se aqui</a>
     </p>
+
+    <p class="footer-note">Conexão segura e criptografada</p>
   </div>
 
-  <script src="../js/supabase-config.js"></script>
-  <script>
-    // Reveal animation
-    setTimeout(() => { document.querySelector('.login-container').classList.add('visible'); }, 100);
+  <script src="../js/supabase-config.js" defer></script>
+  <script defer>
+    // Verificar se URL tem parâmetro de cadastro bem-sucedido
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('cadastro') === 'ok') {
+        const successMsg = document.getElementById('successMsg');
+        successMsg.style.display = 'block';
+        successMsg.textContent = '✓ Cadastro realizado! Faça login para acessar seu painel.';
+      }
+    });
 
-    // Check if already logged in
+    // Verificar sessão ativa
     window.addEventListener('load', async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        window.location.href = '/area-parceiro/index.html';
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          window.location.href = '/area-parceiro/index.html';
+        }
+      } catch (err) {
+        console.warn('[LOGIN] Erro ao verificar sessão:', err);
       }
     });
 
@@ -75,24 +281,61 @@
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const errorMsg = document.getElementById('errorMsg');
-      const email = document.getElementById('email').value;
+      const successMsg = document.getElementById('successMsg');
+      const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
-      
+
+      if (!email || !password) {
+        errorMsg.textContent = 'Preencha e-mail e senha.';
+        return;
+      }
+
       btn.textContent = 'Entrando...';
       btn.disabled = true;
       errorMsg.textContent = '';
+      successMsg.style.display = 'none';
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-      if (error) {
-        errorMsg.textContent = 'Erro ao fazer login: ' + error.message;
+        if (error) {
+          let msg = 'Erro ao fazer login.';
+          if (error.message.includes('Invalid login')) msg = 'E-mail ou senha incorretos.';
+          else if (error.message.includes('Email not confirmed')) msg = 'Confirme seu e-mail antes de entrar.';
+          errorMsg.textContent = msg;
+          btn.textContent = 'Entrar';
+          btn.disabled = false;
+          return;
+        }
+
+        // Verifica se o usuário tem perfil de parceiro
+        const { data: partnerData, error: pErr } = await supabase
+          .from('partners')
+          .select('id, status')
+          .eq('user_id', data.user.id)
+          .single();
+
+        if (pErr || !partnerData) {
+          errorMsg.textContent = 'Perfil de parceiro não encontrado. Entre em contato.';
+          await supabase.auth.signOut();
+          btn.textContent = 'Entrar';
+          btn.disabled = false;
+          return;
+        }
+
+        if (partnerData.status === 'Bloqueado') {
+          errorMsg.textContent = 'Sua conta foi bloqueada. Entre em contato com a PageForge.';
+          await supabase.auth.signOut();
+          btn.textContent = 'Entrar';
+          btn.disabled = false;
+          return;
+        }
+
+        window.location.href = '/area-parceiro/index.html';
+      } catch (err) {
+        errorMsg.textContent = 'Erro de conexão. Tente novamente.';
         btn.textContent = 'Entrar';
         btn.disabled = false;
-      } else {
-        window.location.href = '/area-parceiro/index.html';
       }
     }
   </script>

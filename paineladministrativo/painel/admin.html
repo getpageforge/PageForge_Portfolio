@@ -6,8 +6,444 @@
   <title>PageForge — Painel Administrativo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
   <link rel="stylesheet" href="admin.css" />
+  <style>
+    /* ─── TABS NAVIGATION ─── */
+    .admin-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 5px;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+    .admin-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      border-radius: 10px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .admin-tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .admin-tab.active {
+      background: rgba(245,106,0,0.12);
+      color: var(--text);
+      border: 1px solid var(--orange-border);
+    }
+    .admin-tab .tab-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: background 0.2s;
+    }
+    .admin-tab.active .tab-dot { background: var(--orange); box-shadow: 0 0 6px rgba(245,106,0,0.7); }
+
+    /* ─── PARTNERS SECTION ─── */
+    #section-partners { display: none; }
+    #section-briefings { display: block; }
+
+    /* Partners Metrics */
+    .partners-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .pm-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      backdrop-filter: blur(20px);
+      transition: border-color 0.3s;
+    }
+    .pm-card:hover { border-color: var(--orange-border); }
+    .pm-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .pm-value { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+
+    /* Partners Controls */
+    .partners-controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .partners-search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+    .partners-search-wrap svg {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+    #partners-search {
+      width: 100%;
+      height: 42px;
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      padding: 0 14px 0 40px;
+      outline: none;
+      backdrop-filter: blur(20px);
+      transition: border-color 0.3s;
+    }
+    #partners-search::placeholder { color: var(--muted-2); }
+    #partners-search:focus { border-color: var(--orange-border); }
+
+    #partners-status-filter {
+      height: 42px;
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      padding: 0 14px;
+      outline: none;
+      cursor: pointer;
+      backdrop-filter: blur(20px);
+      transition: border-color 0.3s;
+    }
+    #partners-status-filter:focus { border-color: var(--orange-border); }
+
+    #partners-refresh {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      height: 42px;
+      padding: 0 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      cursor: pointer;
+      backdrop-filter: blur(20px);
+      transition: border-color 0.3s, color 0.3s;
+      white-space: nowrap;
+    }
+    #partners-refresh:hover { border-color: var(--orange-border); color: var(--text); }
+
+    /* Partners Table */
+    .partners-table-container {
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(24px);
+      overflow: hidden;
+    }
+    .partners-table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .partners-table-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    #partners-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 10px;
+    }
+    .partners-table-scroll { overflow-x: auto; }
+    .partners-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+    .partners-table th {
+      text-align: left;
+      padding: 13px 16px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      white-space: nowrap;
+    }
+    .partners-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.88rem;
+    }
+    .partner-row:last-child td { border-bottom: none; }
+    .partner-row:hover td { background: rgba(245,106,0,0.03); }
+
+    .partner-cell-name { display: flex; align-items: center; gap: 12px; }
+    .partner-avatar-sm {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hot) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(245,106,0,0.2);
+    }
+    .partner-name-text { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+    .partner-email-text { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .partner-contact { font-size: 0.85rem; color: var(--muted); }
+    .partner-date { font-size: 0.82rem; color: var(--muted); white-space: nowrap; }
+    .partner-num { text-align: center; font-family: var(--font-display); font-weight: 700; }
+    .partner-closed { color: #4ade80 !important; }
+    .partner-commission { font-family: var(--font-display); font-weight: 700; color: var(--orange) !important; white-space: nowrap; }
+
+    /* Badges */
+    .partner-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-aprovado { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
+    .badge-pendente { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+    .badge-bloqueado { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .badge-negociando { background: rgba(245,106,0,0.12); color: var(--orange); border: 1px solid var(--orange-border); }
+
+    /* Actions */
+    .partner-actions { display: flex; align-items: center; gap: 5px; }
+    .pa-btn {
+      width: 30px; height: 30px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .pa-view:hover { border-color: var(--orange-border); color: var(--orange); background: var(--orange-dim); }
+    .pa-approve:hover { border-color: rgba(74,222,128,0.4); color: #4ade80; background: rgba(74,222,128,0.08); }
+    .pa-block:hover { border-color: rgba(251,191,36,0.4); color: #fbbf24; background: rgba(251,191,36,0.08); }
+    .pa-delete:hover { border-color: rgba(239,68,68,0.4); color: #f87171; background: rgba(239,68,68,0.08); }
+
+    /* Empty / Loading */
+    #partners-empty {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 60px 32px;
+      text-align: center;
+      color: var(--muted);
+    }
+    #partners-loading {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 40px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    #partners-error { display: none; padding: 14px 20px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; color: #f87171; font-size: 0.88rem; margin-bottom: 16px; }
+
+    /* ─── PARTNER DETAIL MODAL ─── */
+    #partner-detail-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 20px;
+      overflow-y: auto;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    #partner-detail-modal.active { display: flex; opacity: 1; }
+
+    .partner-detail-wrapper {
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #partner-modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      z-index: 10;
+      margin: 16px 16px 0 0;
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      font-size: 1.1rem;
+    }
+    #partner-modal-close:hover { color: var(--text); background: rgba(255,255,255,0.1); }
+
+    #partner-detail-content { padding: 8px 28px 32px; clear: both; }
+
+    /* Detail Header */
+    .pd-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 0 20px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .pd-avatar {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hot) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 30px rgba(245,106,0,0.3);
+    }
+    .pd-info { flex: 1; min-width: 0; }
+    .pd-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 4px; }
+    .pd-meta { font-size: 0.85rem; color: var(--muted); }
+    .pd-header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pd-action-btn {
+      padding: 8px 16px;
+      border-radius: 9px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+    .pd-approve { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: #4ade80; }
+    .pd-approve:hover { background: rgba(74,222,128,0.18); }
+    .pd-block { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.3); color: #fbbf24; }
+    .pd-block:hover { background: rgba(251,191,36,0.18); }
+
+    /* Stats */
+    .pd-stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin: 20px 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .pd-stat {
+      background: rgba(255,255,255,0.02);
+      padding: 16px;
+      text-align: center;
+    }
+    .pd-stat-val { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
+    .pd-stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Body grid */
+    .pd-body { display: grid; grid-template-columns: 1fr 320px; gap: 20px; margin-top: 20px; }
+    .pd-section { margin-bottom: 24px; }
+    .pd-section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pd-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .pd-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pd-info-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .pd-info-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .pd-info-val { font-size: 0.88rem; color: var(--text); font-weight: 500; word-break: break-all; }
+
+    /* Table inside detail */
+    .pd-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+    .pd-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+    .pd-table th { text-align: left; padding: 10px 14px; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
+    .pd-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 0.85rem; }
+    .pd-table tr:last-child td { border-bottom: none; }
+
+    /* Timeline */
+    .timeline-list { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .timeline-content { flex: 1; }
+    .timeline-label { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+    .timeline-date { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+    /* Spin animation */
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .partners-metrics { grid-template-columns: repeat(2, 1fr); }
+      .pd-stats { grid-template-columns: repeat(3, 1fr); }
+      .pd-body { grid-template-columns: 1fr; }
+      .pd-right { order: -1; }
+    }
+    @media (max-width: 768px) {
+      .admin-tabs { width: 100%; }
+      .partners-metrics { grid-template-columns: 1fr 1fr; }
+      .pd-info-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .partners-metrics { grid-template-columns: 1fr; }
+      .pd-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -35,7 +471,7 @@
 
       <div class="header-center">
         <h1 class="header-title">Painel Administrativo</h1>
-        <p class="header-subtitle">Gerenciamento de Briefings</p>
+        <p class="header-subtitle" id="header-subtitle">Gerenciamento de Briefings</p>
       </div>
 
       <div class="header-status">
@@ -48,97 +484,198 @@
   <!-- ── MAIN ── -->
   <main class="admin-main">
 
-    <!-- METRICS -->
-    <section class="metrics-section">
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <!-- NAVIGATION TABS -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="tab-briefings" onclick="switchTab('briefings')">
+        <span class="tab-dot"></span>
+        Briefings
+      </button>
+      <button class="admin-tab" id="tab-partners" onclick="switchTab('partners')">
+        <span class="tab-dot"></span>
+        Parceiros
+      </button>
+    </div>
+
+    <!-- ═══ SECTION: BRIEFINGS ═══ -->
+    <div id="section-briefings">
+
+      <!-- METRICS -->
+      <section class="metrics-section">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Total de Briefings</span>
+              <span class="metric-value" id="metric-total">—</span>
+            </div>
+            <div class="metric-trend" id="trend-total"></div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Recebidos Hoje</span>
+              <span class="metric-value" id="metric-today">—</span>
+            </div>
+            <div class="metric-trend" id="trend-today"></div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Esta Semana</span>
+              <span class="metric-value" id="metric-week">—</span>
+            </div>
+            <div class="metric-trend" id="trend-week"></div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Este Mês</span>
+              <span class="metric-value" id="metric-month">—</span>
+            </div>
+            <div class="metric-trend" id="trend-month"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEARCH & CONTROLS -->
+      <section class="controls-section">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="search-input" class="search-input" placeholder="Pesquisar briefing por nome, empresa ou e-mail..." autocomplete="off" />
+          <button class="search-clear" id="search-clear" aria-label="Limpar busca">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="controls-right">
+          <span class="results-count" id="results-count"></span>
+          <button class="refresh-btn" id="refresh-btn" title="Atualizar dados">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Atualizar
+          </button>
+        </div>
+      </section>
+
+      <!-- LIST VIEW -->
+      <section class="list-view" id="list-view">
+        <div class="briefings-list" id="briefings-list"></div>
+
+        <div class="empty-state" id="empty-state" style="display:none">
+          <div class="empty-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
               <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <polyline points="10 9 9 9 8 9"/>
             </svg>
           </div>
-          <div class="metric-info">
-            <span class="metric-label">Total de Briefings</span>
-            <span class="metric-value" id="metric-total">—</span>
-          </div>
-          <div class="metric-trend" id="trend-total"></div>
+          <h3 class="empty-title">Nenhum briefing recebido até o momento.</h3>
+          <p class="empty-sub">Quando novos briefings chegarem pelo portfólio, eles aparecerão aqui automaticamente.</p>
         </div>
 
-        <div class="metric-card">
-          <div class="metric-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
+        <div class="no-results" id="no-results" style="display:none">
+          <div class="empty-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
           </div>
-          <div class="metric-info">
-            <span class="metric-label">Recebidos Hoje</span>
-            <span class="metric-value" id="metric-today">—</span>
-          </div>
-          <div class="metric-trend" id="trend-today"></div>
+          <h3 class="empty-title">Nenhum resultado encontrado.</h3>
+          <p class="empty-sub">Tente buscar por outro nome, empresa ou e-mail.</p>
         </div>
+      </section>
 
-        <div class="metric-card">
-          <div class="metric-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
+      <!-- DETAIL VIEW -->
+      <section class="detail-view" id="detail-view" style="display:none">
+        <div class="detail-header">
+          <button class="back-btn" id="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
             </svg>
-          </div>
-          <div class="metric-info">
-            <span class="metric-label">Esta Semana</span>
-            <span class="metric-value" id="metric-week">—</span>
-          </div>
-          <div class="metric-trend" id="trend-week"></div>
+            Voltar para os Briefings
+          </button>
         </div>
+        <div class="detail-card" id="detail-card"></div>
+      </section>
 
-        <div class="metric-card">
-          <div class="metric-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            </svg>
-          </div>
-          <div class="metric-info">
-            <span class="metric-label">Este Mês</span>
-            <span class="metric-value" id="metric-month">—</span>
-          </div>
-          <div class="metric-trend" id="trend-month"></div>
+    </div><!-- /section-briefings -->
+
+    <!-- ═══ SECTION: PARCEIROS ═══ -->
+    <div id="section-partners">
+
+      <!-- Partner Metrics -->
+      <div class="partners-metrics">
+        <div class="pm-card">
+          <div class="pm-label">Total de Parceiros</div>
+          <div class="pm-value" id="pm-total">—</div>
+        </div>
+        <div class="pm-card">
+          <div class="pm-label">Aprovados</div>
+          <div class="pm-value" id="pm-aprovados" style="color:#4ade80">—</div>
+        </div>
+        <div class="pm-card">
+          <div class="pm-label">Pendentes</div>
+          <div class="pm-value" id="pm-pendentes" style="color:#fbbf24">—</div>
+        </div>
+        <div class="pm-card">
+          <div class="pm-label">Comissões Pagas</div>
+          <div class="pm-value" id="pm-comissao" style="color:var(--orange)">—</div>
         </div>
       </div>
-    </section>
 
-    <!-- SEARCH & CONTROLS -->
-    <section class="controls-section">
-      <div class="search-wrapper">
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input
-          type="text"
-          id="search-input"
-          class="search-input"
-          placeholder="Pesquisar briefing por nome, empresa ou e-mail..."
-          autocomplete="off"
-        />
-        <button class="search-clear" id="search-clear" aria-label="Limpar busca">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="controls-right">
-        <span class="results-count" id="results-count"></span>
-        <button class="refresh-btn" id="refresh-btn" title="Atualizar dados">
+      <!-- Controls -->
+      <div class="partners-controls">
+        <div class="partners-search-wrap">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="partners-search" placeholder="Buscar por nome, e-mail ou WhatsApp..." autocomplete="off">
+        </div>
+        <select id="partners-status-filter">
+          <option value="">Todos os status</option>
+          <option value="Pendente">Pendente</option>
+          <option value="Aprovado">Aprovado</option>
+          <option value="Bloqueado">Bloqueado</option>
+        </select>
+        <button id="partners-refresh" title="Atualizar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="23 4 23 10 17 10"/>
             <polyline points="1 20 1 14 7 14"/>
             <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
@@ -146,58 +683,90 @@
           Atualizar
         </button>
       </div>
-    </section>
 
-    <!-- LIST VIEW -->
-    <section class="list-view" id="list-view">
-      <div class="briefings-list" id="briefings-list">
-        <!-- cards injetados via JS -->
+      <!-- Error -->
+      <div id="partners-error"></div>
+
+      <!-- Loading -->
+      <div id="partners-loading">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite">
+          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+        </svg>
+        Carregando parceiros...
       </div>
 
-      <!-- Empty State -->
-      <div class="empty-state" id="empty-state" style="display:none">
-        <div class="empty-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
+      <!-- Table -->
+      <div class="partners-table-container" id="partners-table-wrap">
+        <div class="partners-table-header">
+          <span class="partners-table-title">Lista de Parceiros</span>
+          <span id="partners-count"></span>
         </div>
-        <h3 class="empty-title">Nenhum briefing recebido até o momento.</h3>
-        <p class="empty-sub">Quando novos briefings chegarem pelo portfólio, eles aparecerão aqui automaticamente.</p>
-      </div>
-
-      <!-- No search results -->
-      <div class="no-results" id="no-results" style="display:none">
-        <div class="empty-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
+        <div class="partners-table-scroll">
+          <table class="partners-table">
+            <thead>
+              <tr>
+                <th>Parceiro</th>
+                <th>WhatsApp</th>
+                <th>Instagram</th>
+                <th>Cadastro</th>
+                <th>Status</th>
+                <th style="text-align:center">Indicações</th>
+                <th style="text-align:center">Fechados</th>
+                <th>Comissão</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="partners-tbody"></tbody>
+          </table>
         </div>
-        <h3 class="empty-title">Nenhum resultado encontrado.</h3>
-        <p class="empty-sub">Tente buscar por outro nome, empresa ou e-mail.</p>
-      </div>
-    </section>
-
-    <!-- DETAIL VIEW -->
-    <section class="detail-view" id="detail-view" style="display:none">
-      <div class="detail-header">
-        <button class="back-btn" id="back-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"/>
-            <polyline points="12 19 5 12 12 5"/>
-          </svg>
-          Voltar para os Briefings
-        </button>
+        <div id="partners-empty">
+          <div style="font-size:2rem;margin-bottom:8px">👥</div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text);margin-bottom:6px">Nenhum parceiro cadastrado</div>
+          <div style="font-size:0.85rem">Quando parceiros se cadastrarem, eles aparecerão aqui.</div>
+        </div>
       </div>
 
-      <div class="detail-card" id="detail-card">
-        <!-- injetado via JS -->
-      </div>
-    </section>
+    </div><!-- /section-partners -->
 
   </main>
 
+  <!-- ─── PARTNER DETAIL MODAL ─── -->
+  <div id="partner-detail-modal" role="dialog" aria-modal="true" aria-label="Detalhes do Parceiro">
+    <div class="partner-detail-wrapper">
+      <button id="partner-modal-close" aria-label="Fechar">✕</button>
+      <div id="partner-detail-content"></div>
+    </div>
+  </div>
+
   <script src="admin.js"></script>
+  <script src="admin-partners.js"></script>
+  <script>
+    // Tab switching
+    function switchTab(tab) {
+      const tabs = ['briefings', 'partners'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        const section = document.getElementById(`section-${t}`);
+        if (t === tab) {
+          btn.classList.add('active');
+          section.style.display = 'block';
+        } else {
+          btn.classList.remove('active');
+          section.style.display = 'none';
+        }
+      });
+
+      // Atualizar subtítulo do header
+      const subtitles = { briefings: 'Gerenciamento de Briefings', partners: 'Gestão de Parceiros' };
+      const subtitleEl = document.getElementById('header-subtitle');
+      if (subtitleEl) subtitleEl.textContent = subtitles[tab] || '';
+
+      // Inicializar módulo de parceiros na primeira visita
+      if (tab === 'partners' && typeof window.initPartnersModule === 'function') {
+        window.initPartnersModule();
+        window.initPartnersModule = null; // Executar só uma vez
+      }
+    }
+  </script>
 </body>
 </html>

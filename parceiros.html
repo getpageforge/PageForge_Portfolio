@@ -2,14 +2,15 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programa de Parceiros — PageForge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="./Visuals/style.css" />
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js" defer></script>
   <style>
     /* Specific styles for Partner Page to match the aesthetic */
     .hero-partner { padding: 160px 0 100px; text-align: center; }
@@ -29,17 +30,82 @@
     .faq-a { color: var(--muted); }
 
     /* Modal Styles */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 999; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      padding: 16px;
+      box-sizing: border-box;
+    }
     .modal-overlay.active { display: flex; opacity: 1; }
-    .modal-content { background: #0a0a0a; border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; position: relative; transform: translateY(20px); transition: transform 0.3s; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    .modal-content {
+      background: #0e0e0e;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px 28px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(245,106,0,0.08);
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(245,106,0,0.4) transparent;
+    }
+    .modal-content::-webkit-scrollbar { width: 4px; }
+    .modal-content::-webkit-scrollbar-thumb { background: rgba(245,106,0,0.4); border-radius: 2px; }
     .modal-overlay.active .modal-content { transform: translateY(0); }
-    .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
-    .modal-close:hover { color: #fff; }
-    .form-group { margin-bottom: 20px; text-align: left; }
-    .form-group label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
-    .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px; color: #fff; font-family: var(--font-body); font-size: 1rem; transition: border-color 0.3s; }
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      margin-bottom: 8px;
+    }
+    .modal-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+    .modal-header { clear: both; }
+    .form-group { margin-bottom: 18px; text-align: left; }
+    .form-group label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.88rem; }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 13px 15px;
+      border-radius: 10px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
     .form-input:focus { outline: none; border-color: var(--orange); background: rgba(255,255,255,0.08); }
-    .form-submit { width: 100%; margin-top: 10px; }
+    .form-submit { width: 100%; margin-top: 12px; }
+    @media (max-width: 600px) {
+      .modal-content { padding: 24px 18px 20px; border-radius: 16px; max-height: 88vh; }
+    }
   </style>
 </head>
 <body>
@@ -245,11 +311,13 @@
   </section>
 
   <!-- MODAL DE CADASTRO -->
-  <div class="modal-overlay" id="signupModal">
+  <div class="modal-overlay" id="signupModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()"><i class="ph ph-x"></i></button>
-      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px;">Cadastro de Parceiro</h3>
-      <p style="color: var(--muted); margin-bottom: 30px; font-size: 0.9rem;">Preencha os dados abaixo. Você receberá acesso ao painel para acompanhar suas indicações.</p>
+      <button class="modal-close" onclick="closeModal()" aria-label="Fechar"><i class="ph ph-x"></i></button>
+      <div class="modal-header">
+        <h3 id="modalTitle" style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 12px;">Cadastro de Parceiro</h3>
+        <p style="color: var(--muted); margin-bottom: 24px; font-size: 0.88rem; line-height: 1.6;">Preencha os dados abaixo. Você receberá acesso ao painel para acompanhar suas indicações.</p>
+      </div>
       
       <form id="partnerForm" onsubmit="submitPartner(event)">
         <div class="form-group">
@@ -298,19 +366,25 @@
     </div>
   </footer>
 
-  <script src="./js/supabase-config.js"></script>
-  <script>
-    // Animations & Interactions
+  <script src="./js/supabase-config.js" defer></script>
+  <script defer>
+    // Animations & Interactions — with visibility optimization
     const cursor = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursor-ring');
     let mx = -200, my = -200, rx = -200, ry = -200;
+    let cursorRafId = null;
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    (function animCursor() {
+    function animCursor() {
       rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
       if (cursor) { cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; }
       if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
-      requestAnimationFrame(animCursor);
-    })();
+      cursorRafId = requestAnimationFrame(animCursor);
+    }
+    animCursor();
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { cancelAnimationFrame(cursorRafId); }
+      else { animCursor(); }
+    });
 
     const revealObs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -328,41 +402,70 @@
       e.preventDefault();
       const btn = document.getElementById('btnSubmit');
       const msg = document.getElementById('formMsg');
+
+      const name = document.getElementById('p_name').value.trim();
+      const email = document.getElementById('p_email').value.trim();
+      const pass = document.getElementById('p_pass').value;
+      const whatsapp = document.getElementById('p_whatsapp').value.trim();
+      const instagram = document.getElementById('p_instagram').value.trim();
+      const city = document.getElementById('p_city').value.trim();
+      const howKnew = document.getElementById('p_how').value.trim();
+      const experience = document.getElementById('p_exp').value.trim();
+
+      if (!name || !email || !pass || !whatsapp || !city || !howKnew) {
+        msg.style.color = 'var(--red)';
+        msg.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+        return;
+      }
+
+      if (pass.length < 6) {
+        msg.style.color = 'var(--red)';
+        msg.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+        return;
+      }
+
       btn.textContent = 'Enviando...';
       btn.disabled = true;
-
-      const email = document.getElementById('p_email').value;
-      const pass = document.getElementById('p_pass').value;
+      msg.textContent = '';
       
       try {
-        // 1. SignUp User
-        const { data: authData, error: authErr } = await supabase.auth.signUp({
-          email: email,
-          password: pass
+        // Usar API serverless (usa service_role, contorna RLS, confirma e-mail)
+        const response = await fetch('/api/partner-register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            password: pass,
+            name,
+            whatsapp,
+            instagram,
+            city,
+            how_knew: howKnew,
+            experience
+          })
         });
 
-        if (authErr) throw authErr;
+        const data = await response.json();
 
-        // 2. Insert into Partners table
-        const { error: dbErr } = await supabase.from('partners').insert([{
-          user_id: authData.user.id,
-          name: document.getElementById('p_name').value,
-          whatsapp: document.getElementById('p_whatsapp').value,
-          instagram: document.getElementById('p_instagram').value,
-          city: document.getElementById('p_city').value,
-          how_knew: document.getElementById('p_how').value,
-          experience: document.getElementById('p_exp').value,
-          email: email
-        }]);
-
-        if (dbErr) throw dbErr;
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Erro ao criar conta. Tente novamente.');
+        }
 
         msg.style.color = '#4ade80';
-        msg.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+        msg.textContent = '✓ Cadastro realizado! Fazendo login...';
         
-        setTimeout(() => {
-          window.location.href = '/area-parceiro/login.html';
-        }, 2000);
+        const { error: loginErr } = await supabase.auth.signInWithPassword({ email, password: pass });
+
+        if (loginErr) {
+          msg.textContent = '✓ Cadastro realizado com sucesso! Redirecionando...';
+          setTimeout(() => {
+            window.location.href = '/area-parceiro/login.html?cadastro=ok';
+          }, 1500);
+        } else {
+          setTimeout(() => {
+            window.location.href = '/area-parceiro/index.html';
+          }, 1000);
+        }
 
       } catch (err) {
         msg.style.color = 'var(--red)';

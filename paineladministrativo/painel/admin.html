@@ -497,6 +497,10 @@
         <span class="tab-dot"></span>
         Ranking
       </button>
+      <button class="admin-tab" id="tab-leads" onclick="switchTab('leads')">
+        <span class="tab-dot"></span>
+        Leads
+      </button>
     </div>
 
     <!-- ═══ SECTION: BRIEFINGS ═══ -->
@@ -767,6 +771,36 @@
 
     </div><!-- /section-ranking -->
 
+    <!-- ═══ SECTION: LEADS ═══ -->
+    <div id="section-leads" style="display:none">
+
+      <div class="partners-table-container">
+        <div class="partners-table-header">
+          <span class="partners-table-title">Leads</span>
+          <span id="leads-count"></span>
+        </div>
+        <div class="partners-table-scroll">
+          <table class="partners-table" style="min-width:600px">
+            <thead>
+              <tr>
+                <th>Lead</th>
+                <th>Parceiro</th>
+                <th>Data</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="leads-tbody"></tbody>
+          </table>
+        </div>
+        <div id="leads-empty" style="display:none;text-align:center;padding:60px 20px">
+          <div style="font-size:2rem;margin-bottom:8px">📋</div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text);margin-bottom:6px">Nenhum lead registrado</div>
+          <div style="font-size:0.85rem">Os leads indicados pelos parceiros aparecerão aqui.</div>
+        </div>
+      </div>
+
+    </div><!-- /section-leads -->
+
   </main>
 
   <!-- ─── PARTNER DETAIL MODAL ─── -->
@@ -782,7 +816,7 @@
   <script>
     // Tab switching
     function switchTab(tab) {
-      const tabs = ['briefings', 'partners', 'ranking'];
+      const tabs = ['briefings', 'partners', 'ranking', 'leads'];
       tabs.forEach(t => {
         const btn = document.getElementById(`tab-${t}`);
         const section = document.getElementById(`section-${t}`);
@@ -796,7 +830,7 @@
       });
 
       // Atualizar subtítulo do header
-      const subtitles = { briefings: 'Gerenciamento de Briefings', partners: 'Gestão de Parceiros', ranking: 'Top Parceiros' };
+      const subtitles = { briefings: 'Gerenciamento de Briefings', partners: 'Gestão de Parceiros', ranking: 'Top Parceiros', leads: 'Leads' };
       const subtitleEl = document.getElementById('header-subtitle');
       if (subtitleEl) subtitleEl.textContent = subtitles[tab] || '';
 

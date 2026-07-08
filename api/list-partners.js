@@ -48,13 +48,23 @@ module.exports = async (req, res) => {
     const { data: partners, error: pErr } = await query;
     if (pErr) throw pErr;
 
+    // Buscar todos os usuários do Auth para associar os e-mails
+    const { data: authData, error: authErr } = await supabaseAdmin.auth.admin.listUsers();
+    const emailMap = {};
+    if (authData && authData.users) {
+      authData.users.forEach(u => {
+        emailMap[u.id] = u.email;
+      });
+    }
+
     // Para cada parceiro, buscar contagem de indicações e comissão
     const enriched = await Promise.all(partners.map(async (p) => {
+      const partnerEmail = emailMap[p.user_id] || '';
       // Filtro por busca
       if (search) {
         const s = search.toLowerCase();
         const match = (p.name || '').toLowerCase().includes(s) ||
-          (p.email || '').toLowerCase().includes(s) ||
+          partnerEmail.toLowerCase().includes(s) ||
           (p.whatsapp || '').toLowerCase().includes(s) ||
           (p.instagram || '').toLowerCase().includes(s);
         if (!match) return null;
@@ -78,6 +88,7 @@ module.exports = async (req, res) => {
 
       return {
         ...p,
+        email: partnerEmail,
         total_referrals: totalRefs,
         closed_referrals: closedRefs,
         total_commission_paid: totalCommission,

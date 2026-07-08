@@ -68,7 +68,6 @@ module.exports = async (req, res) => {
       .insert([{
         user_id: userId,
         name: name.trim(),
-        email: email.trim().toLowerCase(),
         whatsapp: whatsapp.trim(),
         instagram: (instagram || '').trim(),
         city: city.trim(),
@@ -88,7 +87,7 @@ module.exports = async (req, res) => {
     return res.status(201).json({
       success: true,
       message: 'Parceiro cadastrado com sucesso!',
-      data: { id: partnerData.id, name: partnerData.name, email: partnerData.email }
+      data: { id: partnerData.id, name: partnerData.name, email: email.trim().toLowerCase() }
     });
 
   } catch (err) {

@@ -48,6 +48,16 @@ module.exports = async (req, res) => {
       return res.status(404).json({ success: false, error: 'Parceiro não encontrado' });
     }
 
+    let partnerEmail = '';
+    try {
+      const { data: userData, error: uErr } = await supabaseAdmin.auth.admin.getUserById(partner.user_id);
+      if (userData && userData.user) {
+        partnerEmail = userData.user.email;
+      }
+    } catch (err) {
+      console.warn('[get-partner] Erro ao buscar e-mail:', err);
+    }
+
     // Buscar todas as indicações do parceiro
     const { data: referrals, error: rErr } = await supabaseAdmin
       .from('referrals')
@@ -121,7 +131,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: {
-        partner: { ...partner, created_at: formattedCreatedAt },
+        partner: { ...partner, email: partnerEmail, created_at: formattedCreatedAt },
         referrals: referrals ? referrals.map(r => ({
           ...r,
           created_at: new Date(r.created_at).toLocaleDateString('pt-BR'),

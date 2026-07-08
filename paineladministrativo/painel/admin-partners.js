@@ -474,6 +474,44 @@
     else console.error('[Partners]', msg);
   }
 
+  /* ─── RANKING ─────────────────────────────────────────────── */
+  const RANKING_MEDALS = ['🥇', '🥈', '🥉', '🏅', '🏅'];
+
+  window.loadAdminRanking = async function () {
+    const tbody = document.getElementById('ranking-tbody');
+    const empty = document.getElementById('ranking-empty');
+    const count = document.getElementById('ranking-count');
+
+    if (!tbody) return;
+
+    try {
+      const resp = await fetch('/api/top-partners?limit=10');
+      const json = await resp.json();
+
+      if (!json.success || !json.data || json.data.length === 0) {
+        tbody.innerHTML = '';
+        if (empty) empty.style.display = 'block';
+        if (count) count.textContent = '';
+        return;
+      }
+
+      if (empty) empty.style.display = 'none';
+      if (count) count.textContent = `${json.data.length} parceiros`;
+
+      const items = json.data;
+      tbody.innerHTML = items.map(p => `
+        <tr class="partner-row">
+          <td style="text-align:center;font-size:1.2rem">${RANKING_MEDALS[p.position - 1] || p.position}</td>
+          <td>${escHtml(p.display_name)}</td>
+          <td style="text-align:center;font-weight:600;color:var(--orange)">${p.closed_referrals} ${p.closed_referrals === 1 ? 'fechado' : 'fechados'}</td>
+        </tr>
+      `).join('');
+    } catch (err) {
+      console.error('[Admin Ranking] Erro:', err);
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted)">Erro ao carregar ranking.</td></tr>`;
+    }
+  };
+
   /* ─── INICIALIZAÇÃO ──────────────────────────────────────── */
   window.initPartnersModule = function () {
     initPartnerControls();

@@ -493,6 +493,10 @@
         <span class="tab-dot"></span>
         Parceiros
       </button>
+      <button class="admin-tab" id="tab-ranking" onclick="switchTab('ranking')">
+        <span class="tab-dot"></span>
+        Ranking
+      </button>
     </div>
 
     <!-- ═══ SECTION: BRIEFINGS ═══ -->
@@ -727,6 +731,42 @@
 
     </div><!-- /section-partners -->
 
+    <!-- ═══ SECTION: RANKING ═══ -->
+    <div id="section-ranking" style="display:none">
+
+      <div class="partners-metrics">
+        <div class="pm-card">
+          <div class="pm-label">Top Parceiros</div>
+          <div class="pm-value" style="font-size:0.9rem;color:var(--muted);font-weight:400">Ranking por vendas fechadas</div>
+        </div>
+      </div>
+
+      <div class="partners-table-container">
+        <div class="partners-table-header">
+          <span class="partners-table-title">Ranking de Parceiros</span>
+          <span id="ranking-count"></span>
+        </div>
+        <div class="partners-table-scroll">
+          <table class="partners-table" style="min-width:500px">
+            <thead>
+              <tr>
+                <th style="width:50px;text-align:center">#</th>
+                <th>Parceiro</th>
+                <th style="text-align:center">Vendas Fechadas</th>
+              </tr>
+            </thead>
+            <tbody id="ranking-tbody"></tbody>
+          </table>
+        </div>
+        <div id="ranking-empty" style="display:none;text-align:center;padding:60px 20px">
+          <div style="font-size:2rem;margin-bottom:8px">🏆</div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text);margin-bottom:6px">Nenhum parceiro com vendas ainda</div>
+          <div style="font-size:0.85rem">Quando parceiros fecharem vendas, o ranking aparecerá aqui.</div>
+        </div>
+      </div>
+
+    </div><!-- /section-ranking -->
+
   </main>
 
   <!-- ─── PARTNER DETAIL MODAL ─── -->
@@ -742,7 +782,7 @@
   <script>
     // Tab switching
     function switchTab(tab) {
-      const tabs = ['briefings', 'partners'];
+      const tabs = ['briefings', 'partners', 'ranking'];
       tabs.forEach(t => {
         const btn = document.getElementById(`tab-${t}`);
         const section = document.getElementById(`section-${t}`);
@@ -756,7 +796,7 @@
       });
 
       // Atualizar subtítulo do header
-      const subtitles = { briefings: 'Gerenciamento de Briefings', partners: 'Gestão de Parceiros' };
+      const subtitles = { briefings: 'Gerenciamento de Briefings', partners: 'Gestão de Parceiros', ranking: 'Top Parceiros' };
       const subtitleEl = document.getElementById('header-subtitle');
       if (subtitleEl) subtitleEl.textContent = subtitles[tab] || '';
 
@@ -764,6 +804,11 @@
       if (tab === 'partners' && typeof window.initPartnersModule === 'function') {
         window.initPartnersModule();
         window.initPartnersModule = null; // Executar só uma vez
+      }
+
+      // Carregar ranking na primeira vez
+      if (tab === 'ranking' && typeof window.loadAdminRanking === 'function') {
+        window.loadAdminRanking();
       }
     }
   </script>

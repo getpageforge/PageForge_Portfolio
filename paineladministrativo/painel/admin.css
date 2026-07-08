@@ -850,6 +850,9 @@ body.cursor-hover #cursor-ring  { width: 52px; height: 52px; border-color: var(-
   .detail-card-header { flex-direction: column; align-items: flex-start; gap: 14px; padding: 22px 20px; }
   .detail-meta-row    { flex-wrap: wrap; gap: 10px; }
   .detail-qa-section  { padding: 22px 20px; }
+
+  .partners-table-container { border-left: none; border-right: none; border-radius: 0; margin: 0 -16px; }
+  .partners-table-header    { padding: 14px 16px; }
 }
 
 @media (max-width: 480px) {

@@ -52,10 +52,10 @@ module.exports = async (req, res) => {
   if (!id) return res.status(400).json({ success: false, error: 'ID do parceiro é obrigatório' });
 
   try {
-    // Verificar se parceiro existe
+    // Verificar se parceiro existe (incluindo user_id para remover do Auth)
     const { data: partner, error: checkErr } = await supabaseAdmin
       .from('partners')
-      .select('id, name')
+      .select('id, name, user_id')
       .eq('id', id)
       .single();
 
@@ -66,7 +66,17 @@ module.exports = async (req, res) => {
     // Deletar indicações do parceiro primeiro (caso não haja CASCADE configurado)
     await supabaseAdmin.from('referrals').delete().eq('partner_id', id);
 
-    // Deletar parceiro
+    // Deletar usuário do Supabase Auth (Admin API)
+    let authDeleted = true;
+    if (partner.user_id) {
+      const { error: authErr } = await supabaseAdmin.auth.admin.deleteUser(partner.user_id);
+      if (authErr) {
+        console.error('[delete-partner] Erro ao deletar usuário do Auth:', authErr);
+        authDeleted = false;
+      }
+    }
+
+    // Deletar parceiro da tabela
     const { error: delErr } = await supabaseAdmin
       .from('partners')
       .delete()
@@ -76,7 +86,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: `Parceiro "${partner.name}" removido com sucesso`
+      message: `Parceiro "${partner.name}" removido com sucesso${!authDeleted ? ' (exceto usuário no Auth, que precisará ser removido manualmente)' : ''}`
     });
 
   } catch (err) {

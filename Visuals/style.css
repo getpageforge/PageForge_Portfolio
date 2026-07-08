@@ -2661,7 +2661,8 @@ footer {
   }
 
   .nav-cta {
-    display: none;
+    padding: 8px 14px;
+    font-size: 0.78rem;
   }
 
   .hamburger {

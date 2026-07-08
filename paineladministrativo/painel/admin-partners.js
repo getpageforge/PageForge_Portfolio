@@ -512,6 +512,51 @@
     }
   };
 
+  /* ─── LEADS ───────────────────────────────────────────────── */
+  window.loadAdminLeads = async function () {
+    const tbody = document.getElementById('leads-tbody');
+    const empty = document.getElementById('leads-empty');
+    const count = document.getElementById('leads-count');
+    if (!tbody) return;
+
+    const token = localStorage.getItem('authToken');
+    try {
+      const resp = await fetch('/api/list-leads', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const json = await resp.json();
+      if (!json.success || !json.data || json.data.length === 0) {
+        tbody.innerHTML = '';
+        if (empty) empty.style.display = 'block';
+        if (count) count.textContent = '';
+        return;
+      }
+      if (empty) empty.style.display = 'none';
+      if (count) count.textContent = `${json.total} leads`;
+
+      tbody.innerHTML = json.data.map(r => {
+        let badgeClass = 'badge-pendente';
+        const closedStatuses = ['Pagamento', 'Em desenvolvimento', 'Entregue', 'Finalizado'];
+        if (closedStatuses.includes(r.status)) badgeClass = 'badge-aprovado';
+        else if (r.status !== 'Novo Lead') badgeClass = 'badge-bloqueado';
+        const val = Number(r.project_value) > 0 ? 'R$ ' + Number(r.project_value).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : '—';
+        const date = r.created_at ? new Date(r.created_at).toLocaleDateString('pt-BR') : '—';
+        return `<tr class="partner-row">
+          <td><strong>${escHtml(r.client_name)}</strong></td>
+          <td>${escHtml(r.company) || '—'}</td>
+          <td>${escHtml(r.partner_name)}</td>
+          <td>${escHtml(r.service) || '—'}</td>
+          <td>${statusBadge(r.status)}</td>
+          <td style="font-weight:600">${val}</td>
+          <td>${date}</td>
+        </tr>`;
+      }).join('');
+    } catch (err) {
+      console.error('[Admin Leads] Erro:', err);
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted)">Erro ao carregar leads.</td></tr>`;
+    }
+  };
+
   /* ─── INICIALIZAÇÃO ──────────────────────────────────────── */
   window.initPartnersModule = function () {
     initPartnerControls();

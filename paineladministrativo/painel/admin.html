@@ -784,9 +784,12 @@
             <thead>
               <tr>
                 <th>Lead</th>
+                <th>Empresa</th>
                 <th>Parceiro</th>
-                <th>Data</th>
+                <th>Serviço</th>
                 <th>Status</th>
+                <th>Valor</th>
+                <th>Data</th>
               </tr>
             </thead>
             <tbody id="leads-tbody"></tbody>
@@ -843,6 +846,11 @@
       // Carregar ranking na primeira vez
       if (tab === 'ranking' && typeof window.loadAdminRanking === 'function') {
         window.loadAdminRanking();
+      }
+
+      // Carregar leads na primeira vez
+      if (tab === 'leads' && typeof window.loadAdminLeads === 'function') {
+        window.loadAdminLeads();
       }
     }
   </script>

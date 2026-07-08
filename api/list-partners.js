@@ -8,18 +8,30 @@ const supabaseAdmin = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
+const crypto = require('crypto');
+
+function verifySignedToken(token, secret) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 2) return null;
+    const [payloadB64, signature] = parts;
+    const hmac = crypto.createHmac('sha256', secret);
+    hmac.update(payloadB64);
+    const expectedSig = hmac.digest('base64url');
+    if (signature !== expectedSig) return null;
+    const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'));
+    if (payload.exp && Date.now() > payload.exp) return null;
+    return payload;
+  } catch { return null; }
+}
+
 function verifyToken(req) {
   const auth = req.headers['authorization'] || '';
   const token = auth.replace('Bearer ', '').trim();
   if (!token) return false;
-  // Mesmo sistema de token simples usado no admin
-  try {
-    const decoded = Buffer.from(token, 'base64').toString('utf8');
-    const parsed = JSON.parse(decoded);
-    return parsed.role === 'admin' && new Date(parsed.expires) > new Date();
-  } catch {
-    return false;
-  }
+  const ADMIN_PASSWORD = (process.env.ADMIN_PASSWORD || '').trim();
+  const payload = verifySignedToken(token, ADMIN_PASSWORD);
+  return payload && payload.role === 'admin';
 }
 
 module.exports = async (req, res) => {

@@ -245,15 +245,41 @@
       document.getElementById('s_fechados').textContent = tFechados;
       document.getElementById('s_comissao').textContent = `R$ ${tComissaoPaga.toFixed(2)}`;
 
-      // Load Ranking (Mocked logic for demo: we can fetch from a view or group by in Supabase)
-      // Since it requires a complex query, we'll do a simple fetch of top 3 by total referrals if RLS allows,
-      // but RLS might block seeing other partners' referrals.
-      // We will show a placeholder or fake ranking if RLS restricts it.
-      document.getElementById('rankingList').innerHTML = `
-        <div class="ranking-item"><span class="rank-pos">🥇</span><span class="rank-name">Você</span><span class="rank-val">${tFechados} fechados</span></div>
-        <div class="ranking-item"><span class="rank-pos">🥈</span><span class="rank-name">João S.</span><span class="rank-val">2 fechados</span></div>
-        <div class="ranking-item"><span class="rank-pos">🥉</span><span class="rank-name">Marina F.</span><span class="rank-val">1 fechados</span></div>
-      `;
+      // ── Ranking Real ─────────────────────────────────────
+      await loadRanking(tFechados);
+    }
+
+    async function loadRanking(myClosedCount) {
+      const el = document.getElementById('rankingList');
+      const medals = ['🥇', '🥈', '🥉', '🏅', '🏅'];
+
+      try {
+        const resp = await fetch('/api/top-partners?limit=5');
+        const json = await resp.json();
+
+        if (!json.success || !json.data || json.data.length === 0) {
+          el.innerHTML = `<div style="text-align:center; color:var(--muted); padding: 20px 0;">
+            Ainda não há parceiros com vendas fechadas.<br>
+            <small style="font-size:0.8rem;">Seja o primeiro! 🚀</small>
+          </div>`;
+          return;
+        }
+
+        const items = json.data;
+        const html = items.map((p, i) => {
+          const isMe = p.closed_referrals === myClosedCount && myClosedCount > 0;
+          return `<div class="ranking-item" style="${isMe ? 'background:rgba(245,106,0,0.08);border-radius:8px;padding:12px 8px;margin:-4px -8px;' : ''}">
+            <span class="rank-pos">${medals[i] || '🏅'}</span>
+            <span class="rank-name" style="${isMe ? 'color:var(--orange);font-weight:700;' : ''}">${isMe ? 'Você' : p.display_name}</span>
+            <span class="rank-val">${p.closed_referrals} ${p.closed_referrals === 1 ? 'fechado' : 'fechados'}</span>
+          </div>`;
+        }).join('');
+
+        el.innerHTML = html;
+      } catch (e) {
+        console.error('[Ranking] erro:', e);
+        el.innerHTML = `<div style="text-align:center; color:var(--muted);">Ranking indisponível no momento.</div>`;
+      }
     }
 
     async function logout() {

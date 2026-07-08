@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+  <title>Programa de Parceiros — PageForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./Visuals/style.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Specific styles for Partner Page to match the aesthetic */
+    .hero-partner { padding: 160px 0 100px; text-align: center; }
+    .commission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+    .commission-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(20px); }
+    .commission-card:hover { border-color: rgba(245, 106, 0, 0.4); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(245, 106, 0, 0.15); }
+    .com-val { font-size: 1.2rem; color: var(--muted); margin-bottom: 10px; }
+    .com-arrow { color: var(--orange); font-size: 1.5rem; margin: 10px 0; }
+    .com-result { font-size: 2rem; font-family: var(--font-display); font-weight: 700; color: #fff; }
+    
+    .rules-list, .faq-list { max-width: 800px; margin: 40px auto 0; text-align: left; }
+    .rule-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); padding: 20px 24px; border-radius: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 16px; }
+    .rule-item i { color: var(--orange); font-size: 1.5rem; }
+    
+    .faq-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); padding: 24px; border-radius: 12px; margin-bottom: 16px; }
+    .faq-q { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 8px; font-family: var(--font-display); }
+    .faq-a { color: var(--muted); }
+
+    /* Modal Styles */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 999; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .modal-overlay.active { display: flex; opacity: 1; }
+    .modal-content { background: #0a0a0a; border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; position: relative; transform: translateY(20px); transition: transform 0.3s; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
+    .modal-close:hover { color: #fff; }
+    .form-group { margin-bottom: 20px; text-align: left; }
+    .form-group label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
+    .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px; color: #fff; font-family: var(--font-body); font-size: 1rem; transition: border-color 0.3s; }
+    .form-input:focus { outline: none; border-color: var(--orange); background: rgba(255,255,255,0.08); }
+    .form-submit { width: 100%; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="/index.html" class="nav-logo">
+        <img src="./images/iconpf.png" alt="PageForge Logo" class="nav-logo-icon">
+        PageForge
+      </a>
+      <ul class="nav-links">
+        <li><a href="#como-funciona">Como Funciona</a></li>
+        <li><a href="#comissao">Comissão</a></li>
+        <li><a href="#quem">Quem Pode</a></li>
+        <li><a href="#regras">Regras</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="/area-parceiro/login.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); box-shadow: none;">Login do Parceiro</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="hero-partner">
+    <div class="blob hero-blob-1"></div>
+    <div class="container hero-inner">
+      <div class="hero-badge reveal">
+        <span class="dot"></span>
+        Programa de Parcerias
+      </div>
+      <h1 class="hero-headline reveal reveal-d1">
+        Indique clientes.<br>
+        <span class="accent">Ganhe comissões.</span>
+      </h1>
+      <p class="hero-sub reveal reveal-d2">
+        Faça parte da rede de parceiros da PageForge. Você indica empresas que precisam de um site e recebe comissão por cada projeto fechado.
+      </p>
+      <div class="hero-ctas reveal reveal-d3">
+        <button onclick="openModal()" class="btn-primary">Quero Ser Parceiro →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" style="padding: 100px 0;">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-tag">Passo a Passo</div>
+        <h2 class="section-headline">Como Funciona</h2>
+      </div>
+      <div class="hiw-steps">
+        <div class="hiw-step reveal">
+          <div class="hiw-step-number">01</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon"><i class="ph-fill ph-magnifying-glass"></i></div>
+            <h3 class="hiw-step-title">Você encontra</h3>
+            <p class="hiw-step-desc">Você encontra uma empresa ou pessoa interessada em um site.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d1">
+          <div class="hiw-step-number">02</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon"><i class="ph-fill ph-whatsapp-logo"></i></div>
+            <h3 class="hiw-step-title">Você envia o contato</h3>
+            <p class="hiw-step-desc">Você cria um grupo no WhatsApp conosco ou envia o contato direto.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d2">
+          <div class="hiw-step-number">03</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon"><i class="ph-fill ph-handshake"></i></div>
+            <h3 class="hiw-step-title">Nós negociamos</h3>
+            <p class="hiw-step-desc">A PageForge faz toda a negociação, orçamento e briefing.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d3">
+          <div class="hiw-step-number">04</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon"><i class="ph-fill ph-code"></i></div>
+            <h3 class="hiw-step-title">Nós desenvolvemos</h3>
+            <p class="hiw-step-desc">Construímos e entregamos o projeto para o cliente com excelência.</p>
+          </div>
+          <div class="hiw-connector"></div>
+        </div>
+        <div class="hiw-step reveal reveal-d4">
+          <div class="hiw-step-number">05</div>
+          <div class="hiw-step-content">
+            <div class="hiw-step-icon"><i class="ph-fill ph-money"></i></div>
+            <h3 class="hiw-step-title">Você recebe</h3>
+            <p class="hiw-step-desc">Após o pagamento do cliente, você recebe sua comissão direto na conta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMISSÃO -->
+  <section id="comissao" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-tag">Ganhos</div>
+        <h2 class="section-headline">Comissão Transparente</h2>
+        <p class="section-sub">A comissão é paga somente <strong>após a confirmação do pagamento do cliente</strong>.</p>
+      </div>
+      <div class="commission-grid">
+        <div class="commission-card reveal">
+          <p class="com-val">Projeto de R$ 500</p>
+          <div class="com-arrow"><i class="ph-bold ph-arrow-down"></i></div>
+          <p class="com-result">R$ 100 <span style="font-size: 1rem; color: var(--muted); font-weight:400;">comissão</span></p>
+        </div>
+        <div class="commission-card reveal reveal-d1">
+          <p class="com-val">Projeto de R$ 1000</p>
+          <div class="com-arrow"><i class="ph-bold ph-arrow-down"></i></div>
+          <p class="com-result">R$ 200 <span style="font-size: 1rem; color: var(--muted); font-weight:400;">comissão</span></p>
+        </div>
+        <div class="commission-card reveal reveal-d2">
+          <p class="com-val">Projeto de R$ 1500+</p>
+          <div class="com-arrow"><i class="ph-bold ph-arrow-down"></i></div>
+          <p class="com-result">R$ 300+ <span style="font-size: 1rem; color: var(--muted); font-weight:400;">comissão</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUEM PODE -->
+  <section id="quem" style="padding: 100px 0;">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-tag">Participação</div>
+        <h2 class="section-headline">Quem pode participar?</h2>
+      </div>
+      <div class="express-features reveal" style="max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-video-camera"></i></div><h4 class="express-feature-title">Criadores de conteúdo</h4></div>
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-palette"></i></div><h4 class="express-feature-title">Designers</h4></div>
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-instagram-logo"></i></div><h4 class="express-feature-title">Social Media</h4></div>
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-chart-line-up"></i></div><h4 class="express-feature-title">Gestores de tráfego</h4></div>
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-code"></i></div><h4 class="express-feature-title">Desenvolvedores</h4></div>
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-briefcase"></i></div><h4 class="express-feature-title">Empreendedores</h4></div>
+        <div class="express-feature" style="width: auto; padding: 20px 30px;"><div class="express-feature-icon"><i class="ph-fill ph-users"></i></div><h4 class="express-feature-title">Amigos & Qualquer pessoa</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGRAS -->
+  <section id="regras" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-tag">Transparência</div>
+        <h2 class="section-headline">Regras do Programa</h2>
+      </div>
+      <div class="rules-list reveal">
+        <div class="rule-item"><i class="ph-bold ph-x-circle" style="color:var(--red);"></i><p>Não prometer preços ao cliente. Todo orçamento será realizado pela PageForge.</p></div>
+        <div class="rule-item"><i class="ph-bold ph-x-circle" style="color:var(--red);"></i><p>Não prometer prazos de entrega ou garantias em nome da PageForge.</p></div>
+        <div class="rule-item"><i class="ph-bold ph-x-circle" style="color:var(--red);"></i><p>Não negociar em nome da agência. Sua função é apenas apresentar o cliente.</p></div>
+        <div class="rule-item"><i class="ph-bold ph-check-circle"></i><p>A comissão é paga somente <strong>após a confirmação do pagamento</strong> do cliente para a PageForge.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding: 100px 0;">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-tag">Dúvidas</div>
+        <h2 class="section-headline">Perguntas Frequentes</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q">Preciso vender?</div>
+          <div class="faq-a">Não. Você só precisa apresentar ou indicar o cliente. O time da PageForge cuida de toda a negociação.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Preciso entender de sites?</div>
+          <div class="faq-a">Não. Se o cliente precisa de um site, basta conectá-lo com a gente.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Existe limite de indicações?</div>
+          <div class="faq-a">Não existe nenhum limite. Quanto mais clientes fechar, mais você ganha.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Quando recebo a comissão?</div>
+          <div class="faq-a">Logo após o cliente realizar o pagamento (seja à vista ou a primeira parcela/sinal) para o desenvolvimento do projeto.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Posso indicar vários clientes ao mesmo tempo?</div>
+          <div class="faq-a">Sim. Todas as suas indicações ficarão registradas no seu Dashboard de Parceiro.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="padding: 100px 0; text-align: center;">
+    <div class="container">
+      <h2 class="section-headline reveal">Comece a indicar hoje.</h2>
+      <button onclick="openModal()" class="btn-primary reveal reveal-d1" style="font-size: 1.2rem; padding: 20px 40px; margin-top: 30px;">Quero ser parceiro</button>
+    </div>
+  </section>
+
+  <!-- MODAL DE CADASTRO -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()"><i class="ph ph-x"></i></button>
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px;">Cadastro de Parceiro</h3>
+      <p style="color: var(--muted); margin-bottom: 30px; font-size: 0.9rem;">Preencha os dados abaixo. Você receberá acesso ao painel para acompanhar suas indicações.</p>
+      
+      <form id="partnerForm" onsubmit="submitPartner(event)">
+        <div class="form-group">
+          <label>Nome Completo</label>
+          <input type="text" id="p_name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label>E-mail (Será seu login)</label>
+          <input type="email" id="p_email" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="p_pass" class="form-input" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="text" id="p_whatsapp" class="form-input" required placeholder="(XX) XXXXX-XXXX">
+        </div>
+        <div class="form-group">
+          <label>Instagram (Opcional)</label>
+          <input type="text" id="p_instagram" class="form-input" placeholder="@seuusuario">
+        </div>
+        <div class="form-group">
+          <label>Cidade / Estado</label>
+          <input type="text" id="p_city" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label>Como conheceu a PageForge?</label>
+          <input type="text" id="p_how" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label>Experiência com vendas (Opcional)</label>
+          <input type="text" id="p_exp" class="form-input">
+        </div>
+        <button type="submit" class="btn-primary form-submit" id="btnSubmit">Finalizar Cadastro</button>
+      </form>
+      <div id="formMsg" style="margin-top: 15px; text-align: center; color: var(--orange); font-weight: 500;"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner" style="border-top: 1px solid var(--border); padding-top: 40px; text-align: center; color: var(--muted);">
+        <p>© 2026 PageForge. Programa de Parceiros.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/supabase-config.js"></script>
+  <script>
+    // Animations & Interactions
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    let mx = -200, my = -200, rx = -200, ry = -200;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animCursor() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      if (cursor) { cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; }
+      if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
+      requestAnimationFrame(animCursor);
+    })();
+
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Modal Logic
+    const modal = document.getElementById('signupModal');
+    function openModal() { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+
+    // Supabase Submit
+    async function submitPartner(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmit');
+      const msg = document.getElementById('formMsg');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const email = document.getElementById('p_email').value;
+      const pass = document.getElementById('p_pass').value;
+      
+      try {
+        // 1. SignUp User
+        const { data: authData, error: authErr } = await supabase.auth.signUp({
+          email: email,
+          password: pass
+        });
+
+        if (authErr) throw authErr;
+
+        // 2. Insert into Partners table
+        const { error: dbErr } = await supabase.from('partners').insert([{
+          user_id: authData.user.id,
+          name: document.getElementById('p_name').value,
+          whatsapp: document.getElementById('p_whatsapp').value,
+          instagram: document.getElementById('p_instagram').value,
+          city: document.getElementById('p_city').value,
+          how_knew: document.getElementById('p_how').value,
+          experience: document.getElementById('p_exp').value,
+          email: email
+        }]);
+
+        if (dbErr) throw dbErr;
+
+        msg.style.color = '#4ade80';
+        msg.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+        
+        setTimeout(() => {
+          window.location.href = '/area-parceiro/login.html';
+        }, 2000);
+
+      } catch (err) {
+        msg.style.color = 'var(--red)';
+        msg.textContent = 'Erro ao cadastrar: ' + err.message;
+        btn.textContent = 'Finalizar Cadastro';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

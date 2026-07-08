@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+  <title>Login - Área do Parceiro | PageForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Visuals/style.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--bg); }
+    .login-container { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 100%; max-width: 420px; backdrop-filter: blur(20px); text-align: center; }
+    .login-logo { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; }
+    .login-logo img { width: 30px; height: 30px; border-radius: 7px; }
+    .login-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; font-family: var(--font-display); }
+    .login-sub { color: var(--muted); margin-bottom: 30px; font-size: 0.9rem; }
+    
+    .form-group { margin-bottom: 20px; text-align: left; }
+    .form-group label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
+    .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px; color: #fff; font-family: var(--font-body); font-size: 1rem; transition: border-color 0.3s; }
+    .form-input:focus { outline: none; border-color: var(--orange); background: rgba(255,255,255,0.08); }
+    
+    .btn-submit { width: 100%; padding: 14px; border-radius: 10px; background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hot) 100%); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1rem; border: 1px solid rgba(255, 200, 120, 0.2); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 10px; }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(245, 106, 0, 0.3); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
+    
+    #errorMsg { color: var(--red); margin-top: 15px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="login-container reveal">
+    <a href="/index.html" class="login-logo">
+      <img src="../images/iconpf.png" alt="Logo">
+      PageForge
+    </a>
+    <h2 class="login-title">Área do Parceiro</h2>
+    <p class="login-sub">Acesse seu painel de indicações e comissões</p>
+    
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="email" class="form-input" required placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="password" class="form-input" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn-submit" id="submitBtn">Entrar</button>
+    </form>
+    
+    <p id="errorMsg"></p>
+    
+    <p style="margin-top: 25px; color: var(--muted); font-size: 0.9rem;">
+      Não tem conta? <a href="/parceiros.html" style="color: var(--orange); text-decoration: underline;">Cadastre-se</a>
+    </p>
+  </div>
+
+  <script src="../js/supabase-config.js"></script>
+  <script>
+    // Reveal animation
+    setTimeout(() => { document.querySelector('.login-container').classList.add('visible'); }, 100);
+
+    // Check if already logged in
+    window.addEventListener('load', async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        window.location.href = '/area-parceiro/index.html';
+      }
+    });
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMsg');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      btn.textContent = 'Entrando...';
+      btn.disabled = true;
+      errorMsg.textContent = '';
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        errorMsg.textContent = 'Erro ao fazer login: ' + error.message;
+        btn.textContent = 'Entrar';
+        btn.disabled = false;
+      } else {
+        window.location.href = '/area-parceiro/index.html';
+      }
+    }
+  </script>
+</body>
+</html>

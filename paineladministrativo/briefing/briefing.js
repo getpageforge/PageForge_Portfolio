@@ -319,7 +319,7 @@
 
   /* ── API SEND ──────────────────────────────────– */
   function sendBriefingToAPI() {
-    const API_ENDPOINT = '/api/create-briefing';
+    const API_ENDPOINT = '/api/briefing';
     fetch(API_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

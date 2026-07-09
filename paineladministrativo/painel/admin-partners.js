@@ -122,7 +122,7 @@
     if (loadingEl) loadingEl.style.display = 'flex';
 
     try {
-      let url = '/api/list-partners';
+      let url = '/api/partner';
       const params = new URLSearchParams();
       if (search) params.set('search', search);
       if (statusFilter) params.set('status', statusFilter);
@@ -172,7 +172,7 @@
     if (!confirm(`Deseja ${label} o parceiro "${name}"?`)) return;
 
     try {
-      const resp = await fetch(`/api/update-partner?id=${id}`, {
+      const resp = await fetch(`/api/partner?id=${id}`, {
         method: 'PATCH',
         headers: authHeaders(),
         body: JSON.stringify({ status: newStatus })
@@ -199,7 +199,7 @@
     if (!confirm(`Excluir o parceiro "${name}"?\n\nTodas as indicações associadas também serão removidas.\n\nEssa ação não pode ser desfeita.`)) return;
 
     try {
-      const resp = await fetch(`/api/delete-partner?id=${id}`, {
+      const resp = await fetch(`/api/partner?id=${id}`, {
         method: 'DELETE',
         headers: authHeaders()
       });
@@ -237,7 +237,7 @@
     document.body.style.overflow = 'hidden';
 
     try {
-      const resp = await fetch(`/api/get-partner?id=${id}`, { headers: authHeaders() });
+      const resp = await fetch(`/api/partner?id=${id}`, { headers: authHeaders() });
 
       if (resp.status === 401) { window.location.href = '/paineladministrativo/login/login.html'; return; }
 
@@ -521,7 +521,7 @@
 
     const token = localStorage.getItem('authToken');
     try {
-      const resp = await fetch('/api/list-leads', {
+      const resp = await fetch('/api/leads', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const json = await resp.json();

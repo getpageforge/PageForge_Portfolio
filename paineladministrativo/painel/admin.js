@@ -126,7 +126,7 @@
 
   async function loadBriefings(searchTerm = '') {
     try {
-      let url = '/api/list-briefings?limit=100';
+      let url = '/api/briefing?limit=100';
       if (searchTerm.trim()) {
         url += `&search=${encodeURIComponent(searchTerm)}`;
       }
@@ -275,7 +275,7 @@
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`/api/delete-briefing?id=${id}`, {
+      const response = await fetch(`/api/briefing?id=${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -313,7 +313,7 @@
   async function viewBriefingDetail(id) {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`/api/get-briefing?id=${id}`, {
+      const response = await fetch(`/api/briefing?id=${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

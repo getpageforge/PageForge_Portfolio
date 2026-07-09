@@ -35,32 +35,39 @@ module.exports = async (req, res) => {
       return res.status(400).json({ success: false, error: 'Senha deve ter pelo menos 6 caracteres' });
     }
 
-    // 1. Criar usuário no Auth
+    // 1. Verificar se o email já existe no Auth
+    const { data: userList } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
+    const existingAuthUser = (userList?.users || []).find(u => u.email === email.toLowerCase().trim());
+
+    if (existingAuthUser) {
+      // Checar se tem parceiro associado — se não tiver, é um cadastro órfão, permite recriar
+      const { data: existingPartner } = await supabaseAdmin
+        .from('partners')
+        .select('id')
+        .eq('user_id', existingAuthUser.id)
+        .single();
+
+      if (existingPartner) {
+        // Usuário completo — email realmente já está em uso
+        return res.status(409).json({ success: false, error: 'Este e-mail já está cadastrado. Faça login ou use a opção de recuperar senha.' });
+      }
+
+      // Caso orfão: usuário no Auth mas sem parceiro no BD — apaga e recria
+      await supabaseAdmin.auth.admin.deleteUser(existingAuthUser.id);
+    }
+
+    // 2. Criar usuário no Auth
     const { data: authData, error: authErr } = await supabaseAdmin.auth.admin.createUser({
-      email,
+      email: email.toLowerCase().trim(),
       password,
       email_confirm: true // Confirma email automaticamente
     });
 
     if (authErr) {
-      if (authErr.message.includes('already registered') || authErr.message.includes('already been registered')) {
-        return res.status(409).json({ success: false, error: 'Este e-mail já está cadastrado.' });
-      }
       throw authErr;
     }
 
     const userId = authData.user.id;
-
-    // 2. Verificar se já tem perfil de parceiro (edge case)
-    const { data: existing } = await supabaseAdmin
-      .from('partners')
-      .select('id')
-      .eq('user_id', userId)
-      .single();
-
-    if (existing) {
-      return res.status(409).json({ success: false, error: 'Este usuário já possui um perfil de parceiro.' });
-    }
 
     // 3. Inserir parceiro na tabela
     const { data: partnerData, error: partnerErr } = await supabaseAdmin

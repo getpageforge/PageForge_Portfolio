@@ -36,12 +36,12 @@ function verifyToken(req) {
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, PUT, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   
-  if (!['GET', 'PATCH', 'PUT'].includes(req.method)) {
+  if (!['GET', 'PATCH', 'PUT', 'DELETE'].includes(req.method)) {
     return res.status(405).json({ success: false, error: 'Método não permitido' });
   }
 
@@ -54,6 +54,16 @@ module.exports = async (req, res) => {
     const { partner_id = '', status = '', search = '' } = req.query;
 
     
+    if (req.method === 'DELETE') {
+      const { id } = req.query;
+      if (!id) return res.status(400).json({ success: false, error: 'ID do lead é obrigatório' });
+
+      const { error } = await supabaseAdmin.from('referrals').delete().eq('id', id);
+      if (error) throw error;
+
+      return res.status(200).json({ success: true, message: 'Lead apagado com sucesso' });
+    }
+
     if (req.method === 'PATCH' || req.method === 'PUT') {
       const { id } = req.query;
       if (!id) return res.status(400).json({ success: false, error: 'ID do lead é obrigatório' });

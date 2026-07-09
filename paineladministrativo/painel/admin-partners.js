@@ -652,9 +652,11 @@
         <div class="pd-section">
           <h3 class="pd-section-title"><i class="ph-bold ph-arrows-clockwise"></i> Atualizar Status do Projeto</h3>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-            <button class="pd-action-btn" style="background:rgba(74,222,128,0.1);color:#4ade80;border-color:rgba(74,222,128,0.3)" onclick="updateLeadStatus('${lead.id}', 'Aprovado')">Aprovado</button>
-            <button class="pd-action-btn" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.3)" onclick="updateLeadStatus('${lead.id}', 'Pendente')">Pendente</button>
-            <button class="pd-action-btn" style="background:rgba(239,68,68,0.1);color:#f87171;border-color:rgba(239,68,68,0.3)" onclick="updateLeadStatus('${lead.id}', 'Bloqueado')">Bloqueado</button>
+            <button class="pd-action-btn" style="background:rgba(74,222,128,0.1);color:#4ade80;border-color:rgba(74,222,128,0.3)" onclick="updateLeadStatus('${lead.id}', 'Aprovado')"><i class="ph-bold ph-check"></i> Aprovado</button>
+            <button class="pd-action-btn" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.3)" onclick="updateLeadStatus('${lead.id}', 'Pendente')"><i class="ph-bold ph-clock"></i> Pendente</button>
+            <button class="pd-action-btn" style="background:rgba(245,106,0,0.1);color:var(--orange);border-color:var(--orange-border)" onclick="updateLeadStatus('${lead.id}', 'Em desenvolvimento')"><i class="ph-bold ph-code"></i> Em desenvolvimento</button>
+            <button class="pd-action-btn" style="background:rgba(239,68,68,0.1);color:#f87171;border-color:rgba(239,68,68,0.3)" onclick="updateLeadStatus('${lead.id}', 'Bloqueado')"><i class="ph-bold ph-x"></i> Bloqueado</button>
+            <button class="pd-action-btn" style="background:rgba(239,68,68,0.08);color:#f87171;border-color:rgba(239,68,68,0.2);margin-left:auto" onclick="adminDeleteLead('${lead.id}')"><i class="ph-bold ph-trash"></i> Apagar Lead</button>
           </div>
         </div>
         
@@ -666,6 +668,23 @@
 
   window.closeLeadModal = function() {
     document.getElementById('lead-detail-modal').classList.remove('active');
+  };
+
+  window.adminDeleteLead = async function(id) {
+    if (!confirm('Tem certeza que deseja apagar permanentemente este lead?')) return;
+    try {
+      const token = localStorage.getItem('authToken');
+      const resp = await fetch(`/api/leads?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.success) throw new Error(data.error || 'Erro ao apagar');
+      closeLeadModal();
+      loadAdminLeads();
+    } catch (err) {
+      alert('Erro ao apagar lead: ' + err.message);
+    }
   };
 
   window.updateLeadStatus = async function(id, newStatus) {

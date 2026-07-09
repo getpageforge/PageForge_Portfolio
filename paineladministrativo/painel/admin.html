@@ -443,6 +443,7 @@
       .pd-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 </head>
 <body>
 
@@ -454,19 +455,39 @@
   <div class="ambient-blob blob-1"></div>
   <div class="ambient-blob blob-2"></div>
 
-  <!-- ── HEADER ── -->
+
+<div class="admin-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="sidebar-header">
+      <img src="/images/iconpf.png" alt="Logo PageForge" class="sidebar-logo" />
+      <span class="sidebar-brand">PageForge Admin</span>
+      <button class="sidebar-close-btn" onclick="toggleSidebar()"><i class="ph ph-x"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="admin-tab active" id="tab-briefings" onclick="switchTab('briefings')">
+        <i class="ph ph-envelope-open"></i><span>Briefings</span>
+      </button>
+      <button class="admin-tab" id="tab-partners" onclick="switchTab('partners')">
+        <i class="ph ph-users"></i><span>Parceiros</span>
+      </button>
+      <button class="admin-tab" id="tab-ranking" onclick="switchTab('ranking')">
+        <i class="ph ph-trophy"></i><span>Ranking</span>
+      </button>
+      <button class="admin-tab" id="tab-leads" onclick="switchTab('leads')">
+        <i class="ph ph-target"></i><span>Leads</span>
+      </button>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="admin-content">
+<!-- ── HEADER ── -->
   <header class="admin-header">
     <div class="header-inner">
-      <div class="header-brand">
-        <div class="brand-icon">
-          <img src="/images/iconpf.png" alt="Logo PageForge" style="width: 24px; height: 24px;" />
-        </div>
-        <div class="brand-text">
-          <span class="brand-name">PageForge</span>
-          <span class="brand-sep">·</span>
-          <span class="brand-sub">Admin</span>
-        </div>
-      </div>
+      <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="ph ph-list"></i>
+      </button>
 
       <div class="header-center">
         <h1 class="header-title">Painel Administrativo</h1>
@@ -484,24 +505,7 @@
   <main class="admin-main">
 
     <!-- NAVIGATION TABS -->
-    <div class="admin-tabs">
-      <button class="admin-tab active" id="tab-briefings" onclick="switchTab('briefings')">
-        <span class="tab-dot"></span>
-        Briefings
-      </button>
-      <button class="admin-tab" id="tab-partners" onclick="switchTab('partners')">
-        <span class="tab-dot"></span>
-        Parceiros
-      </button>
-      <button class="admin-tab" id="tab-ranking" onclick="switchTab('ranking')">
-        <span class="tab-dot"></span>
-        Ranking
-      </button>
-      <button class="admin-tab" id="tab-leads" onclick="switchTab('leads')">
-        <span class="tab-dot"></span>
-        Leads
-      </button>
-    </div>
+    
 
     <!-- ═══ SECTION: BRIEFINGS ═══ -->
     <div id="section-briefings">
@@ -805,6 +809,8 @@
     </div><!-- /section-leads -->
 
   </main>
+  </div>
+</div>
 
   <!-- ─── PARTNER DETAIL MODAL ─── -->
   <div id="partner-detail-modal" role="dialog" aria-modal="true" aria-label="Detalhes do Parceiro">
@@ -817,6 +823,12 @@
   <script src="admin.js?v=2"></script>
   <script src="admin-partners.js?v=2"></script>
   <script>
+    
+    function toggleSidebar() {
+      const sidebar = document.getElementById('admin-sidebar');
+      sidebar.classList.toggle('active');
+    }
+
     // Tab switching
     function switchTab(tab) {
       const tabs = ['briefings', 'partners', 'ranking', 'leads'];
@@ -854,5 +866,14 @@
       }
     }
   </script>
+
+    <!-- ═══ LEAD DETAIL MODAL ═══ -->
+    <div id="lead-detail-modal">
+      <div class="partner-detail-wrapper lead-modal-wrapper">
+        <button id="lead-modal-close"><i class="ph ph-x"></i></button>
+        <div id="lead-detail-content"></div>
+      </div>
+    </div>
+
 </body>
 </html>

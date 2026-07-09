@@ -36,11 +36,15 @@ function verifyToken(req) {
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'GET') return res.status(405).json({ success: false, error: 'Método não permitido' });
+  
+  if (!['GET', 'PATCH', 'PUT'].includes(req.method)) {
+    return res.status(405).json({ success: false, error: 'Método não permitido' });
+  }
+
 
   if (!verifyToken(req)) {
     return res.status(401).json({ success: false, error: 'Não autorizado' });
@@ -48,6 +52,31 @@ module.exports = async (req, res) => {
 
   try {
     const { partner_id = '', status = '', search = '' } = req.query;
+
+    
+    if (req.method === 'PATCH' || req.method === 'PUT') {
+      const { id } = req.query;
+      if (!id) return res.status(400).json({ success: false, error: 'ID do lead é obrigatório' });
+      
+      const body = req.body;
+      if (!body || Object.keys(body).length === 0) return res.status(400).json({ success: false, error: 'Nenhum dado para atualizar' });
+      
+      const allowed = ['status', 'commission_status', 'commission_value', 'project_value', 'notes'];
+      const updateData = {};
+      allowed.forEach(field => { if (body[field] !== undefined) updateData[field] = body[field]; });
+      
+      if (Object.keys(updateData).length === 0) return res.status(400).json({ success: false, error: 'Nenhum campo válido para atualizar' });
+      
+      updateData.updated_at = new Date().toISOString();
+      
+      const { data, error } = await supabaseAdmin.from('referrals').update(updateData).eq('id', id).select().single();
+      if (error) throw error;
+      if (!data) return res.status(404).json({ success: false, error: 'Lead não encontrado' });
+      
+      return res.status(200).json({ success: true, message: 'Lead atualizado com sucesso', data });
+    }
+
+    // A partir daqui, é GET
 
     // Buscar todas as indicações
     let query = supabaseAdmin

@@ -474,50 +474,87 @@
     else console.error('[Partners]', msg);
   }
 
-  /* ─── RANKING ─────────────────────────────────────────────── */
-  const RANKING_MEDALS = ['🥇', '🥈', '🥉', '🏅', '🏅'];
-
+  
+  /* ─── RANKING ────────────────────────────────────────────── */
   window.loadAdminRanking = async function () {
-    const tbody = document.getElementById('ranking-tbody');
+    const container = document.querySelector('#section-ranking .partners-table-scroll');
     const empty = document.getElementById('ranking-empty');
-    const count = document.getElementById('ranking-count');
-
-    if (!tbody) return;
+    if (!container) return;
 
     try {
-      const resp = await fetch('/api/top-partners?limit=10');
+      const resp = await fetch('/api/top-partners');
       const json = await resp.json();
 
       if (!json.success || !json.data || json.data.length === 0) {
-        tbody.innerHTML = '';
+        container.innerHTML = '';
         if (empty) empty.style.display = 'block';
-        if (count) count.textContent = '';
         return;
       }
-
       if (empty) empty.style.display = 'none';
-      if (count) count.textContent = `${json.data.length} parceiros`;
 
-      const items = json.data;
-      tbody.innerHTML = items.map(p => `
-        <tr class="partner-row">
-          <td style="text-align:center;font-size:1.2rem">${RANKING_MEDALS[p.position - 1] || p.position}</td>
-          <td>${escHtml(p.display_name)}</td>
-          <td style="text-align:center;font-weight:600;color:var(--orange)">${p.closed_referrals} ${p.closed_referrals === 1 ? 'fechado' : 'fechados'}</td>
-        </tr>
-      `).join('');
+      const top3 = json.data.slice(0, 3);
+      const others = json.data.slice(3);
+      
+      let html = '<div class="podium-container">';
+      
+      // Top 2 (Silver)
+      if (top3[1]) {
+        html += `<div class="podium-step podium-silver">
+          <i class="ph-fill ph-trophy podium-icon"></i>
+          <div class="podium-partner-name">${escHtml(top3[1].display_name)}</div>
+          <div class="podium-sales">${top3[1].closed_referrals} Vendas</div>
+        </div>`;
+      }
+      // Top 1 (Gold)
+      if (top3[0]) {
+        html += `<div class="podium-step podium-gold">
+          <i class="ph-fill ph-trophy podium-icon"></i>
+          <div class="podium-partner-name">${escHtml(top3[0].display_name)}</div>
+          <div class="podium-sales">${top3[0].closed_referrals} Vendas</div>
+        </div>`;
+      }
+      // Top 3 (Bronze)
+      if (top3[2]) {
+        html += `<div class="podium-step podium-bronze">
+          <i class="ph-fill ph-trophy podium-icon"></i>
+          <div class="podium-partner-name">${escHtml(top3[2].display_name)}</div>
+          <div class="podium-sales">${top3[2].closed_referrals} Vendas</div>
+        </div>`;
+      }
+      html += '</div>';
+
+      if (others.length > 0) {
+        html += '<div class="ranking-list">';
+        others.forEach((p, index) => {
+          html += `<div class="ranking-list-item">
+            <div class="rli-left">
+              <span class="rli-pos">#${index + 4}</span>
+              <span class="rli-name" style="font-weight:600">${escHtml(p.display_name)}</span>
+            </div>
+            <div class="rli-right">
+              <span class="rli-sales" style="color:var(--orange);font-weight:700">${p.closed_referrals} Vendas</span>
+            </div>
+          </div>`;
+        });
+        html += '</div>';
+      }
+
+      container.innerHTML = html;
     } catch (err) {
       console.error('[Admin Ranking] Erro:', err);
-      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted)">Erro ao carregar ranking.</td></tr>`;
+      container.innerHTML = `<div style="text-align:center;padding:40px;color:red">Erro ao carregar ranking.</div>`;
     }
   };
 
+  
   /* ─── LEADS ───────────────────────────────────────────────── */
+  window.allLeads = [];
+  
   window.loadAdminLeads = async function () {
-    const tbody = document.getElementById('leads-tbody');
+    const container = document.querySelector('#section-leads .partners-table-scroll');
     const empty = document.getElementById('leads-empty');
     const count = document.getElementById('leads-count');
-    if (!tbody) return;
+    if (!container) return;
 
     const token = localStorage.getItem('authToken');
     try {
@@ -526,36 +563,146 @@
       });
       const json = await resp.json();
       if (!json.success || !json.data || json.data.length === 0) {
-        tbody.innerHTML = '';
+        container.innerHTML = '';
         if (empty) empty.style.display = 'block';
         if (count) count.textContent = '';
         return;
       }
       if (empty) empty.style.display = 'none';
       if (count) count.textContent = `${json.total} leads`;
+      
+      window.allLeads = json.data;
 
-      tbody.innerHTML = json.data.map(r => {
-        let badgeClass = 'badge-pendente';
-        const closedStatuses = ['Pagamento', 'Em desenvolvimento', 'Entregue', 'Finalizado'];
-        if (closedStatuses.includes(r.status)) badgeClass = 'badge-aprovado';
-        else if (r.status !== 'Novo Lead') badgeClass = 'badge-bloqueado';
-        const val = Number(r.project_value) > 0 ? 'R$ ' + Number(r.project_value).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : '—';
+      let html = '<div class="leads-cards-grid">';
+      html += json.data.map(r => {
+        const val = Number(r.project_value) > 0 ? 'R$ ' + Number(r.project_value).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : 'A definir';
         const date = r.created_at ? new Date(r.created_at).toLocaleDateString('pt-BR') : '—';
-        return `<tr class="partner-row">
-          <td><strong>${escHtml(r.client_name)}</strong></td>
-          <td>${escHtml(r.company) || '—'}</td>
-          <td>${escHtml(r.partner_name)}</td>
-          <td>${escHtml(r.service) || '—'}</td>
-          <td>${statusBadge(r.status)}</td>
-          <td style="font-weight:600">${val}</td>
-          <td>${date}</td>
-        </tr>`;
+        return `
+          <div class="lead-card">
+            <div class="lead-card-header">
+              <div>
+                <h4 class="lead-card-title">${escHtml(r.client_name)}</h4>
+                <div class="lead-card-company">${escHtml(r.company) || 'Sem empresa'}</div>
+              </div>
+              <div>${statusBadge(r.status)}</div>
+            </div>
+            <div class="lead-card-body">
+              <div class="lead-card-item">
+                <i class="ph-fill ph-users"></i> ${escHtml(r.partner_name)}
+              </div>
+              <div class="lead-card-item">
+                <i class="ph-fill ph-money"></i> ${val}
+              </div>
+              <div class="lead-card-item">
+                <i class="ph-fill ph-calendar-blank"></i> ${date}
+              </div>
+            </div>
+            <div class="lead-card-footer">
+              <button class="lead-card-btn" onclick="openLeadModal('${r.id}')">
+                <i class="ph-bold ph-gear"></i> Gerenciar Lead
+              </button>
+            </div>
+          </div>
+        `;
       }).join('');
+      html += '</div>';
+      
+      container.innerHTML = html;
+      
     } catch (err) {
       console.error('[Admin Leads] Erro:', err);
-      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted)">Erro ao carregar leads.</td></tr>`;
+      container.innerHTML = `<div style="text-align:center;color:red;padding:40px">Erro ao carregar leads.</div>`;
     }
   };
+
+  window.openLeadModal = function(id) {
+    const lead = window.allLeads.find(l => l.id === id);
+    if (!lead) return;
+    
+    const modal = document.getElementById('lead-detail-modal');
+    const content = document.getElementById('lead-detail-content');
+    
+    const val = Number(lead.project_value) > 0 ? 'R$ ' + Number(lead.project_value).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : 'A definir';
+    const comm = Number(lead.commission_value) > 0 ? 'R$ ' + Number(lead.commission_value).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : 'A definir';
+    
+    content.innerHTML = `
+      <div class="pd-header" style="border-bottom: none; padding-bottom: 0;">
+        <div class="pd-info">
+          <h2 class="pd-name">${escHtml(lead.client_name)}</h2>
+          <div class="pd-meta">Indicado por: <strong>${escHtml(lead.partner_name)}</strong></div>
+        </div>
+        <div class="pd-header-actions">
+          ${statusBadge(lead.status)}
+        </div>
+      </div>
+      
+      <div class="pd-body" style="grid-template-columns: 1fr;">
+        <div class="pd-section">
+          <h3 class="pd-section-title"><i class="ph-bold ph-info"></i> Detalhes do Lead</h3>
+          <div class="pd-info-grid">
+            <div class="pd-info-item"><div class="pd-info-label">Empresa</div><div class="pd-info-val">${escHtml(lead.company) || '—'}</div></div>
+            <div class="pd-info-item"><div class="pd-info-label">Telefone</div><div class="pd-info-val">${escHtml(lead.phone) || '—'}</div></div>
+            <div class="pd-info-item"><div class="pd-info-label">Serviço</div><div class="pd-info-val">${escHtml(lead.service) || '—'}</div></div>
+            <div class="pd-info-item"><div class="pd-info-label">Instagram</div><div class="pd-info-val">${escHtml(lead.instagram) || '—'}</div></div>
+            <div class="pd-info-item"><div class="pd-info-label">Valor do Projeto</div><div class="pd-info-val" style="color:var(--text);font-weight:700">${val}</div></div>
+            <div class="pd-info-item"><div class="pd-info-label">Comissão Estimada</div><div class="pd-info-val" style="color:var(--orange);font-weight:700">${comm}</div></div>
+          </div>
+        </div>
+        
+        <div class="pd-section">
+          <h3 class="pd-section-title"><i class="ph-bold ph-arrows-clockwise"></i> Atualizar Status do Projeto</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+            <button class="pd-action-btn pd-approve" onclick="updateLeadStatus('${lead.id}', 'Em desenvolvimento')">Em desenvolvimento</button>
+            <button class="pd-action-btn pd-approve" onclick="updateLeadStatus('${lead.id}', 'Pagamento')">Aguardando Pagamento</button>
+            <button class="pd-action-btn" style="background:rgba(255,255,255,0.1);color:var(--text);border-color:var(--border)" onclick="updateLeadStatus('${lead.id}', 'Finalizado')">Finalizado</button>
+            <button class="pd-action-btn pd-block" onclick="updateLeadStatus('${lead.id}', 'Perdido')">Lead Perdido</button>
+          </div>
+        </div>
+        
+      </div>
+    `;
+    
+    modal.classList.add('active');
+  };
+
+  window.closeLeadModal = function() {
+    document.getElementById('lead-detail-modal').classList.remove('active');
+  };
+
+  window.updateLeadStatus = async function(id, newStatus) {
+    if (!confirm(`Mudar o status deste lead para "${newStatus}"?`)) return;
+    const btn = event.target;
+    const oldText = btn.textContent;
+    btn.textContent = 'Salvando...';
+    btn.disabled = true;
+    
+    try {
+      const token = localStorage.getItem('authToken');
+      const resp = await fetch(`/api/leads?id=${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.success) throw new Error(data.error || 'Erro ao atualizar');
+      
+      alert('Lead atualizado com sucesso!');
+      closeLeadModal();
+      loadAdminLeads();
+    } catch (err) {
+      alert(err.message);
+      btn.textContent = oldText;
+      btn.disabled = false;
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.getElementById('lead-modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', closeLeadModal);
+  });
 
   /* ─── INICIALIZAÇÃO ──────────────────────────────────────── */
   window.initPartnersModule = function () {

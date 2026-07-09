@@ -652,10 +652,9 @@
         <div class="pd-section">
           <h3 class="pd-section-title"><i class="ph-bold ph-arrows-clockwise"></i> Atualizar Status do Projeto</h3>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-            <button class="pd-action-btn pd-approve" onclick="updateLeadStatus('${lead.id}', 'Em desenvolvimento')">Em desenvolvimento</button>
-            <button class="pd-action-btn pd-approve" onclick="updateLeadStatus('${lead.id}', 'Pagamento')">Aguardando Pagamento</button>
-            <button class="pd-action-btn" style="background:rgba(255,255,255,0.1);color:var(--text);border-color:var(--border)" onclick="updateLeadStatus('${lead.id}', 'Finalizado')">Finalizado</button>
-            <button class="pd-action-btn pd-block" onclick="updateLeadStatus('${lead.id}', 'Perdido')">Lead Perdido</button>
+            <button class="pd-action-btn" style="background:rgba(74,222,128,0.1);color:#4ade80;border-color:rgba(74,222,128,0.3)" onclick="updateLeadStatus('${lead.id}', 'Aprovado')">Aprovado</button>
+            <button class="pd-action-btn" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.3)" onclick="updateLeadStatus('${lead.id}', 'Pendente')">Pendente</button>
+            <button class="pd-action-btn" style="background:rgba(239,68,68,0.1);color:#f87171;border-color:rgba(239,68,68,0.3)" onclick="updateLeadStatus('${lead.id}', 'Bloqueado')">Bloqueado</button>
           </div>
         </div>
         

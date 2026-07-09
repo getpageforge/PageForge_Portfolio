@@ -131,6 +131,7 @@
                 <th>Status (CRM)</th>
                 <th>Comissão</th>
                 <th>Data</th>
+                <th style="text-align:right">Ações</th>
               </tr>
             </thead>
             <tbody id="referralsTable">
@@ -232,9 +233,12 @@
           <td><strong>${ref.client_name}</strong><br><span style="font-size:0.85rem;color:var(--muted);">${ref.company || ''}</span></td>
           <td><span class="status-badge ${badgeClass}">${ref.status}</span></td>
           <td style="color:${ref.commission_status === 'Paga' ? '#4ade80' : 'var(--text)'}">
-            ${valStr} <br><span style="font-size:0.75rem;opacity:0.7">${ref.commission_status}</span>
+            ${valStr} <br><span style="font-size:0.75rem;opacity:0.7">${ref.commission_status || ''}</span>
           </td>
           <td>${dateStr}</td>
+          <td style="text-align:right">
+            <button onclick="deleteLead('${ref.id}')" title="Apagar Lead" style="background:none;border:none;color:#f87171;font-size:1.2rem;cursor:pointer;padding:4px;"><i class="ph-bold ph-trash"></i></button>
+          </td>
         `;
         tbody.appendChild(tr);
       });
@@ -279,6 +283,20 @@
       } catch (e) {
         console.error('[Ranking] erro:', e);
         el.innerHTML = `<div style="text-align:center; color:var(--muted);">Ranking indisponível no momento.</div>`;
+      }
+    }
+
+    
+    async function deleteLead(leadId) {
+      if (!confirm("Tem certeza que deseja apagar esta indicação?")) return;
+      try {
+        const { error } = await supabase.from('referrals').delete().eq('id', leadId).eq('partner_id', partnerId);
+        if (error) throw error;
+        alert("Indicação apagada com sucesso!");
+        loadDashboardData();
+      } catch (e) {
+        console.error("Erro ao apagar lead:", e);
+        alert("Erro ao apagar indicação. Tente novamente.");
       }
     }
 

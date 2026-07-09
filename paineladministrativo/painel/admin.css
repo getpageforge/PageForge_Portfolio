@@ -965,6 +965,8 @@ body.cursor-hover #cursor-ring  { width: 52px; height: 52px; border-color: var(-
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .mobile-menu-btn {
